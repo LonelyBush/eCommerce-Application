@@ -28,6 +28,17 @@ Prettier                  | checks and formats files:              | prettier --
 Husky                     | setting up Git hooks:                  | npm run prepare
 Tsconfig                  | compiles files and builds the app:     | npm run build 
 
+## Instructions for setting up and running the project locally
+- cd  eCommerce-App
+- npm instal
+- npm run dev
+- press h + enter to show help
+- press r + enter to restart the server
+- press u + enter to show server url
+- press o + enter to open in browser
+- press c + enter to clear console
+- press q + enter to quit
+
 ## Trello board
 
 - [invite](https://trello.com/invite/b/voqlTYQ5/ATTI17477b878af29c3c4b41baec360a6c9eF4B103F3/final-task)
