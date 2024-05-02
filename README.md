@@ -17,6 +17,27 @@ Our eCommerce application provides users with a seamless online shopping experie
    - Husky
    - Vitest
 
+## Scripts
+ Scripts                  |   instructions                         | Comands
+--------------------------|:---------------------------------------|:-----------------------------
+ESLint                    | check:                                 | npm run lint 
+//                        | fix:                                   | eslint src --fix
+Vite                      | compiles files and builds the app:     | npm run build 
+//                        | create a local server for development: | npm run dev 
+Prettier                  | checks and formats files:              | prettier --write .
+Husky                     | setting up Git hooks:                  | npm run prepare
+Tsconfig                  | compiles files and builds the app:     | npm run build 
+
+## Instructions for setting up and running the project locally
+- cd  eCommerce-App
+- npm instal
+- npm run dev
+- press h + enter to show help
+- press r + enter to restart the server
+- press u + enter to show server url
+- press o + enter to open in browser
+- press c + enter to clear console
+- press q + enter to quit
 
 ## Trello board
 
