@@ -10,6 +10,7 @@
     "lint": "eslint . --ext ts,tsx",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier . --write",
+    "test": "vitest",
     "prepare": "cd .. && husky eCommerce-App/.husky"
   },
   "dependencies": {
