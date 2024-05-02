@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx",
     "lint:fix": "eslint . --fix",
+    "prettier": "prettier . --write",
     "prepare": "cd .. && husky eCommerce-App/.husky"
   },
   "dependencies": {
