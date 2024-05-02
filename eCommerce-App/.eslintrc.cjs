@@ -36,6 +36,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    '@typescript-eslint/no-explicit-any': 'error',
     'react/react-in-jsx-scope': 0,
   },
 };
