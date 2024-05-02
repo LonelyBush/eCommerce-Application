@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx",
+    "prepare": "cd .. && husky eCommerce-App/.husky"
   },
   "dependencies": {
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -28,6 +30,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "sass": "^1.76.0",
     "typescript": "^5.2.2",

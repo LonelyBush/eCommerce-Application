@@ -1,0 +1,3 @@
+cd eCommerce-App
+npx eslint . --fix
+npx eslint . --ext ts,tsx
