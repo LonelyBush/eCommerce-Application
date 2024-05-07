@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => {
       'process.env.SCOPE': JSON.stringify(env.SCOPE),
       'process.env.API_URL': JSON.stringify(env.API_URL),
       'process.env.AUTH_URL': JSON.stringify(env.AUTH_URL),
+      global: {},
     },
     plugins: [react()],
     test: {
