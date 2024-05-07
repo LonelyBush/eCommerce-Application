@@ -2,15 +2,26 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/test_setup/setupTests.ts'],
-  },
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  return {
+    define: {
+      'process.env.PROJECT_KEY': JSON.stringify(env.PROJECT_KEY),
+      'process.env.CLIENT_ID': JSON.stringify(env.CLIENT_ID),
+      'process.env.SECRET': JSON.stringify(env.SECRET),
+      'process.env.SCOPE': JSON.stringify(env.SCOPE),
+      'process.env.API_URL': JSON.stringify(env.API_URL),
+      'process.env.AUTH_URL': JSON.stringify(env.AUTH_URL),
+    },
+    plugins: [react()],
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./src/test_setup/setupTests.ts'],
+    },
+  };
 });
