@@ -18,6 +18,11 @@ export default defineConfig(({ mode }) => {
       'process.env.AUTH_URL': JSON.stringify(env.AUTH_URL),
       global: {},
     },
+    resolve: {
+      alias: {
+        'node-fetch': 'isomorphic-fetch',
+      },
+    },
     plugins: [react()],
     test: {
       globals: true,
