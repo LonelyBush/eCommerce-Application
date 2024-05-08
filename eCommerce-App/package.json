@@ -47,6 +47,7 @@
     "husky": "^9.0.11",
     "isomorphic-fetch": "^3.0.0",
     "jsdom": "^24.0.0",
+    "node-fetch": "^3.3.2",
     "prettier": "^3.2.5",
     "sass": "^1.76.0",
     "typescript": "^5.2.2",
