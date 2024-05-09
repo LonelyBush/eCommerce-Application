@@ -1,0 +1,13 @@
+@import "../../styles/colors.css";
+.title {
+    text-align: center;
+    color: var(--c-blue-800);
+    font-weight: 500;
+    font-size: 3rem;
+}
+
+@media (max-width: 580px) {
+    .title {
+        font-size: 2rem;
+      }
+}

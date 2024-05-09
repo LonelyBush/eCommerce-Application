@@ -1,4 +1,12 @@
 @import "../../styles/colors.css";
+.errorBlock {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
 
 .errorContainer {
     text-align: center;
@@ -23,7 +31,7 @@
     color:var( --c-green-400);
   }
   .errorContainer > span:nth-of-type(1) > span {
-    transform-origin: 50% 100% 0px;
+    transform-origin: 50% 100% 0;
     transform: rotateX(0);
     animation: easyoutelastic 8s infinite;
   }
@@ -34,7 +42,7 @@
     color:var(--c-mint-100);
   }
   .errorContainer > span:nth-of-type(3) > span {
-    transform-origin: 100% 100% 0px;
+    transform-origin: 100% 100% 0;
     transform: rotate(0deg);
     animation: rotatedrop 8s infinite;
   }
@@ -89,3 +97,15 @@
       transform: rotateX(0);
     }
   }
+
+  @media (max-width: 800px) {
+    .errorContainer {
+        font-size: 12rem;
+      }
+}
+
+@media (max-width: 580px) {
+    .errorContainer {
+        font-size: 7rem;
+      }
+}

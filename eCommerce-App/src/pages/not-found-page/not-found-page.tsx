@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import Button from '../../utils/button/button';
+import H1 from '../../utils/tags/tags';
 import styles from './not-found.module.css';
 
 function NotFoundPage() {
   return (
-    <div>
-      <h1> Ooops... Page not found</h1>
+    <div className={styles.errorBlock}>
+      <H1> Ooops... Page not found</H1>
       <section className={styles.errorContainer}>
         <span>
           <span>4</span>
