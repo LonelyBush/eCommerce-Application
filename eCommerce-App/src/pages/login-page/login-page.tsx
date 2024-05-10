@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import getProject from '../../api/api-client';
+import LoginForm from '../../components/login-form/login-form';
 
 interface Project {
   key: string;
@@ -18,7 +19,7 @@ function LoginPage() {
   }, []);
   return (
     <div>
-      <p>Login Page</p>
+      <LoginForm />
       <div>
         <p>
           Test for fetching data using TS SDK below will deploy main API data
