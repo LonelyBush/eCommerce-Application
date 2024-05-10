@@ -29,5 +29,8 @@ export default defineConfig(({ mode }) => {
       environment: 'jsdom',
       setupFiles: ['./src/test_setup/setupTests.ts'],
     },
+    css: {
+      modules: {},
+    },
   };
 });
