@@ -1,0 +1,9 @@
+.formInput > input {
+    padding: 15px;
+    border: 1px solid black;
+}
+
+.formInput{
+    display: flex;
+    flex-direction: column;
+}
