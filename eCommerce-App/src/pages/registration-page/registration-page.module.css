@@ -1,7 +1,16 @@
 .registrationForm{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 25rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border: 0.1rem solid var(--c-mint-100);
+    border-radius: 1rem;
 }

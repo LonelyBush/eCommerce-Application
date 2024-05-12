@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import FormInput from '../../components/form-input/form-input';
 import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
+import H1 from '../../utils/tags/tags';
 
 interface InputData {
   email: string;
@@ -9,6 +10,21 @@ interface InputData {
   lastName: string;
   dateBirth: string;
   password: string;
+}
+
+function isAtLeast13YearsOld(dateString: string) {
+  const inputDate = new Date(dateString);
+
+  const today = new Date();
+
+  const ageDiff = today.getFullYear() - inputDate.getFullYear();
+  const monthDiff = today.getMonth() - inputDate.getMonth();
+  const dayDiff = today.getDate() - inputDate.getDate();
+
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    return ageDiff - 1 >= 13;
+  }
+  return ageDiff >= 13;
 }
 
 function RegistrationPage() {
@@ -27,7 +43,7 @@ function RegistrationPage() {
       type: 'email',
       placeholder: 'Email',
       label: 'Email',
-      errorMessage: 'It should be a valid email adress',
+      errorMessage: '*it should be a valid email adress',
       required: true,
     },
     {
@@ -37,7 +53,7 @@ function RegistrationPage() {
       placeholder: 'First Name',
       label: 'First Name',
       errorMessage:
-        'Must contain at least one character and no special characters or numbers',
+        '*must contain at least one character and no special characters or numbers',
       required: true,
       pattern: '^[^\\W\\d]*[^\\W\\d\\s][^\\W\\d]*$',
     },
@@ -48,7 +64,7 @@ function RegistrationPage() {
       placeholder: 'Last Name',
       label: 'Last Name',
       errorMessage:
-        'Must contain at least one character and no special characters or numbers',
+        '*must contain at least one character and no special characters or numbers',
       required: true,
       pattern: '^[^\\W\\d]*[^\\W\\d\\s][^\\W\\d]*$',
     },
@@ -78,7 +94,7 @@ function RegistrationPage() {
       type: 'password',
       placeholder: 'Confirm password',
       label: 'Confirm password',
-      errorMessage: 'Password dont match !',
+      errorMessage: '*password dont match !',
       required: true,
       pattern: values.password,
     },
@@ -92,11 +108,16 @@ function RegistrationPage() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!isAtLeast13YearsOld(values.dateBirth)) {
+      console.log('You must be at least 13 years old.');
+      return;
+    }
     const data = new FormData(e.currentTarget);
     console.log(Object.fromEntries(data));
   };
   return (
     <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
+      <H1>Sign Up!</H1>
       {inputs.map((input) => {
         return (
           <FormInput

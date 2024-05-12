@@ -2,15 +2,36 @@
     display: flex;
     flex-direction: column;
     width: 20rem;
+    gap: 0.1rem;
+}
+
+label{
+    color: var(--c-mint-100);
 }
 
 .formInput > input {
     padding: 15px;
-    border: 1px solid black;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    border: 0.2rem solid var(--c-mint-100);
+    border-radius: 1rem;
+}
+
+input:focus {
+  border: 0.2rem solid var( --c-blue-800);
+}
+
+input:valid{
+    border: 0.2rem solid var(--c-green-400)
+}
+
+input:invalid[data-focused='true']{
+    border: 0.2rem solid red;
 }
 
 span{
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: red;
     word-wrap: break-word;
     display: none;
