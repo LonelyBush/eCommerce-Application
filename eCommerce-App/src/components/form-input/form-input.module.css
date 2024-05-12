@@ -1,9 +1,23 @@
+.formInput{
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+}
+
 .formInput > input {
     padding: 15px;
     border: 1px solid black;
 }
 
-.formInput{
-    display: flex;
-    flex-direction: column;
+span{
+    font-size: 0.7rem;
+    color: red;
+    word-wrap: break-word;
+    display: none;
 }
+
+input:invalid[data-focused='true'] ~ span{
+    display: block;
+}
+
+

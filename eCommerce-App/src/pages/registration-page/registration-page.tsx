@@ -24,9 +24,11 @@ function RegistrationPage() {
     {
       id: 'email',
       name: 'email',
-      type: 'text',
+      type: 'email',
       placeholder: 'Email',
       label: 'Email',
+      errorMessage: 'It should be a valid email adress',
+      required: true,
     },
     {
       id: 'firstName',
@@ -34,6 +36,10 @@ function RegistrationPage() {
       type: 'text',
       placeholder: 'First Name',
       label: 'First Name',
+      errorMessage:
+        'Must contain at least one character and no special characters or numbers',
+      required: true,
+      pattern: '^[^\\W\\d]*[^\\W\\d\\s][^\\W\\d]*$',
     },
     {
       id: 'lastName',
@@ -41,25 +47,47 @@ function RegistrationPage() {
       type: 'text',
       placeholder: 'Last Name',
       label: 'Last Name',
+      errorMessage:
+        'Must contain at least one character and no special characters or numbers',
+      required: true,
+      pattern: '^[^\\W\\d]*[^\\W\\d\\s][^\\W\\d]*$',
     },
     {
       id: 'dateBirth',
       name: 'dateBirth',
-      type: 'text',
+      type: 'date',
       placeholder: 'Date of Birth',
       label: 'Date Of Birth',
+      errorMessage: '',
+      required: true,
     },
     {
       id: 'password',
       name: 'password',
-      type: 'text',
+      type: 'password',
       placeholder: 'Password',
       label: 'Password',
+      errorMessage:
+        'Must contain minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
+      required: true,
+      pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$',
+    },
+    {
+      id: 'confirmPassword',
+      name: 'confirmPassword',
+      type: 'password',
+      placeholder: 'Confirm password',
+      label: 'Confirm password',
+      errorMessage: 'Password dont match !',
+      required: true,
+      pattern: values.password,
     },
   ];
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
+    if (e.currentTarget.name !== 'confirmPassword') {
+      setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
+    }
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -67,7 +95,6 @@ function RegistrationPage() {
     const data = new FormData(e.currentTarget);
     console.log(Object.fromEntries(data));
   };
-  console.log(values);
   return (
     <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
       {inputs.map((input) => {
