@@ -1,4 +1,4 @@
-const inputs = [
+export const inputs = [
   {
     id: 'email',
     name: 'email',
@@ -52,4 +52,28 @@ const inputs = [
   },
 ];
 
-export default inputs;
+export const selectInput = {
+  id: 'selectCountry',
+  name: 'selectCountry',
+  label: 'Country',
+  errorMessage: '*you must choose valid country',
+  required: true,
+  options: [
+    {
+      value: '',
+      optionLabel: 'Choose one...',
+    },
+    {
+      value: 'US',
+      optionLabel: 'United States',
+    },
+    {
+      value: 'RU',
+      optionLabel: 'Russia',
+    },
+    {
+      value: 'UK',
+      optionLabel: 'Ukraine',
+    },
+  ],
+};

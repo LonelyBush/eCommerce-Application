@@ -6,16 +6,23 @@ export interface InputData {
   lastName: string;
   dateBirth: string;
   password: string;
+  country: string;
+}
+
+interface SelectOptionProps {
+  value: string;
+  optionLabel: string;
 }
 
 export interface PropsOption extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  placeholder: string;
+  placeholder?: string;
   name: string;
   id: string;
-  type: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  type?: string;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  value?: string;
   errorMessage: string;
   required: boolean;
+  options?: SelectOptionProps[];
 }

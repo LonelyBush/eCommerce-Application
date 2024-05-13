@@ -3,8 +3,10 @@ import FormInput from '../../components/form-input/form-input';
 import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
 import H1 from '../../utils/tags/tags';
-import inputs from './text-inputs-const';
+import { inputs, selectInput } from './inputs-const';
+
 import { InputData } from '../../types/registration-form/registration-int';
+import SelectInput from '../../components/select-input/select-input';
 
 function isAtLeast13YearsOld(dateString: string) {
   const inputDate = new Date(dateString);
@@ -28,9 +30,10 @@ function RegistrationPage() {
     lastName: '',
     dateBirth: '',
     password: '',
+    country: '',
   });
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     if (!isAtLeast13YearsOld(e.currentTarget.value)) {
       if (e.currentTarget.name === 'dateBirth')
         e.currentTarget.setCustomValidity('User must be at least 13 years old');
@@ -44,6 +47,7 @@ function RegistrationPage() {
     const data = new FormData(e.currentTarget);
     console.log(Object.fromEntries(data));
   };
+  console.log(values);
   return (
     <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
       <H1>Sign Up!</H1>
@@ -59,6 +63,7 @@ function RegistrationPage() {
           />
         );
       })}
+      <SelectInput {...selectInput} onChange={(e) => onChange(e)} />
       <Button btnType="submit">Submit</Button>
     </form>
   );
