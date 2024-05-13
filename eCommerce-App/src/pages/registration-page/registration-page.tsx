@@ -3,6 +3,7 @@ import FormInput from '../../components/form-input/form-input';
 import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
 import H1 from '../../utils/tags/tags';
+import inputs from './text-inputs-const';
 
 interface InputData {
   email: string;
@@ -36,82 +37,17 @@ function RegistrationPage() {
     password: '',
   });
 
-  const inputs = [
-    {
-      id: 'email',
-      name: 'email',
-      type: 'email',
-      placeholder: 'Email',
-      label: 'Email',
-      errorMessage: '*it should be a valid email adress',
-      required: true,
-    },
-    {
-      id: 'firstName',
-      name: 'firstName',
-      type: 'text',
-      placeholder: 'First Name',
-      label: 'First Name',
-      errorMessage:
-        '*must contain at least one character and no special characters or numbers',
-      required: true,
-      pattern: '^[^\\W\\d]*[^\\W\\d\\s][^\\W\\d]*$',
-    },
-    {
-      id: 'lastName',
-      name: 'lastName',
-      type: 'text',
-      placeholder: 'Last Name',
-      label: 'Last Name',
-      errorMessage:
-        '*must contain at least one character and no special characters or numbers',
-      required: true,
-      pattern: '^[^\\W\\d]*[^\\W\\d\\s][^\\W\\d]*$',
-    },
-    {
-      id: 'dateBirth',
-      name: 'dateBirth',
-      type: 'date',
-      placeholder: 'Date of Birth',
-      label: 'Date Of Birth',
-      errorMessage: '',
-      required: true,
-    },
-    {
-      id: 'password',
-      name: 'password',
-      type: 'password',
-      placeholder: 'Password',
-      label: 'Password',
-      errorMessage:
-        'Must contain minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
-      required: true,
-      pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$',
-    },
-    {
-      id: 'confirmPassword',
-      name: 'confirmPassword',
-      type: 'password',
-      placeholder: 'Confirm password',
-      label: 'Confirm password',
-      errorMessage: '*password dont match !',
-      required: true,
-      pattern: values.password,
-    },
-  ];
-
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.name !== 'confirmPassword') {
-      setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
-    }
+    if (!isAtLeast13YearsOld(e.currentTarget.value)) {
+      if (e.currentTarget.name === 'dateBirth')
+        e.currentTarget.setCustomValidity('User must be at least 13 years old');
+    } else if (e.currentTarget.name === 'dateBirth')
+      e.currentTarget.setCustomValidity('');
+    setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isAtLeast13YearsOld(values.dateBirth)) {
-      console.log('You must be at least 13 years old.');
-      return;
-    }
     const data = new FormData(e.currentTarget);
     console.log(Object.fromEntries(data));
   };
