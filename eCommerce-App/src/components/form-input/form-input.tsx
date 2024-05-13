@@ -1,17 +1,6 @@
-import { ChangeEvent, useState, InputHTMLAttributes } from 'react';
+import { useState } from 'react';
 import styles from './form-input.module.css';
-
-interface PropsOption extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  placeholder: string;
-  name: string;
-  id: string;
-  type: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  value: string;
-  errorMessage: string;
-  required: boolean;
-}
+import { PropsOption } from '../../types/registration-form/registration-int';
 
 function FormInput(props: PropsOption) {
   const [focused, setFocused] = useState(false);

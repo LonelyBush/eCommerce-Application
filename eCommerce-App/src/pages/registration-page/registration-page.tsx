@@ -4,14 +4,7 @@ import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
 import H1 from '../../utils/tags/tags';
 import inputs from './text-inputs-const';
-
-interface InputData {
-  email: string;
-  firstName: string;
-  lastName: string;
-  dateBirth: string;
-  password: string;
-}
+import { InputData } from '../../types/registration-form/registration-int';
 
 function isAtLeast13YearsOld(dateString: string) {
   const inputDate = new Date(dateString);
