@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { emailValidationMessages } from '../login-form/login-const';
 import { LoginFormType } from '../../types/types';
 
@@ -57,6 +57,10 @@ function LoginEmail({
     setEmailValid(emailError.length < 1 && loginData.email.length > 1);
     setLoginData({ ...loginData, [name]: value });
   };
+
+  useEffect(() => {
+    setEmailValid(emailError.length === 0 && loginData.password.length > 1);
+  }, [emailError, loginData.password, setEmailValid]);
 
   return (
     <>

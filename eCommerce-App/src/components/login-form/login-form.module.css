@@ -79,6 +79,11 @@
   color: red;
 }
 
+.link {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 500px) {
   .form {
     padding: 1rem;

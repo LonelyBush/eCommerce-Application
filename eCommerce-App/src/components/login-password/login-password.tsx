@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { passwordValidationMessages } from '../login-form/login-const';
 import { LoginFormType } from '../../types/types';
 import styles from '../login-form/login-form.module.css';
@@ -65,6 +65,12 @@ function LoginPassword({
     setPasswordValid(passwordError.length < 1 && loginData.password.length > 1);
     setLoginData({ ...loginData, [name]: value });
   };
+
+  useEffect(() => {
+    setPasswordValid(
+      passwordError.length === 0 && loginData.password.length > 1,
+    );
+  }, [passwordError, loginData.password, setPasswordValid]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
