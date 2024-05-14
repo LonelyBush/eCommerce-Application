@@ -37,11 +37,6 @@ function RegistrationPage() {
   });
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    if (!isAtLeast13YearsOld(e.currentTarget.value)) {
-      if (e.currentTarget.name === 'dateBirth')
-        e.currentTarget.setCustomValidity('User must be at least 13 years old');
-    } else if (e.currentTarget.name === 'dateBirth')
-      e.currentTarget.setCustomValidity('');
     if (e.currentTarget.name === 'country') {
       const getPostalCode = document.getElementsByName('postalCode');
       if (e.currentTarget.value === 'US') {
@@ -52,6 +47,12 @@ function RegistrationPage() {
         getPostalCode[0].setAttribute('pattern', '^\\d{6}$');
       }
     }
+
+    if (!isAtLeast13YearsOld(e.currentTarget.value)) {
+      if (e.currentTarget.name === 'dateOfBirth')
+        e.currentTarget.setCustomValidity('User must be at least 13 years old');
+    } else if (e.currentTarget.name === 'dateOfBirth')
+      e.currentTarget.setCustomValidity('');
     setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
   };
 
