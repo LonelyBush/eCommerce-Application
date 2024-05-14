@@ -42,6 +42,16 @@ function RegistrationPage() {
         e.currentTarget.setCustomValidity('User must be at least 13 years old');
     } else if (e.currentTarget.name === 'dateBirth')
       e.currentTarget.setCustomValidity('');
+    if (e.currentTarget.name === 'country') {
+      const getPostalCode = document.getElementsByName('postalCode');
+      if (e.currentTarget.value === 'US') {
+        getPostalCode[0].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
+      } else if (e.currentTarget.value === 'UK') {
+        getPostalCode[0].setAttribute('pattern', '^\\d{5}$');
+      } else if (e.currentTarget.value === 'RU') {
+        getPostalCode[0].setAttribute('pattern', '^\\d{6}$');
+      }
+    }
     setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
   };
 
@@ -68,7 +78,7 @@ function RegistrationPage() {
       password: dataObj.password,
       addresses: baseAdresses,
     };
-    console.log(createCustomerDraftBody);
+    console.log(createCustomerDraftBody); // this body will go to POST request for sign up
   };
   return (
     <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
