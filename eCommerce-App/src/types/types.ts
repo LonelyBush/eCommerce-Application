@@ -5,6 +5,6 @@ export type ButtonType = {
 };
 
 export type LoginFormType = {
-  mail: string;
+  email: string;
   password: string;
 };
