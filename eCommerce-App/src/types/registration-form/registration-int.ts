@@ -4,8 +4,11 @@ export interface InputData {
   email: string;
   firstName: string;
   lastName: string;
-  dateBirth: string;
+  dateOfBirth: string;
   password: string;
+  streetName: string;
+  postalCode: string;
+  city: string;
   country: string;
 }
 

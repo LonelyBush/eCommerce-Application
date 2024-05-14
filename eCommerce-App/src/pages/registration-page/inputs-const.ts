@@ -31,8 +31,8 @@ export const inputs = [
     pattern: '^[^\\W\\d]*[^\\W\\d\\s][^\\W\\d]*$',
   },
   {
-    id: 'dateBirth',
-    name: 'dateBirth',
+    id: 'dateOfBirth',
+    name: 'dateOfBirth',
     type: 'date',
     placeholder: 'YYY-MM-DD',
     label: 'Date Of Birth',
@@ -53,8 +53,8 @@ export const inputs = [
 ];
 
 export const selectInput = {
-  id: 'selectCountry',
-  name: 'selectCountry',
+  id: 'country',
+  name: 'country',
   label: 'Country',
   errorMessage: '*you must choose valid country',
   required: true,
@@ -77,3 +77,35 @@ export const selectInput = {
     },
   ],
 };
+
+export const adressInputs = [
+  {
+    id: 'city',
+    name: 'city',
+    type: 'text',
+    placeholder: 'City',
+    label: 'City',
+    errorMessage:
+      '*must contain at least one character and no special characters or numbers',
+    required: true,
+    pattern: '^[a-zA-Z]+$',
+  },
+  {
+    id: 'streetName',
+    name: 'streetName',
+    type: 'text',
+    placeholder: 'Street',
+    label: 'Street',
+    errorMessage: '*must contain at least one character',
+    required: true,
+  },
+  {
+    id: 'postalCode',
+    name: 'postalCode',
+    type: 'text',
+    placeholder: 'Postal Code',
+    label: 'Postal Code',
+    errorMessage: '*must follow the format for the country',
+    required: true,
+  },
+];

@@ -3,9 +3,9 @@ import FormInput from '../../components/form-input/form-input';
 import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
 import H1 from '../../utils/tags/tags';
-import { inputs, selectInput } from './inputs-const';
+import { inputs, selectInput, adressInputs } from './inputs-const';
 
-import { InputData } from '../../types/registration-form/registration-int';
+import { inputData } from '../../types/registration-form/registration-int';
 import SelectInput from '../../components/select-input/select-input';
 
 function isAtLeast13YearsOld(dateString: string) {
@@ -24,12 +24,15 @@ function isAtLeast13YearsOld(dateString: string) {
 }
 
 function RegistrationPage() {
-  const [values, setValues] = useState<InputData>({
+  const [values, setValues] = useState<inputData>({
     email: '',
     firstName: '',
     lastName: '',
-    dateBirth: '',
+    dateOfBirth: '',
     password: '',
+    streetName: '',
+    postalCode: '',
+    city: '',
     country: '',
   });
 
@@ -45,9 +48,28 @@ function RegistrationPage() {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    console.log(Object.fromEntries(data));
+    const dataObj = Object.fromEntries(data);
+    const baseAdresses = [
+      {
+        firstName: dataObj.firstName,
+        lastName: dataObj.lastName,
+        email: dataObj.email,
+        city: dataObj.city,
+        streetName: dataObj.streetName,
+        postalCode: dataObj.postalCode,
+        country: dataObj.country,
+      },
+    ];
+    const createCustomerDraftBody = {
+      email: dataObj.email,
+      firstName: dataObj.firstName,
+      lastName: dataObj.lastName,
+      dateOfBirth: dataObj.dateOfBirth,
+      password: dataObj.password,
+      addresses: baseAdresses,
+    };
+    console.log(createCustomerDraftBody);
   };
-  console.log(values);
   return (
     <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
       <H1>Sign Up!</H1>
@@ -64,6 +86,18 @@ function RegistrationPage() {
         );
       })}
       <SelectInput {...selectInput} onChange={(e) => onChange(e)} />
+      {adressInputs.map((input) => {
+        return (
+          <FormInput
+            key={input.id}
+            {...input}
+            onChange={(e) => {
+              onChange(e);
+            }}
+            value={values[input.name as keyof typeof values]}
+          />
+        );
+      })}
       <Button btnType="submit">Submit</Button>
     </form>
   );
