@@ -6,9 +6,11 @@ import styles from '../login-form/login-form.module.css';
 function LoginPassword({
   loginData,
   setLoginData,
+  setPasswordValid,
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
+  setPasswordValid: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<string[]>([]);
@@ -60,6 +62,7 @@ function LoginPassword({
       return prevErrors;
     });
 
+    setPasswordValid(passwordError.length < 1 && loginData.password.length > 1);
     setLoginData({ ...loginData, [name]: value });
   };
 
@@ -73,7 +76,9 @@ function LoginPassword({
       <label className={styles.label} htmlFor="password">
         Enter password:
       </label>
-      <div className={styles.passwordBlock}>
+      <div
+        className={`${styles.passwordBlock} ${passwordError.length > 0 ? styles.borderError : ''}`}
+      >
         <input
           id="password"
           className={styles.passwordInput}

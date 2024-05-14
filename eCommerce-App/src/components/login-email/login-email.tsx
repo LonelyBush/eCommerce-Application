@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { emailValidationMessages } from '../login-form/login-const';
 import { LoginFormType } from '../../types/types';
+
 import styles from '../login-form/login-form.module.css';
 
 function LoginEmail({
   loginData,
   setLoginData,
+  setEmailValid,
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
+  setEmailValid: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [emailError, setEmailError] = useState<string[]>([]);
 
@@ -51,7 +54,7 @@ function LoginEmail({
 
       return prevErrors;
     });
-
+    setEmailValid(emailError.length < 1 && loginData.email.length > 1);
     setLoginData({ ...loginData, [name]: value });
   };
 
@@ -63,7 +66,7 @@ function LoginEmail({
       </label>
       <input
         id="email"
-        className={styles.input}
+        className={`${styles.input} ${emailError.length > 0 ? styles.borderError : ''}`}
         type="email"
         placeholder="email"
         name="email"

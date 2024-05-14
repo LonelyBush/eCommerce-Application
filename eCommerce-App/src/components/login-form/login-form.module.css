@@ -24,19 +24,8 @@
   border: 0.2rem solid var(--c-mint-100);
   border-radius: 1rem;
 }
-.input:focus,
-.passwordBlock:focus {
+.input:focus {
   border: 0.2rem solid var( --c-blue-800);
-}
-
-.input.error,
-.passwordBlock.error {
-  border: 0.3rem solid red;
-}
-
-.input.valid,
-.passwordBlock.valid {
-  border: 0.2rem solid var(--c-green-400);
 }
 
 .passwordBlock {
@@ -47,6 +36,15 @@
   color: var(--c-blue-800);
   border: 0.2rem solid var(--c-mint-100);
   border-radius: 1rem;
+}
+
+.passwordBlock:focus {
+  border: 0.2rem solid var( --c-blue-800);
+}
+
+.input.borderError,
+.passwordBlock.borderError {
+  border: 0.2rem solid red;
 }
 
 .passwordInput {
