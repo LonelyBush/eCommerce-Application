@@ -5,7 +5,7 @@ import Button from '../../utils/button/button';
 import H1 from '../../utils/tags/tags';
 import { inputs, selectInput, adressInputs } from './inputs-const';
 
-import { inputData } from '../../types/registration-form/registration-int';
+import { InputData } from '../../types/registration-form/registration-int';
 import SelectInput from '../../components/select-input/select-input';
 
 function isAtLeast13YearsOld(dateString: string) {
@@ -24,7 +24,7 @@ function isAtLeast13YearsOld(dateString: string) {
 }
 
 function RegistrationPage() {
-  const [values, setValues] = useState<inputData>({
+  const [values, setValues] = useState<InputData>({
     email: '',
     firstName: '',
     lastName: '',
