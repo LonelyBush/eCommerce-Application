@@ -30,7 +30,7 @@ label{
     border: 0.2rem solid red;
 }
 
-span{
+.formInput > span{
     font-size: 0.8rem;
     color: red;
     word-wrap: break-word;
