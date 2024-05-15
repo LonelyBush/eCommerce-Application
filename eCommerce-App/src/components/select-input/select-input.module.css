@@ -32,7 +32,7 @@
     color: var(--c-mint-100);
 }
 
-select:focus{
+.selectInputForm > select:focus{
     border: 0.2rem solid var( --c-blue-800);
     background-image:
     linear-gradient(45deg, white 50%, transparent 50%),
@@ -51,14 +51,14 @@ select:focus{
   outline: 0;
   }
   
-select:valid{
-      border: 0.2rem solid var(--c-green-400)
+.selectInputForm > select:valid{
+  border: 0.2rem solid var(--c-green-400)
   }
   
-select:invalid[data-focused='true']{
-      border: 0.2rem solid red;
+.selectInputForm > select:invalid[data-focused='true']{
+  border: 0.2rem solid red;
 }
 
-select:invalid[data-focused='true'] ~ span{
-    display: block;
+.selectInputForm > select:invalid[data-focused='true'] ~ span{
+  display: block;
 }

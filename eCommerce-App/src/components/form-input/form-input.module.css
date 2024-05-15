@@ -18,15 +18,15 @@ label{
     border-radius: 1rem;
 }
 
-input:focus {
+.formInput > input:focus {
   border: 0.2rem solid var( --c-blue-800);
 }
 
-input:valid{
+.formInput > input:valid{
     border: 0.2rem solid var(--c-green-400)
 }
 
-input:invalid[data-focused='true']{
+.formInput > input:invalid[data-focused='true']{
     border: 0.2rem solid red;
 }
 
@@ -37,7 +37,7 @@ span{
     display: none;
 }
 
-input:invalid[data-focused='true'] ~ span{
+.formInput > input:invalid[data-focused='true'] ~ span{
     display: block;
 }
 
