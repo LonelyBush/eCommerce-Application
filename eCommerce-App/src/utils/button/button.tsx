@@ -6,7 +6,7 @@ function Button({
   children,
   onClick,
   disabled,
-}: ButtonType & { disabled?: boolean }) {
+}: ButtonType) {
   return (
     <button
       className={styles.btn}
@@ -18,9 +18,5 @@ function Button({
     </button>
   );
 }
-
-Button.defaultProps = {
-  disabled: false,
-};
 
 export default Button;
