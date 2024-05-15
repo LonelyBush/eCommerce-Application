@@ -46,9 +46,10 @@ export const inputs = [
     placeholder: 'Password',
     label: 'Password',
     errorMessage:
-      '*must contain minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
+      '*must contain minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter 1 special character, and 1 number',
     required: true,
-    pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$',
+    pattern:
+      '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$$',
   },
 ];
 

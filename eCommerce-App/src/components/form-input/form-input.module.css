@@ -5,7 +5,7 @@
     gap: 0.1rem;
 }
 
-label{
+.formInput > label{
     color: var(--c-mint-100);
 }
 
