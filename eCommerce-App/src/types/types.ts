@@ -3,3 +3,8 @@ export type ButtonType = {
   children: string;
   onClick?: () => void;
 };
+
+export type LoginFormType = {
+  email: string;
+  password: string;
+};

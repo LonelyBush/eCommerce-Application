@@ -1,0 +1,97 @@
+@import '../../styles/colors.css';
+
+.form {
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 3rem;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  border: 0.1rem solid var(--c-mint-100);
+  border-radius: 2rem;
+}
+
+.label {
+  color: var(--c-mint-100);
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin: 0.8rem 0;
+  box-sizing: border-box;
+  color: var(--c-blue-800);
+  border: 0.2rem solid var(--c-mint-100);
+  border-radius: 1rem;
+}
+.input:focus {
+  border: 0.2rem solid var( --c-blue-800);
+}
+
+.passwordBlock {
+  display: flex;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  box-sizing: border-box;
+  color: var(--c-blue-800);
+  border: 0.2rem solid var(--c-mint-100);
+  border-radius: 1rem;
+}
+
+.passwordBlock:focus {
+  border: 0.2rem solid var( --c-blue-800);
+}
+
+.input.borderError,
+.passwordBlock.borderError {
+  border: 0.2rem solid red;
+}
+
+.passwordInput {
+  width: 100%;
+  border: 0;
+  outline: 0;
+}
+
+.passwordEye {
+  margin-top: 0.5rem;
+  min-width: 3rem;
+  height: 2.5rem;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  mask-position: center;
+  background-color: var(--c-mint-100);
+  cursor: pointer;
+}
+
+.passwordEyeClosed {
+  mask-image: url('../../assets/svg-icons/open-eye-password.svg');
+}
+
+.passwordEyeOpen {
+  mask-image: url('../../assets/svg-icons/close-eye-password.svg');
+}
+
+.error {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  text-align: left;
+  color: red;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .form {
+    padding: 1rem;
+    font-size: 1.8rem;
+  }
+
+  .passwordEye {
+    min-width: 2rem;
+    height: 1.5rem;
+  }
+}

@@ -5,4 +5,10 @@ function H1({ children }: ITags) {
   return <h1 className={styles.title}>{children}</h1>;
 }
 
-export default H1;
+function Container({ children }: ITags) {
+  return <div className={styles.container}>{children}</div>;
+}
+
+const Tags = { H1, Container };
+
+export default Tags;
