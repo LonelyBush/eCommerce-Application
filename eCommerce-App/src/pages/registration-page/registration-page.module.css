@@ -1,16 +1,38 @@
+.registrationRoot{
+    display: flex;
+    justify-content: center;
+}
+
 .registrationForm{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 25rem;
+    width: 40rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 1rem;
     padding: 1rem;
     margin-bottom: 2rem;
     border: 0.1rem solid var(--c-mint-100);
     border-radius: 1rem;
+}
+
+.passwordSection,
+.emailSection,
+.nameSection,
+.birthSection{
+display: flex;
+gap: 1rem;
+}
+
+.fieldsetBlock{
+    border: 0.1rem solid var(--c-mint-100);
+    padding: 1rem;
+}
+.fieldsetBlock > legend {
+    color: var(--c-mint-100);
+}
+
+.inputsBlock {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.7rem;
 }

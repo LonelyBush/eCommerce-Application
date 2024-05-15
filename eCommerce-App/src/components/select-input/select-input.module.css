@@ -1,7 +1,7 @@
 .selectInputForm{
     display: flex;
     flex-direction: column;
-    width: 20rem;
+    width: 100%;
     gap: 0.1rem;
 }
 .selectInputForm > select {
@@ -28,7 +28,7 @@
 }
 
 
-.selectInputForm > p {
+.selectInputForm > label {
     color: var(--c-mint-100);
 }
 
@@ -55,7 +55,7 @@
     font-size: 0.8rem;
     color: red;
     word-wrap: break-word;
-    display: none;
+    visibility: hidden;
 }
   
 .selectInputForm > select:valid{
@@ -67,5 +67,5 @@
 }
 
 .selectInputForm > select:invalid[data-focused='true'] ~ span{
-  display: block;
+  visibility:visible
 }

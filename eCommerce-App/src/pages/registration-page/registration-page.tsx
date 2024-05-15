@@ -3,7 +3,14 @@ import FormInput from '../../components/form-input/form-input';
 import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
 import Tags from '../../utils/tags/tags';
-import { inputs, selectInput, adressInputs } from './inputs-const';
+import {
+  nameInput,
+  emailInput,
+  passwordInput,
+  dateInput,
+  selectInput,
+  adressInputs,
+} from './inputs-const';
 
 import { InputData } from '../../types/registration-form/registration-int';
 import SelectInput from '../../components/select-input/select-input';
@@ -47,7 +54,6 @@ function RegistrationPage() {
         getPostalCode[0].setAttribute('pattern', '^\\d{6}$');
       }
     }
-
     if (!isAtLeast13YearsOld(e.currentTarget.value)) {
       if (e.currentTarget.name === 'dateOfBirth')
         e.currentTarget.setCustomValidity('User must be at least 13 years old');
@@ -82,35 +88,86 @@ function RegistrationPage() {
     console.log(createCustomerDraftBody); // this body will go to POST request for sign up
   };
   return (
-    <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
-      <Tags.H1>Sign Up!</Tags.H1>
-      {inputs.map((input) => {
-        return (
-          <FormInput
-            key={input.id}
-            {...input}
-            onChange={(e) => {
-              onChange(e);
-            }}
-            value={values[input.name as keyof typeof values]}
-          />
-        );
-      })}
-      <SelectInput {...selectInput} onChange={(e) => onChange(e)} />
-      {adressInputs.map((input) => {
-        return (
-          <FormInput
-            key={input.id}
-            {...input}
-            onChange={(e) => {
-              onChange(e);
-            }}
-            value={values[input.name as keyof typeof values]}
-          />
-        );
-      })}
-      <Button btnType="submit">Submit</Button>
-    </form>
+    <div className={styles.registrationRoot}>
+      <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
+        <Tags.H1>Sign Up!</Tags.H1>
+        <div className={styles.inputsBlock}>
+          <div className={styles.emailSection}>
+            {emailInput.map((input) => {
+              return (
+                <FormInput
+                  key={input.id}
+                  {...input}
+                  onChange={(e) => {
+                    onChange(e);
+                  }}
+                  value={values[input.name as keyof typeof values]}
+                />
+              );
+            })}
+          </div>
+          <div className={styles.nameSection}>
+            {nameInput.map((input) => {
+              return (
+                <FormInput
+                  key={input.id}
+                  {...input}
+                  onChange={(e) => {
+                    onChange(e);
+                  }}
+                  value={values[input.name as keyof typeof values]}
+                />
+              );
+            })}
+          </div>
+          <div className={styles.birthSection}>
+            {dateInput.map((input) => {
+              return (
+                <FormInput
+                  key={input.id}
+                  {...input}
+                  onChange={(e) => {
+                    onChange(e);
+                  }}
+                  value={values[input.name as keyof typeof values]}
+                />
+              );
+            })}
+          </div>
+          <div className={styles.passwordSection}>
+            {passwordInput.map((input) => {
+              return (
+                <FormInput
+                  key={input.id}
+                  {...input}
+                  onChange={(e) => {
+                    onChange(e);
+                  }}
+                  value={values[input.name as keyof typeof values]}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <fieldset className={styles.fieldsetBlock}>
+          <legend>Shipping Address</legend>
+          <SelectInput {...selectInput} onChange={(e) => onChange(e)} />
+          {adressInputs.map((input) => {
+            return (
+              <FormInput
+                key={input.id}
+                {...input}
+                onChange={(e) => {
+                  onChange(e);
+                }}
+                value={values[input.name as keyof typeof values]}
+              />
+            );
+          })}
+        </fieldset>
+        <Button btnType="submit">Submit</Button>
+      </form>
+    </div>
   );
 }
 
