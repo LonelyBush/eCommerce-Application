@@ -1,7 +1,7 @@
 @import '../../styles/colors.css';
 
 .form {
-  max-width: 40rem;
+  max-width: 35rem;
   display: flex;
   flex-direction: column;
   padding: 2rem 3rem;
@@ -25,7 +25,7 @@
   border-radius: 1rem;
 }
 .input:focus {
-  border: 0.2rem solid var( --c-blue-800);
+  border: 0.2rem solid var(--c-blue-800);
 }
 
 .passwordBlock {
@@ -39,7 +39,7 @@
 }
 
 .passwordBlock:focus {
-  border: 0.2rem solid var( --c-blue-800);
+  border: 0.2rem solid var(--c-blue-800);
 }
 
 .input.borderError,
@@ -77,11 +77,6 @@
   font-size: 1.2rem;
   text-align: left;
   color: red;
-}
-
-.link {
-  display: flex;
-  justify-content: center;
 }
 
 @media (max-width: 500px) {

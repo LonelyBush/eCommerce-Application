@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import FormInput from '../../components/form-input/form-input';
 import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
-import H1 from '../../utils/tags/tags';
+import Tags from '../../utils/tags/tags';
 import { inputs, selectInput, adressInputs } from './inputs-const';
 
 import { InputData } from '../../types/registration-form/registration-int';
@@ -83,7 +83,7 @@ function RegistrationPage() {
   };
   return (
     <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
-      <H1>Sign Up!</H1>
+      <Tags.H1>Sign Up!</Tags.H1>
       {inputs.map((input) => {
         return (
           <FormInput

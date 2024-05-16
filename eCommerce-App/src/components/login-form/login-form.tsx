@@ -45,7 +45,6 @@ function LoginForm() {
         />
         {error && <div className={styles.error}>{error}</div>}
       </div>
-
       <div className={styles.link}>
         <Button btnType="submit" disabled={!(emailValid && passwordValid)}>
           Submit
