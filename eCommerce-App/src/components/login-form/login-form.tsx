@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Button from '../../utils/button/button';
 import { LoginFormType } from '../../types/types';
 import LoginEmail from '../login-email/login-email';
@@ -34,11 +33,9 @@ function LoginForm() {
           setPasswordValid={setPasswordValid}
         />
       </div>
-      <Link className={styles.link} to="/registration">
-        <Button btnType="submit" disabled={!(emailValid && passwordValid)}>
-          Submit
-        </Button>
-      </Link>
+      <Button btnType="submit" disabled={!(emailValid && passwordValid)}>
+        Submit
+      </Button>
     </form>
   );
 }
