@@ -45,11 +45,13 @@ function LoginForm() {
           loginData={loginData}
           setLoginData={setLoginData}
           setEmailValid={setEmailValid}
+          setError={setError}
         />
         <LoginPassword
           loginData={loginData}
           setLoginData={setLoginData}
           setPasswordValid={setPasswordValid}
+          setError={setError}
         />
         {error && <div className={styles.error}>{error}</div>}
       </div>
