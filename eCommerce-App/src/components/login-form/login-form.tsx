@@ -35,7 +35,7 @@ function LoginForm() {
     <form className={styles.form} onSubmit={handleSubmit}>
       <h2 className={styles.titleLogin}>Welcome!!!</h2>
       <p className={styles.titleLogin}>
-        Don&apos;t have an account?
+        Don&apos;t have an account?&nbsp;
         <Link className={styles.link} to="/registration">
           Sign up
         </Link>
