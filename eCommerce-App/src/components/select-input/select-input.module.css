@@ -55,7 +55,7 @@
     font-size: 0.8rem;
     color: red;
     word-wrap: break-word;
-    visibility: hidden;
+    display: none;
 }
   
 .selectInputForm > select:valid{
@@ -67,5 +67,5 @@
 }
 
 .selectInputForm > select:invalid[data-focused='true'] ~ span{
-  visibility:visible
+  display: block;
 }

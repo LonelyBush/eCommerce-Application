@@ -14,6 +14,7 @@ import {
 
 import { InputData } from '../../types/registration-form/registration-int';
 import SelectInput from '../../components/select-input/select-input';
+import Checkbox from '../../utils/checkbox/checkbox';
 
 function isAtLeast13YearsOld(dateString: string) {
   const inputDate = new Date(dateString);
@@ -164,6 +165,24 @@ function RegistrationPage() {
               />
             );
           })}
+          <Checkbox id="shipping-adress-check" label="Set default address" />
+        </fieldset>
+        <fieldset className={styles.fieldsetBlock}>
+          <legend>Billing Address</legend>
+          <SelectInput {...selectInput} onChange={(e) => onChange(e)} />
+          {adressInputs.map((input) => {
+            return (
+              <FormInput
+                key={input.id}
+                {...input}
+                onChange={(e) => {
+                  onChange(e);
+                }}
+                value={values[input.name as keyof typeof values]}
+              />
+            );
+          })}
+          <Checkbox id="billing-adress-check" label="Set as default address" />
         </fieldset>
         <Button btnType="submit">Submit</Button>
       </form>
