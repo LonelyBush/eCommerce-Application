@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../utils/button/button';
 import { LoginFormType } from '../../types/types';
 import LoginEmail from '../login-email/login-email';
@@ -26,12 +26,20 @@ function LoginForm() {
       await checkAuthClient(loginData);
       navigate('/main');
     } catch (caughtError) {
-      if (caughtError instanceof Error) setError(caughtError.message);
+      if (caughtError instanceof Error)
+        setError(`* ${caughtError.message.toLowerCase()}`);
     }
   };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      <h2 className={styles.titleLogin}>Welcome!!!</h2>
+      <p className={styles.titleLogin}>
+        Don&apos;t have an account?
+        <Link className={styles.link} to="/registration">
+          Sign up
+        </Link>
+      </p>
       <div>
         <LoginEmail
           loginData={loginData}
@@ -45,9 +53,9 @@ function LoginForm() {
         />
         {error && <div className={styles.error}>{error}</div>}
       </div>
-      <div className={styles.link}>
+      <div className={styles.btnBlock}>
         <Button btnType="submit" disabled={!(emailValid && passwordValid)}>
-          Submit
+          Log in
         </Button>
       </div>
     </form>

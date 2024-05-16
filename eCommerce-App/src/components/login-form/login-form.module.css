@@ -6,10 +6,39 @@
   flex-direction: column;
   padding: 2rem 3rem;
   margin-bottom: 2rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
   border: 0.1rem solid var(--c-mint-100);
   border-radius: 2rem;
 }
+
+.titleLogin {
+  padding-bottom: 1rem;
+  font-size: 1.7rem;
+  color: var(--c-blue-600);
+  text-align: center;
+}
+
+.link {
+  color: var(--c-green-400);
+  padding-bottom: 0.4rem;
+  position: relative;
+}
+
+.link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0.15rem;
+  background-color: var(--c-green-400);
+  transition: all 0.4s ease-in;
+  transform: translateX(-50%);
+}
+
+.link:hover::before {
+  width: 100%;
+} 
 
 .label {
   color: var(--c-mint-100);
@@ -24,6 +53,7 @@
   border: 0.2rem solid var(--c-mint-100);
   border-radius: 1rem;
 }
+
 .input:focus {
   border: 0.2rem solid var(--c-blue-800);
 }
@@ -79,14 +109,27 @@
   color: red;
 }
 
+.btnBlock {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 500px) {
   .form {
     padding: 1rem;
     font-size: 1.8rem;
   }
 
+  .titleLogin {
+    font-size: 1.4rem;
+  }
+
   .passwordEye {
     min-width: 2rem;
     height: 1.5rem;
+  }
+
+  .error {
+    font-size: 1rem;
   }
 }
