@@ -54,13 +54,13 @@ function LoginEmail({
 
       return prevErrors;
     });
-    setEmailValid(emailError.length < 1 && loginData.email.length > 1);
+    setEmailValid(emailError.length === 0 && loginData.email.length > 1);
     setLoginData({ ...loginData, [name]: value });
   };
 
   useEffect(() => {
-    setEmailValid(emailError.length === 0 && loginData.password.length > 1);
-  }, [emailError, loginData.password, setEmailValid]);
+    setEmailValid(emailError.length === 0 && loginData.email.length > 1);
+  }, [emailError, loginData.email, setEmailValid]);
 
   return (
     <>

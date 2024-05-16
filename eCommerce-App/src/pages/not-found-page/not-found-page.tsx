@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import Button from '../../utils/button/button';
 import Tags from '../../utils/tags/tags';
 import styles from './not-found.module.css';
@@ -16,9 +15,9 @@ function NotFoundPage() {
           <span className={styles.digitThird}>4</span>
         </span>
       </section>
-      <Link to="/main">
-        <Button btnType="button">To main page</Button>
-      </Link>
+      <Button btnType="button" to="/main">
+        To main page
+      </Button>
     </div>
   );
 }
