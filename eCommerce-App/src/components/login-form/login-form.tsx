@@ -26,7 +26,8 @@ function LoginForm() {
       await checkAuthClient(loginData);
       navigate('/main');
     } catch (caughtError) {
-      if (caughtError instanceof Error) setError(caughtError.message);
+      if (caughtError instanceof Error)
+        setError(`* ${caughtError.message.toLowerCase()}`);
     }
   };
 
@@ -45,9 +46,9 @@ function LoginForm() {
         />
         {error && <div className={styles.error}>{error}</div>}
       </div>
-      <div className={styles.link}>
+      <div className={styles.buttonBlock}>
         <Button btnType="submit" disabled={!(emailValid && passwordValid)}>
-          Submit
+          Enter
         </Button>
       </div>
     </form>
