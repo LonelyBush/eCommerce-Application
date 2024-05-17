@@ -4,6 +4,7 @@ import Button from '../../utils/button/button';
 import { LoginFormType } from '../../types/types';
 import LoginEmail from '../login-email/login-email';
 import LoginPassword from '../login-password/login-password';
+import LinkTemplate from '../../utils/link/link';
 
 import styles from './login-form.module.css';
 import { checkAuthClient } from '../../api/checkAuthClient';
@@ -36,22 +37,29 @@ function LoginForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      <h2 className={styles.titleLogin}>Welcome!!!</h2>
+      <p className={styles.titleLogin}>
+        Don&apos;t have an account?&nbsp;
+        <LinkTemplate to="/registration">Sign up</LinkTemplate>
+      </p>
       <div>
         <LoginEmail
           loginData={loginData}
           setLoginData={setLoginData}
           setEmailValid={setEmailValid}
+          setError={setError}
         />
         <LoginPassword
           loginData={loginData}
           setLoginData={setLoginData}
           setPasswordValid={setPasswordValid}
+          setError={setError}
         />
         {error && <div className={styles.error}>{error}</div>}
       </div>
-      <div className={styles.buttonBlock}>
+      <div className={styles.btnBlock}>
         <Button btnType="submit" disabled={!(emailValid && passwordValid)}>
-          Enter
+          Log in
         </Button>
       </div>
     </form>
