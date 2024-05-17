@@ -1,9 +1,3 @@
-:root {
-    --form-control-color: rebeccapurple;
-    --form-control-disabled: #959495;
-  }
-
-
 .registrationRoot{
     display: flex;
     justify-content: center;
@@ -22,27 +16,4 @@
 
 .registrationForm > button {
     align-self: center;
-}
-
-.passwordSection,
-.emailSection,
-.nameSection,
-.birthSection{
-display: flex;
-gap: 1rem;
-}
-
-.fieldsetBlock{
-    border: 0.1rem solid var(--c-mint-100);
-    padding: 1rem;
-}
-.fieldsetBlock > legend {
-    color: var(--c-mint-100);
-}
-
-.inputsBlock {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.7rem;
 }

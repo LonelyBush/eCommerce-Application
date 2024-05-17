@@ -23,9 +23,30 @@ export interface PropsOption extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   id: string;
   type?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   value?: string;
   errorMessage: string;
   required: boolean;
   options?: SelectOptionProps[];
+}
+
+export interface CredentialsProps
+  extends InputHTMLAttributes<HTMLInputElement> {
+  emailInput: PropsOption[];
+  nameInput: PropsOption[];
+  dateInput: PropsOption[];
+
+  passwordInput: PropsOption[];
+
+  values: InputData;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+}
+
+export interface AdressFormProps {
+  adressInputs: PropsOption[];
+  fieldLegend: string;
+  selectInput: PropsOption;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+
+  values: InputData;
 }

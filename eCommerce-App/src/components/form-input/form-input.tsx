@@ -10,7 +10,7 @@ function FormInput(props: PropsOption) {
       <label htmlFor={id}>{label}</label>
       <input
         {...inputProps}
-        onChange={(e) => onChange(e)}
+        onChange={(e) => onChange!(e)}
         onBlur={() => setFocused(true)}
         data-focused={focused.toString()}
       />
