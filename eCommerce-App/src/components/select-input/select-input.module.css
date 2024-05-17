@@ -31,7 +31,6 @@
 .selectInputForm > label {
     color: var(--c-mint-100);
 }
-
 .selectInputForm > select:focus{
     border: 0.2rem solid var( --c-blue-800);
     background-image:

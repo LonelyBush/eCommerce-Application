@@ -26,9 +26,7 @@ function CredentialsForm({
   values,
   onChange,
 }: CredentialsProps) {
-  const onChangeDate = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
+  const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     if (!isAtLeast13YearsOld(e.currentTarget.value)) {
       if (e.currentTarget.name === 'dateOfBirth')
         e.currentTarget.setCustomValidity('User must be at least 13 years old');
@@ -43,7 +41,7 @@ function CredentialsForm({
             <FormInput
               key={input.id}
               {...input}
-              onChange={(e) => {
+              onChangeInput={(e) => {
                 onChange(e);
               }}
               value={values[input.name as keyof typeof values]}
@@ -57,7 +55,7 @@ function CredentialsForm({
             <FormInput
               key={input.id}
               {...input}
-              onChange={(e) => {
+              onChangeInput={(e) => {
                 onChange(e);
               }}
               value={values[input.name as keyof typeof values]}
@@ -71,7 +69,7 @@ function CredentialsForm({
             <FormInput
               key={input.id}
               {...input}
-              onChange={(e) => {
+              onChangeInput={(e) => {
                 onChangeDate(e);
                 onChange(e);
               }}
@@ -86,7 +84,7 @@ function CredentialsForm({
             <FormInput
               key={input.id}
               {...input}
-              onChange={(e) => {
+              onChangeInput={(e) => {
                 onChange(e);
               }}
               value={values[input.name as keyof typeof values]}

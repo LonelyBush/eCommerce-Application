@@ -38,27 +38,46 @@ function RegistrationPage() {
     dateOfBirth: '',
     password: '',
   });
+  const [useSameAddress, setUseSameAddress] = useState<boolean>(false);
 
-  console.log(shippingValues, billingValues);
-  const onShippingChange = (
+  const handleInputChange = (
+    addressType: 'billing' | 'shipping',
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    setShippingInput({
-      ...shippingValues,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
+    if (addressType === 'shipping') {
+      setShippingInput({
+        ...shippingValues,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
+      if (useSameAddress) {
+        setBillingInput({
+          ...billingValues,
+          [e.currentTarget.name]: e.currentTarget.value,
+        });
+        const getCurrrentName = document.getElementsByName(
+          e.currentTarget.name,
+        );
+        getCurrrentName.forEach((elem) => {
+          elem.setAttribute('data-focused', 'true');
+        });
+      }
+    } else {
+      setBillingInput({
+        ...billingValues,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
+    }
+  };
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUseSameAddress(e.target.checked);
+    if (e.target.checked) {
+      setBillingInput(shippingValues);
+    }
   };
 
-  const onBillingChange = (
+  const onCredentialsChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    setBillingInput({
-      ...billingValues,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
-  };
-
-  const onCredentialsChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCredentialsValues({
       ...credentialsValues,
       [e.currentTarget.name]: e.currentTarget.value,
@@ -104,17 +123,21 @@ function RegistrationPage() {
           onChange={(e) => onCredentialsChange(e)}
         />
         <AdressForm
+          checked={useSameAddress}
+          onCheckboxChange={(e) => handleCheckboxChange(e)}
           fieldLegend="Shipping Address"
           adressInputs={adressInputs}
           selectInput={selectInput}
-          onChange={(e) => onShippingChange(e)}
+          onChange={(e) => handleInputChange('shipping', e)}
           values={shippingValues}
         />
         <AdressForm
+          checked={useSameAddress}
+          onCheckboxChange={(e) => handleCheckboxChange(e)}
           fieldLegend="Billing Address"
           adressInputs={adressInputs}
           selectInput={selectInput}
-          onChange={(e) => onBillingChange(e)}
+          onChange={(e) => handleInputChange('billing', e)}
           values={billingValues}
         />
         <Button btnType="submit">Submit</Button>

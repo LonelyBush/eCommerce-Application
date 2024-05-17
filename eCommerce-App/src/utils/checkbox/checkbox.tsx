@@ -1,15 +1,23 @@
+import { ChangeEvent } from 'react';
 import styles from './checkbox.module.css';
 
 type CheckBoxType = {
   id: string;
   label: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  checked: boolean;
 };
 
-function Checkbox({ id, label }: CheckBoxType) {
+function Checkbox({ id, label, onChange, checked }: CheckBoxType) {
   return (
     <label className={styles.labelContainer} htmlFor={id}>
       {label}
-      <input id={id} type="checkbox" />
+      <input
+        checked={checked}
+        onChange={(e) => onChange(e)}
+        id={id}
+        type="checkbox"
+      />
       <span className={styles.checkmark} />
     </label>
   );

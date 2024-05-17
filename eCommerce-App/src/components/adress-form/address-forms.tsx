@@ -10,11 +10,13 @@ function AdressForm({
   adressInputs,
   selectInput,
   onChange,
+  onCheckboxChange,
+  checked,
   values,
 }: AdressFormProps) {
   let checkbox;
 
-  const onChangeSelect = (
+  const onChangePostalCodeFormat = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     if (e.currentTarget.name === 'country') {
@@ -31,14 +33,12 @@ function AdressForm({
 
   if (fieldLegend === 'Shipping Address') {
     checkbox = (
-      <>
-        <Checkbox id="shipping-adress-check" label="Set default address" />
-        <Checkbox id="set-as-billing-check" label="Set as billing address" />
-      </>
-    );
-  } else {
-    checkbox = (
-      <Checkbox id="shipping-adress-check" label="Set default address" />
+      <Checkbox
+        checked={checked}
+        onChange={onCheckboxChange}
+        id="set-as-billing-check"
+        label="Set as billing address"
+      />
     );
   }
   return (
@@ -46,17 +46,18 @@ function AdressForm({
       <legend>{fieldLegend}</legend>
       <SelectInput
         {...selectInput}
-        onChange={(e) => {
-          onChangeSelect(e);
+        onChangeSelect={(e) => {
+          onChangePostalCodeFormat(e);
           onChange(e);
         }}
+        value={values[selectInput.name as keyof typeof values]}
       />
       {adressInputs.map((input) => {
         return (
           <FormInput
             key={input.id}
             {...input}
-            onChange={(e) => {
+            onChangeInput={(e) => {
               onChange(e);
             }}
             value={values[input.name as keyof typeof values]}
