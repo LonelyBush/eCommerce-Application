@@ -6,7 +6,8 @@ import LoginEmail from '../login-email/login-email';
 import LoginPassword from '../login-password/login-password';
 
 import styles from './login-form.module.css';
-import checkAuthClient from '../../api/auth-client';
+import { checkAuthClient } from '../../api/checkAuthClient';
+import authWithPassword from '../../api/authWithPassword';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -23,7 +24,9 @@ function LoginForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await checkAuthClient(loginData);
+      const response = await checkAuthClient(loginData);
+      console.log('Response from checkAuthClient:', response);
+      authWithPassword(loginData);
       navigate('/main');
     } catch (caughtError) {
       if (caughtError instanceof Error)
