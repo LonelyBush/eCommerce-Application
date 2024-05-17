@@ -7,7 +7,7 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<Navigate to="/main" replace />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/main" element={<MainPage />} />
