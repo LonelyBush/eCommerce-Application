@@ -110,8 +110,8 @@ export const adressInputs = [
     required: true,
   },
   {
-    id: 'adress',
-    name: 'adress',
+    id: 'streetName',
+    name: 'streetName',
     type: 'text',
     placeholder: 'Adress',
     label: 'Adress',

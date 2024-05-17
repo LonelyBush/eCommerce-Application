@@ -1,11 +1,14 @@
 import { ChangeEvent, InputHTMLAttributes } from 'react';
 
-export interface InputData {
+export interface CredentialsData {
   email: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
   password: string;
+}
+
+export interface AdressData {
   streetName: string;
   postalCode: string;
   city: string;
@@ -23,7 +26,7 @@ export interface PropsOption extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   id: string;
   type?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   errorMessage: string;
   required: boolean;
@@ -38,8 +41,8 @@ export interface CredentialsProps
 
   passwordInput: PropsOption[];
 
-  values: InputData;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  values: CredentialsData;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface AdressFormProps {
@@ -48,5 +51,5 @@ export interface AdressFormProps {
   selectInput: PropsOption;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 
-  values: InputData;
+  values: AdressData;
 }

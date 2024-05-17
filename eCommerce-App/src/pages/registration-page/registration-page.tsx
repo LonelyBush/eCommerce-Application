@@ -11,55 +11,58 @@ import {
   adressInputs,
 } from './inputs-const';
 
-import { InputData } from '../../types/registration-form/registration-int';
+import {
+  CredentialsData,
+  AdressData,
+} from '../../types/registration-form/registration-int';
 import CredentialsForm from '../../components/credentials-form/credentials-form';
 import AdressForm from '../../components/adress-form/address-forms';
 
-function isAtLeast13YearsOld(dateString: string) {
-  const inputDate = new Date(dateString);
-
-  const today = new Date();
-
-  const ageDiff = today.getFullYear() - inputDate.getFullYear();
-  const monthDiff = today.getMonth() - inputDate.getMonth();
-  const dayDiff = today.getDate() - inputDate.getDate();
-
-  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-    return ageDiff - 1 >= 13;
-  }
-  return ageDiff >= 13;
-}
-
 function RegistrationPage() {
-  const [values, setValues] = useState<InputData>({
-    email: '',
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    password: '',
+  const [shippingValues, setShippingInput] = useState<AdressData>({
     streetName: '',
     postalCode: '',
     city: '',
     country: '',
   });
+  const [billingValues, setBillingInput] = useState<AdressData>({
+    streetName: '',
+    postalCode: '',
+    city: '',
+    country: '',
+  });
+  const [credentialsValues, setCredentialsValues] = useState<CredentialsData>({
+    email: '',
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    password: '',
+  });
 
-  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    if (e.currentTarget.name === 'country') {
-      const getPostalCode = document.getElementsByName('postalCode');
-      if (e.currentTarget.value === 'US') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
-      } else if (e.currentTarget.value === 'UK') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{5}$');
-      } else if (e.currentTarget.value === 'RU') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{6}$');
-      }
-    }
-    if (!isAtLeast13YearsOld(e.currentTarget.value)) {
-      if (e.currentTarget.name === 'dateOfBirth')
-        e.currentTarget.setCustomValidity('User must be at least 13 years old');
-    } else if (e.currentTarget.name === 'dateOfBirth')
-      e.currentTarget.setCustomValidity('');
-    setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
+  console.log(shippingValues, billingValues);
+  const onShippingChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    setShippingInput({
+      ...shippingValues,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+
+  const onBillingChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    setBillingInput({
+      ...billingValues,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+
+  const onCredentialsChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCredentialsValues({
+      ...credentialsValues,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -70,6 +73,7 @@ function RegistrationPage() {
       {
         firstName: dataObj.firstName,
         lastName: dataObj.lastName,
+
         email: dataObj.email,
         city: dataObj.city,
         streetName: dataObj.streetName,
@@ -96,22 +100,22 @@ function RegistrationPage() {
           passwordInput={passwordInput}
           dateInput={dateInput}
           nameInput={nameInput}
-          values={values}
-          onChange={(e) => onChange(e)}
+          values={credentialsValues}
+          onChange={(e) => onCredentialsChange(e)}
         />
         <AdressForm
           fieldLegend="Shipping Address"
           adressInputs={adressInputs}
           selectInput={selectInput}
-          onChange={(e) => onChange(e)}
-          values={values}
+          onChange={(e) => onShippingChange(e)}
+          values={shippingValues}
         />
         <AdressForm
           fieldLegend="Billing Address"
           adressInputs={adressInputs}
           selectInput={selectInput}
-          onChange={(e) => onChange(e)}
-          values={values}
+          onChange={(e) => onBillingChange(e)}
+          values={billingValues}
         />
         <Button btnType="submit">Submit</Button>
       </form>
