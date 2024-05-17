@@ -8,10 +8,12 @@ function LoginEmail({
   loginData,
   setLoginData,
   setEmailValid,
+  setError,
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
   setEmailValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [emailError, setEmailError] = useState<string[]>([]);
 
@@ -20,6 +22,7 @@ function LoginEmail({
   ) => {
     event.preventDefault();
     const { name, value } = event.target;
+    setError('');
 
     setEmailError((prevErrors) => {
       if (name === 'email') {

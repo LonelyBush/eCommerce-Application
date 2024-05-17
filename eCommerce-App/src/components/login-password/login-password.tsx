@@ -7,10 +7,12 @@ function LoginPassword({
   loginData,
   setLoginData,
   setPasswordValid,
+  setError,
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
   setPasswordValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<string[]>([]);
@@ -20,6 +22,7 @@ function LoginPassword({
   ) => {
     event.preventDefault();
     const { name, value } = event.target;
+    setError('');
 
     setPasswordError((prevErrors) => {
       if (name === 'password') {
