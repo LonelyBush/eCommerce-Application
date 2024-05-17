@@ -1,9 +1,7 @@
-import HeaderMainPage from "../../components/header-main-page/header-main-page";
+import HeaderMainPage from '../../components/header-main-page/header-main-page';
+
 function MainPage() {
-  return (<>
-<HeaderMainPage/>
-  </>
-  );
+  return <HeaderMainPage />;
 }
 
 export default MainPage;
