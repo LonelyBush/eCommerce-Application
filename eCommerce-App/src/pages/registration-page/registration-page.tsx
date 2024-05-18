@@ -2,8 +2,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './registration-page.module.css';
-import Button from '../../utils/button/button';
-import Tags from '../../utils/tags/tags';
+import Button from '../../components/ui/button/button';
+import Tags from '../../components/ui/tags/tags';
 
 import {
   nameInput,

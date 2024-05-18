@@ -1,0 +1,15 @@
+@import "../../styles/colors.css";
+
+.headerMain {
+display: grid;
+grid-template-columns: 1fr 1fr;
+padding: 2rem;
+background-color: var(--c-blue-800);
+color: var(--c-white);
+}
+
+.navMain {
+    display: flex;
+    gap: 2rem;
+    font-size: 2rem;
+}

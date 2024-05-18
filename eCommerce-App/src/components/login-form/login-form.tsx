@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../utils/button/button';
+import Button from '../ui/button/button';
 import { LoginFormType } from '../../types/types';
 import LoginEmail from '../login-email/login-email';
 import LoginPassword from '../login-password/login-password';
-import LinkTemplate from '../../utils/link/link';
+import LinkTemplate from '../ui/link/link';
 
 import styles from './login-form.module.css';
 import { checkAuthClient } from '../../api/checkAuthClient';

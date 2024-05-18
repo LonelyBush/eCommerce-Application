@@ -1,4 +1,4 @@
-import { ITags } from '../../types/interface';
+import { ITags } from '../../../types/interface';
 import styles from './tags.module.css';
 
 function H1({ children }: ITags) {

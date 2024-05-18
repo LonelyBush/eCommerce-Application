@@ -1,5 +1,7 @@
+import HeaderMainPage from '../../components/header-main-page/header-main-page';
+
 function MainPage() {
-  return <div>Main page</div>;
+  return <HeaderMainPage />;
 }
 
 export default MainPage;

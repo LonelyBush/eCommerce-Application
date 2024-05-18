@@ -1,4 +1,4 @@
-import { ButtonType } from '../../types/types';
+import { ButtonType } from '../../../types/types';
 import styles from './btn.module.css';
 
 function Button({
