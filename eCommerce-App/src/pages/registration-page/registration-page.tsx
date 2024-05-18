@@ -1,116 +1,182 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { ChangeEvent, FormEvent, useState } from 'react';
-import FormInput from '../../components/form-input/form-input';
+import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './registration-page.module.css';
 import Button from '../../components/ui/button/button';
 import Tags from '../../components/ui/tags/tags';
-import { inputs, selectInput, adressInputs } from './inputs-const';
 
-import { InputData } from '../../types/registration-form/registration-int';
-import SelectInput from '../../components/select-input/select-input';
+import {
+  nameInput,
+  emailInput,
+  passwordInput,
+  dateInput,
+  selectInput,
+  adressInputs,
+} from './inputs-const';
 
-function isAtLeast13YearsOld(dateString: string) {
-  const inputDate = new Date(dateString);
-
-  const today = new Date();
-
-  const ageDiff = today.getFullYear() - inputDate.getFullYear();
-  const monthDiff = today.getMonth() - inputDate.getMonth();
-  const dayDiff = today.getDate() - inputDate.getDate();
-
-  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-    return ageDiff - 1 >= 13;
-  }
-  return ageDiff >= 13;
-}
+import {
+  CredentialsData,
+  PostBody,
+} from '../../types/registration-form/registration-int';
+import CredentialsForm from '../../components/credentials-form/credentials-form';
+import AdressForm from '../../components/adress-form/address-forms';
 
 function RegistrationPage() {
-  const [values, setValues] = useState<InputData>({
-    email: '',
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    password: '',
+  const [shippingValues, setShippingInput] = useState<BaseAddress>({
     streetName: '',
     postalCode: '',
     city: '',
     country: '',
   });
+  const [billingValues, setBillingInput] = useState<BaseAddress>({
+    streetName: '',
+    postalCode: '',
+    city: '',
+    country: '',
+  });
+  const [credentialsValues, setCredentialsValues] = useState<CredentialsData>({
+    email: '',
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    password: '',
+  });
+  const [useSameAddress, setUseSameAddress] = useState<boolean>(false);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    if (e.currentTarget.name === 'country') {
-      const getPostalCode = document.getElementsByName('postalCode');
-      if (e.currentTarget.value === 'US') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
-      } else if (e.currentTarget.value === 'UK') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{5}$');
-      } else if (e.currentTarget.value === 'RU') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{6}$');
+  const [useDefaultShipping, setDefaultShipping] = useState<boolean>(false);
+  const [useDefaultBilling, setDefaultBilling] = useState<boolean>(false);
+
+  const handleInputChange = (
+    addressType: 'billing' | 'shipping',
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    if (addressType === 'shipping') {
+      setShippingInput({
+        ...shippingValues,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
+      if (useSameAddress) {
+        setBillingInput({
+          ...billingValues,
+          [e.currentTarget.name]: e.currentTarget.value,
+        });
+        const getCurrrentName = document.getElementsByName(
+          e.currentTarget.name,
+        );
+        getCurrrentName.forEach((elem) => {
+          elem.setAttribute('data-focused', 'true');
+        });
       }
+    } else {
+      setBillingInput({
+        ...billingValues,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
     }
+  };
+  const handleSameAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    setUseSameAddress(e.target.checked);
+    const getBillingField = document.getElementsByName('billing');
+    const getBillingCheck = document.getElementById('default-billing-check');
+    if (e.target.checked) {
+      setBillingInput(shippingValues);
+      getBillingCheck?.parentElement?.setAttribute(
+        'style',
+        'pointer-events: auto',
+      );
+      getBillingField.forEach((elem) => {
+        elem.setAttribute('style', 'pointer-events: none');
+      });
+    } else {
+      getBillingCheck?.parentElement?.removeAttribute('style');
+      getBillingField.forEach((elem) => {
+        elem.removeAttribute('style');
+      });
+    }
+  };
 
-    if (!isAtLeast13YearsOld(e.currentTarget.value)) {
-      if (e.currentTarget.name === 'dateOfBirth')
-        e.currentTarget.setCustomValidity('User must be at least 13 years old');
-    } else if (e.currentTarget.name === 'dateOfBirth')
-      e.currentTarget.setCustomValidity('');
-    setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
+  const handleDefaultAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.id === 'default-shipping-check') {
+      setDefaultShipping(e.target.checked);
+    } else {
+      setDefaultBilling(e.target.checked);
+    }
+  };
+
+  const onCredentialsChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    setCredentialsValues({
+      ...credentialsValues,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const dataObj = Object.fromEntries(data);
-    const baseAdresses = [
+    const createArrOfAddresses = [
       {
-        firstName: dataObj.firstName,
-        lastName: dataObj.lastName,
-        email: dataObj.email,
-        city: dataObj.city,
-        streetName: dataObj.streetName,
-        postalCode: dataObj.postalCode,
-        country: dataObj.country,
+        firstName: credentialsValues.firstName,
+        lastName: credentialsValues.lastName,
+        email: credentialsValues.email,
+        ...shippingValues,
+      },
+      {
+        firstName: credentialsValues.firstName,
+        lastName: credentialsValues.lastName,
+        email: credentialsValues.email,
+        ...billingValues,
       },
     ];
-    const createCustomerDraftBody = {
-      email: dataObj.email,
-      firstName: dataObj.firstName,
-      lastName: dataObj.lastName,
-      dateOfBirth: dataObj.dateOfBirth,
-      password: dataObj.password,
-      addresses: baseAdresses,
-    };
-    console.log(createCustomerDraftBody); // this body will go to POST request for sign up
+    const postBody = { ...credentialsValues } as PostBody;
+    postBody.addresses = createArrOfAddresses;
+    if (useDefaultBilling) {
+      postBody.defaultBillingAddress = 1;
+    }
+    if (useDefaultShipping) {
+      postBody.defaultShippingAddress = 0;
+    }
+    console.log(postBody);
   };
   return (
-    <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
-      <Tags.H1>Sign Up!</Tags.H1>
-      {inputs.map((input) => {
-        return (
-          <FormInput
-            key={input.id}
-            {...input}
-            onChange={(e) => {
-              onChange(e);
-            }}
-            value={values[input.name as keyof typeof values]}
-          />
-        );
-      })}
-      <SelectInput {...selectInput} onChange={(e) => onChange(e)} />
-      {adressInputs.map((input) => {
-        return (
-          <FormInput
-            key={input.id}
-            {...input}
-            onChange={(e) => {
-              onChange(e);
-            }}
-            value={values[input.name as keyof typeof values]}
-          />
-        );
-      })}
-      <Button btnType="submit">Submit</Button>
-    </form>
+    <div className={styles.registrationRoot}>
+      <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
+        <Tags.H2>Sign Up!</Tags.H2>
+        <CredentialsForm
+          emailInput={emailInput}
+          passwordInput={passwordInput}
+          dateInput={dateInput}
+          nameInput={nameInput}
+          values={credentialsValues}
+          onChange={(e) => onCredentialsChange(e)}
+        />
+        <AdressForm
+          checkedDefault={useDefaultShipping}
+          onDefaultCheckboxChange={(e) => handleDefaultAddress(e)}
+          fieldName="shipping"
+          checked={useSameAddress}
+          onCheckboxChange={(e) => handleSameAddress(e)}
+          fieldLegend="Shipping Address"
+          adressInputs={adressInputs}
+          selectInput={selectInput}
+          onChange={(e) => handleInputChange('shipping', e)}
+          values={shippingValues}
+        />
+        <AdressForm
+          checkedDefault={useDefaultBilling}
+          onDefaultCheckboxChange={(e) => handleDefaultAddress(e)}
+          fieldName="billing"
+          checked={useSameAddress}
+          onCheckboxChange={(e) => handleSameAddress(e)}
+          fieldLegend="Billing Address"
+          adressInputs={adressInputs}
+          selectInput={selectInput}
+          onChange={(e) => handleInputChange('billing', e)}
+          values={billingValues}
+        />
+        <Button btnType="submit">Submit</Button>
+      </form>
+    </div>
   );
 }
 

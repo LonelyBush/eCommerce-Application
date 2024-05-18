@@ -4,6 +4,7 @@ export type ButtonType = {
   to?: string;
   disabled?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 };
 
 export type LoginFormType = {

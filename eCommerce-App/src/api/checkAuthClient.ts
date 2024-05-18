@@ -1,20 +1,33 @@
+import { ClientBuilder } from '@commercetools/sdk-client-v2';
+import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import {
   CustomerSignin,
   CustomerSignInResult,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/customer';
-import { apiRoot } from './api-client';
+import ApiResponse from './intefaceApi';
+import {
+  projectKey,
+  authMiddlewareOptions,
+  httpMiddlewareOptions,
+} from './constForApi';
 
-// const customerCredentials: CustomerSignin = {
-//     email: 'test27@example.com',
-//     password: 'examplePassword',
-//   };
+const credentialsFlowClient = new ClientBuilder()
+  .withClientCredentialsFlow(authMiddlewareOptions)
+  .withHttpMiddleware(httpMiddlewareOptions)
+  .withLoggerMiddleware()
+  .build();
 
-interface ApiResponse {
-  customerSignInResult?: CustomerSignInResult;
-  error?: Error;
-}
+const apiRoot = createApiBuilderFromCtpClient(
+  credentialsFlowClient,
+).withProjectKey({
+  projectKey,
+});
 
-export default function checkAuthClient(
+export const getProject = () => {
+  return apiRoot.get().execute();
+};
+
+export function checkAuthClient(
   customerSignin: CustomerSignin,
 ): Promise<ApiResponse> {
   return new Promise((resolve, reject) => {

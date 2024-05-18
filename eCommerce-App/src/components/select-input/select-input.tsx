@@ -1,23 +1,30 @@
-import { FocusEventHandler, useState } from 'react';
+import { useState } from 'react';
 
 import styles from './select-input.module.css';
 import { PropsOption } from '../../types/registration-form/registration-int';
 
 function SelectInput(props: PropsOption) {
   const [focused, setFocused] = useState(false);
-  const { label, id, onChange, errorMessage, options, name, required } = props;
-  const handleFocus = () => {
-    setFocused(true);
-  };
+  const {
+    label,
+    id,
+    onChangeSelect,
+    errorMessage,
+    name,
+    options,
+    required,
+    value,
+  } = props;
   return (
     <div className={styles.selectInputForm}>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>{label} </label>
       <select
-        onBlur={handleFocus as FocusEventHandler}
+        onBlur={() => setFocused(true)}
         data-focused={focused.toString()}
-        onChange={(e) => onChange(e)}
+        onChange={(e) => onChangeSelect!(e)}
         name={name}
         required={required}
+        value={value}
       >
         {options?.map((option) => {
           return (

@@ -1,4 +1,4 @@
-export const inputs = [
+export const emailInput = [
   {
     id: 'email',
     name: 'email',
@@ -8,6 +8,9 @@ export const inputs = [
     errorMessage: '*it should be a valid email adress',
     required: true,
   },
+];
+
+export const nameInput = [
   {
     id: 'firstName',
     name: 'firstName',
@@ -30,6 +33,9 @@ export const inputs = [
     required: true,
     pattern: '^[^\\W\\d]*[^\\W\\d\\s][^\\W\\d]*$',
   },
+];
+
+export const dateInput = [
   {
     id: 'dateOfBirth',
     name: 'dateOfBirth',
@@ -39,6 +45,9 @@ export const inputs = [
     errorMessage: '*you must be at least 13 years old',
     required: true,
   },
+];
+
+export const passwordInput = [
   {
     id: 'password',
     name: 'password',
@@ -46,9 +55,10 @@ export const inputs = [
     placeholder: 'Password',
     label: 'Password',
     errorMessage:
-      '*must contain minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
+      '*must contain minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter 1 special character, and 1 number',
     required: true,
-    pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$',
+    pattern:
+      '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$$',
   },
 ];
 
@@ -91,21 +101,21 @@ export const adressInputs = [
     pattern: '^[a-zA-Z]+$',
   },
   {
-    id: 'streetName',
-    name: 'streetName',
-    type: 'text',
-    placeholder: 'Street',
-    label: 'Street',
-    errorMessage: '*must contain at least one character',
-    required: true,
-  },
-  {
     id: 'postalCode',
     name: 'postalCode',
     type: 'text',
     placeholder: 'Postal Code',
     label: 'Postal Code',
     errorMessage: '*must follow the format for the country',
+    required: true,
+  },
+  {
+    id: 'streetName',
+    name: 'streetName',
+    type: 'text',
+    placeholder: 'Adress',
+    label: 'Adress',
+    errorMessage: '*must contain at least one character',
     required: true,
   },
 ];
