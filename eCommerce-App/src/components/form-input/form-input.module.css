@@ -1,11 +1,11 @@
 .formInput{
     display: flex;
     flex-direction: column;
-    width: 20rem;
+    width: 100%;
     gap: 0.1rem;
 }
 
-label{
+.formInput > label{
     color: var(--c-mint-100);
 }
 
@@ -18,26 +18,26 @@ label{
     border-radius: 1rem;
 }
 
-input:focus {
+.formInput > input:focus {
   border: 0.2rem solid var( --c-blue-800);
 }
 
-input:valid{
+.formInput > input:valid{
     border: 0.2rem solid var(--c-green-400)
 }
 
-input:invalid[data-focused='true']{
+.formInput > input:invalid[data-focused='true']{
     border: 0.2rem solid red;
 }
 
-span{
+.formInput > span{
     font-size: 0.8rem;
     color: red;
     word-wrap: break-word;
     display: none;
 }
 
-input:invalid[data-focused='true'] ~ span{
+.formInput > input:invalid[data-focused='true'] ~ span{
     display: block;
 }
 
