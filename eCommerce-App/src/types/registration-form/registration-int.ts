@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { BaseAddress } from '@commercetools/platform-sdk';
 import { ChangeEvent } from 'react';
 
 export interface CredentialsData {
@@ -52,6 +54,20 @@ export interface AdressFormProps {
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   onCheckboxChange: (e: ChangeEvent<HTMLInputElement>) => void;
 
-  values: AdressData;
+  onDefaultCheckboxChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  checkedDefault: boolean;
+  values: BaseAddress;
   checked: boolean;
+  fieldName: string;
+}
+
+export interface PostBody {
+  email: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  password: string;
+  addresses: BaseAddress[];
+  defaultShippingAddress?: number;
+  defaultBillingAddress?: number;
 }

@@ -11,38 +11,91 @@ function AdressForm({
   selectInput,
   onChange,
   onCheckboxChange,
+  checkedDefault,
+  onDefaultCheckboxChange,
   checked,
   values,
+  fieldName,
 }: AdressFormProps) {
   let checkbox;
 
   const onChangePostalCodeFormat = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    if (e.currentTarget.name === 'country') {
-      const getPostalCode = document.getElementsByName('postalCode');
-      if (e.currentTarget.value === 'US') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
-      } else if (e.currentTarget.value === 'UK') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{5}$');
-      } else if (e.currentTarget.value === 'RU') {
-        getPostalCode[0].setAttribute('pattern', '^\\d{6}$');
+    const getPreviousSiblingContent =
+      e.currentTarget.parentElement?.previousElementSibling?.textContent;
+    if (getPreviousSiblingContent === 'Shipping Address') {
+      if (e.currentTarget.name === 'country') {
+        const getPostalCode = document.getElementsByName('postalCode');
+        if (e.currentTarget.value === 'US') {
+          getPostalCode[0].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
+        } else if (e.currentTarget.value === 'UK') {
+          getPostalCode[0].setAttribute('pattern', '^\\d{5}$');
+        } else if (e.currentTarget.value === 'RU') {
+          getPostalCode[0].setAttribute('pattern', '^\\d{6}$');
+        }
+      }
+    }
+    if (getPreviousSiblingContent === 'Billing Address' || checked === true) {
+      if (e.currentTarget.name === 'country') {
+        const getPostalCode = document.getElementsByName('postalCode');
+        if (e.currentTarget.value === 'US') {
+          getPostalCode[1].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
+        } else if (e.currentTarget.value === 'UK') {
+          getPostalCode[1].setAttribute('pattern', '^\\d{5}$');
+        } else if (e.currentTarget.value === 'RU') {
+          getPostalCode[1].setAttribute('pattern', '^\\d{6}$');
+        }
+      }
+    }
+  };
+
+  const postalCodeCheckboxChange = () => {
+    const getShipSelect = document.getElementsByName('country');
+    const getPostalCode = document.getElementsByName('postalCode');
+    if (getShipSelect[0] instanceof HTMLSelectElement) {
+      if (getShipSelect[0].value === 'US') {
+        getPostalCode[1].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
+      } else if (getShipSelect[0].value === 'UK') {
+        getPostalCode[1].setAttribute('pattern', '^\\d{5}$');
+      } else if (getShipSelect[0].value === 'RU') {
+        getPostalCode[1].setAttribute('pattern', '^\\d{6}$');
       }
     }
   };
 
   if (fieldLegend === 'Shipping Address') {
     checkbox = (
+      <>
+        <Checkbox
+          checked={checked}
+          onChange={(e) => {
+            postalCodeCheckboxChange();
+            onCheckboxChange(e);
+          }}
+          id="set-as-billing-check"
+          label="Set as billing address"
+        />
+        <Checkbox
+          checked={checkedDefault}
+          onChange={onDefaultCheckboxChange}
+          id={`default-${fieldName}-check`}
+          label="Set as default address"
+        />
+      </>
+    );
+  } else {
+    checkbox = (
       <Checkbox
-        checked={checked}
-        onChange={onCheckboxChange}
-        id="set-as-billing-check"
-        label="Set as billing address"
+        checked={checkedDefault}
+        onChange={onDefaultCheckboxChange}
+        id={`default-${fieldName}-check`}
+        label="Set as default address"
       />
     );
   }
   return (
-    <fieldset className={styles.fieldsetBlock}>
+    <fieldset name={fieldName} className={styles.fieldsetBlock}>
       <legend>{fieldLegend}</legend>
       <SelectInput
         {...selectInput}

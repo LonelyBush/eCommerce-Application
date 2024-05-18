@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
 import Tags from '../../utils/tags/tags';
@@ -13,19 +15,19 @@ import {
 
 import {
   CredentialsData,
-  AdressData,
+  PostBody,
 } from '../../types/registration-form/registration-int';
 import CredentialsForm from '../../components/credentials-form/credentials-form';
 import AdressForm from '../../components/adress-form/address-forms';
 
 function RegistrationPage() {
-  const [shippingValues, setShippingInput] = useState<AdressData>({
+  const [shippingValues, setShippingInput] = useState<BaseAddress>({
     streetName: '',
     postalCode: '',
     city: '',
     country: '',
   });
-  const [billingValues, setBillingInput] = useState<AdressData>({
+  const [billingValues, setBillingInput] = useState<BaseAddress>({
     streetName: '',
     postalCode: '',
     city: '',
@@ -39,6 +41,9 @@ function RegistrationPage() {
     password: '',
   });
   const [useSameAddress, setUseSameAddress] = useState<boolean>(false);
+
+  const [useDefaultShipping, setDefaultShipping] = useState<boolean>(false);
+  const [useDefaultBilling, setDefaultBilling] = useState<boolean>(false);
 
   const handleInputChange = (
     addressType: 'billing' | 'shipping',
@@ -68,10 +73,32 @@ function RegistrationPage() {
       });
     }
   };
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSameAddress = (e: ChangeEvent<HTMLInputElement>) => {
     setUseSameAddress(e.target.checked);
+    const getBillingField = document.getElementsByName('billing');
+    const getBillingCheck = document.getElementById('default-billing-check');
     if (e.target.checked) {
       setBillingInput(shippingValues);
+      getBillingCheck?.parentElement?.setAttribute(
+        'style',
+        'pointer-events: auto',
+      );
+      getBillingField.forEach((elem) => {
+        elem.setAttribute('style', 'pointer-events: none');
+      });
+    } else {
+      getBillingCheck?.parentElement?.removeAttribute('style');
+      getBillingField.forEach((elem) => {
+        elem.removeAttribute('style');
+      });
+    }
+  };
+
+  const handleDefaultAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.id === 'default-shipping-check') {
+      setDefaultShipping(e.target.checked);
+    } else {
+      setDefaultBilling(e.target.checked);
     }
   };
 
@@ -86,29 +113,29 @@ function RegistrationPage() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const dataObj = Object.fromEntries(data);
-    const baseAdresses = [
+    const createArrOfAddresses = [
       {
-        firstName: dataObj.firstName,
-        lastName: dataObj.lastName,
-
-        email: dataObj.email,
-        city: dataObj.city,
-        streetName: dataObj.streetName,
-        postalCode: dataObj.postalCode,
-        country: dataObj.country,
+        firstName: credentialsValues.firstName,
+        lastName: credentialsValues.lastName,
+        email: credentialsValues.email,
+        ...shippingValues,
+      },
+      {
+        firstName: credentialsValues.firstName,
+        lastName: credentialsValues.lastName,
+        email: credentialsValues.email,
+        ...billingValues,
       },
     ];
-    const createCustomerDraftBody = {
-      email: dataObj.email,
-      firstName: dataObj.firstName,
-      lastName: dataObj.lastName,
-      dateOfBirth: dataObj.dateOfBirth,
-      password: dataObj.password,
-      addresses: baseAdresses,
-    };
-    console.log(createCustomerDraftBody); // this body will go to POST request for sign up
+    const postBody = { ...credentialsValues } as PostBody;
+    postBody.addresses = createArrOfAddresses;
+    if (useDefaultBilling) {
+      postBody.defaultBillingAddress = 1;
+    }
+    if (useDefaultShipping) {
+      postBody.defaultShippingAddress = 0;
+    }
+    console.log(postBody);
   };
   return (
     <div className={styles.registrationRoot}>
@@ -123,8 +150,11 @@ function RegistrationPage() {
           onChange={(e) => onCredentialsChange(e)}
         />
         <AdressForm
+          checkedDefault={useDefaultShipping}
+          onDefaultCheckboxChange={(e) => handleDefaultAddress(e)}
+          fieldName="shipping"
           checked={useSameAddress}
-          onCheckboxChange={(e) => handleCheckboxChange(e)}
+          onCheckboxChange={(e) => handleSameAddress(e)}
           fieldLegend="Shipping Address"
           adressInputs={adressInputs}
           selectInput={selectInput}
@@ -132,8 +162,11 @@ function RegistrationPage() {
           values={shippingValues}
         />
         <AdressForm
+          checkedDefault={useDefaultBilling}
+          onDefaultCheckboxChange={(e) => handleDefaultAddress(e)}
+          fieldName="billing"
           checked={useSameAddress}
-          onCheckboxChange={(e) => handleCheckboxChange(e)}
+          onCheckboxChange={(e) => handleSameAddress(e)}
           fieldLegend="Billing Address"
           adressInputs={adressInputs}
           selectInput={selectInput}
