@@ -4,6 +4,7 @@ import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './registration-page.module.css';
 import Button from '../../utils/button/button';
 import Tags from '../../utils/tags/tags';
+
 import {
   nameInput,
   emailInput,

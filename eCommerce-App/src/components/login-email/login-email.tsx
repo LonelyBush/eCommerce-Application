@@ -8,10 +8,12 @@ function LoginEmail({
   loginData,
   setLoginData,
   setEmailValid,
+  setError,
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
   setEmailValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [emailError, setEmailError] = useState<string[]>([]);
 
@@ -20,6 +22,7 @@ function LoginEmail({
   ) => {
     event.preventDefault();
     const { name, value } = event.target;
+    setError('');
 
     setEmailError((prevErrors) => {
       if (name === 'email') {
@@ -54,13 +57,13 @@ function LoginEmail({
 
       return prevErrors;
     });
-    setEmailValid(emailError.length < 1 && loginData.email.length > 1);
+    setEmailValid(emailError.length === 0 && loginData.email.length > 1);
     setLoginData({ ...loginData, [name]: value });
   };
 
   useEffect(() => {
-    setEmailValid(emailError.length === 0 && loginData.password.length > 1);
-  }, [emailError, loginData.password, setEmailValid]);
+    setEmailValid(emailError.length === 0 && loginData.email.length > 1);
+  }, [emailError, loginData.email, setEmailValid]);
 
   return (
     <>
