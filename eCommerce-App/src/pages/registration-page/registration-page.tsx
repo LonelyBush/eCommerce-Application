@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import FormInput from '../../components/form-input/form-input';
 import styles from './registration-page.module.css';
-import Button from '../../utils/button/button';
-import Tags from '../../utils/tags/tags';
+import Button from '../../components/ui/button/button';
+import Tags from '../../components/ui/tags/tags';
 import { inputs, selectInput, adressInputs } from './inputs-const';
 
 import { InputData } from '../../types/registration-form/registration-int';

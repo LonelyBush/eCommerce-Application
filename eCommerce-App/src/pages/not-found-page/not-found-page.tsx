@@ -1,5 +1,5 @@
-import Button from '../../utils/button/button';
-import Tags from '../../utils/tags/tags';
+import Button from '../../components/ui/button/button';
+import Tags from '../../components/ui/tags/tags';
 import styles from './not-found.module.css';
 
 function NotFoundPage() {

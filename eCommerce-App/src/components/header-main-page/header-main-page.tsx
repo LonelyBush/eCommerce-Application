@@ -1,4 +1,4 @@
-import LinkTemplate from '../../utils/link/link';
+import LinkTemplate from '../ui/link/link';
 
 import styles from './header-main-page.module.css';
 
