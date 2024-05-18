@@ -6,6 +6,13 @@
     font-size: 3rem;
 }
 
+.smallTitle {
+    text-align: center;
+    color: var(--c-blue-800);
+    font-weight: 500;
+    font-size: 2rem;
+}
+
 .container {
     height: 80vh;
     display: flex;

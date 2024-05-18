@@ -140,7 +140,7 @@ function RegistrationPage() {
   return (
     <div className={styles.registrationRoot}>
       <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
-        <Tags.H1>Sign Up!</Tags.H1>
+        <Tags.H2>Sign Up!</Tags.H2>
         <CredentialsForm
           emailInput={emailInput}
           passwordInput={passwordInput}
