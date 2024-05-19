@@ -152,8 +152,8 @@ function RegistrationPage() {
       const response = await createClients(postBody);
       setModalText({
         ...modalText,
-        title: `Hello ${response.customerSignInResult?.customer.firstName} ${response.customerSignInResult?.customer.lastName}!`,
-        text: 'Your account has succesfully created!',
+        title: `Hello, ${response.customerSignInResult?.customer.firstName} ${response.customerSignInResult?.customer.lastName}!`,
+        text: 'Your account has been succesfully created!',
       });
       console.log(response.customerSignInResult?.customer.firstName);
       setShowModal(true);
