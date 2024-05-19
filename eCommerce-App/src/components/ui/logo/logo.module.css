@@ -1,0 +1,20 @@
+.logoHeader {
+  padding: 1rem  1rem 0;
+}
+
+.logoLink {
+  display: inline-block;
+}
+
+.logo {
+  margin-top: 0.5rem;
+  min-width: 6rem;
+  height: 3rem;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  background-color: var(--c-green-400);
+  cursor: pointer;
+  mask-image: url('../../../assets/logo/logo-un.png');
+  /* mask-image: url('../../../assets/logo/logo-und.png'); */
+}
