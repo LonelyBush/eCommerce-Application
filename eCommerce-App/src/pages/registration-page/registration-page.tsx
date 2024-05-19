@@ -4,6 +4,7 @@ import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './registration-page.module.css';
 import Button from '../../components/ui/button/button';
 import Tags from '../../components/ui/tags/tags';
+import LinkTemplate from '../../components/ui/link/link';
 
 import {
   nameInput,
@@ -142,6 +143,10 @@ function RegistrationPage() {
     <div className={styles.registrationRoot}>
       <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
         <Tags.H2>Sign Up!</Tags.H2>
+        <p className={styles.titleRegistration}>
+          Already have an account?
+          <LinkTemplate to="/login">Sign in!</LinkTemplate>
+        </p>
         <CredentialsForm
           emailInput={emailInput}
           passwordInput={passwordInput}
