@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/button/button';
 import { LoginFormType } from '../../types/types';
@@ -27,13 +27,20 @@ function LoginForm() {
     try {
       const response = await checkAuthClient(loginData);
       console.log('Response from checkAuthClient:', response);
-      authWithPassword(loginData);
+      await authWithPassword(loginData);
       navigate('/main');
+      console.log(localStorage.getItem('authToken'));
     } catch (caughtError) {
       if (caughtError instanceof Error)
         setError(`* ${caughtError.message.toLowerCase()}`);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('authToken')) {
+      navigate('/main');
+    }
+  });
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

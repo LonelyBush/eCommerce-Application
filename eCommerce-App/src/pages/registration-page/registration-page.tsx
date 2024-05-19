@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './registration-page.module.css';
 import Button from '../../components/ui/button/button';
@@ -138,6 +139,14 @@ function RegistrationPage() {
     }
     console.log(postBody);
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem('authToken')) {
+      navigate('/main');
+    }
+  });
+
   return (
     <div className={styles.registrationRoot}>
       <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
