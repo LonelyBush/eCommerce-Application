@@ -4,6 +4,7 @@ import { BaseAddress } from '@commercetools/platform-sdk';
 import styles from './registration-page.module.css';
 import Button from '../../components/ui/button/button';
 import Tags from '../../components/ui/tags/tags';
+import LinkTemplate from '../../components/ui/link/link'
 import LogoHeader from '../../components/ui/logo/logo';
 
 import {
@@ -143,43 +144,47 @@ function RegistrationPage() {
     <>
       <LogoHeader />
       <div className={styles.registrationRoot}>
-        <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
-          <Tags.H2>Sign Up!</Tags.H2>
-          <CredentialsForm
-            emailInput={emailInput}
-            passwordInput={passwordInput}
-            dateInput={dateInput}
-            nameInput={nameInput}
-            values={credentialsValues}
-            onChange={(e) => onCredentialsChange(e)}
-          />
-          <AdressForm
-            checkedDefault={useDefaultShipping}
-            onDefaultCheckboxChange={(e) => handleDefaultAddress(e)}
-            fieldName="shipping"
-            checked={useSameAddress}
-            onCheckboxChange={(e) => handleSameAddress(e)}
-            fieldLegend="Shipping Address"
-            adressInputs={adressInputs}
-            selectInput={selectInput}
-            onChange={(e) => handleInputChange('shipping', e)}
-            values={shippingValues}
-          />
-          <AdressForm
-            checkedDefault={useDefaultBilling}
-            onDefaultCheckboxChange={(e) => handleDefaultAddress(e)}
-            fieldName="billing"
-            checked={useSameAddress}
-            onCheckboxChange={(e) => handleSameAddress(e)}
-            fieldLegend="Billing Address"
-            adressInputs={adressInputs}
-            selectInput={selectInput}
-            onChange={(e) => handleInputChange('billing', e)}
-            values={billingValues}
-          />
-          <Button btnType="submit">Submit</Button>
-        </form>
-      </div>
+      <form className={styles.registrationForm} onSubmit={(e) => onSubmit(e)}>
+        <Tags.H2>Sign Up!</Tags.H2>
+        <p className={styles.titleRegistration}>
+          Already have an account?
+          <LinkTemplate to="/login">Sign in!</LinkTemplate>
+        </p>
+        <CredentialsForm
+          emailInput={emailInput}
+          passwordInput={passwordInput}
+          dateInput={dateInput}
+          nameInput={nameInput}
+          values={credentialsValues}
+          onChange={(e) => onCredentialsChange(e)}
+        />
+        <AdressForm
+          checkedDefault={useDefaultShipping}
+          onDefaultCheckboxChange={(e) => handleDefaultAddress(e)}
+          fieldName="shipping"
+          checked={useSameAddress}
+          onCheckboxChange={(e) => handleSameAddress(e)}
+          fieldLegend="Shipping Address"
+          adressInputs={adressInputs}
+          selectInput={selectInput}
+          onChange={(e) => handleInputChange('shipping', e)}
+          values={shippingValues}
+        />
+        <AdressForm
+          checkedDefault={useDefaultBilling}
+          onDefaultCheckboxChange={(e) => handleDefaultAddress(e)}
+          fieldName="billing"
+          checked={useSameAddress}
+          onCheckboxChange={(e) => handleSameAddress(e)}
+          fieldLegend="Billing Address"
+          adressInputs={adressInputs}
+          selectInput={selectInput}
+          onChange={(e) => handleInputChange('billing', e)}
+          values={billingValues}
+        />
+        <Button btnType="submit">Submit</Button>
+      </form>
+    </div>
     </>
   );
 }
