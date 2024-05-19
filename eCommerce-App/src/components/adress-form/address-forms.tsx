@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import Checkbox from '../../utils/checkbox/checkbox';
+import Checkbox from '../ui/checkbox/checkbox';
 import SelectInput from '../select-input/select-input';
 import FormInput from '../form-input/form-input';
 import styles from './adress-forms.module.css';

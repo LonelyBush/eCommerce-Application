@@ -1,12 +1,37 @@
+import { useState } from 'react';
 import LinkTemplate from '../ui/link/link';
+import Logo from '../ui/logo/logo';
 
 import styles from './header-main-page.module.css';
 
 function HeaderMainPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className={styles.headerMain}>
-      <h1>Online store</h1>
-      <nav className={styles.navMain}>
+      <Logo />
+      <button className={styles.burgerMenu} onClick={toggleMenu} type="button">
+        <div
+          className={
+            isMenuOpen
+              ? `${styles.burgerIcon} ${styles.open}`
+              : styles.burgerIcon
+          }
+        >
+          <span className={styles.spanBurger} />
+          <span className={styles.spanBurger} />
+          <span className={styles.spanBurger} />
+        </div>
+      </button>
+      <nav
+        className={
+          isMenuOpen ? `${styles.navMain} ${styles.open}` : styles.navMain
+        }
+      >
         <LinkTemplate to="/login">Log in</LinkTemplate>
         <LinkTemplate to="/registration">Sign up</LinkTemplate>
       </nav>
