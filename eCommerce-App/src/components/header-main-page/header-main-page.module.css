@@ -12,6 +12,12 @@
   display: flex;
   align-items: self-end;
   gap: 2rem;
+
+.btnLogOut {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  
   font-size: 1.5rem;
 }
 

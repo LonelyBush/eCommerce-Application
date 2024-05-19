@@ -1,10 +1,22 @@
+
+import logOutClient from '../../utils/logOutClient';
+import { useNavigate } from 'react-router-dom';
+
 import { useState } from 'react';
 import LinkTemplate from '../ui/link/link';
 import Logo from '../ui/logo/logo';
 
 import styles from './header-main-page.module.css';
+import Button from '../ui/button/button';
 
 function HeaderMainPage() {
+
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    logOutClient();
+    navigate('/main');
+  };
+        
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -32,8 +44,17 @@ function HeaderMainPage() {
           isMenuOpen ? `${styles.navMain} ${styles.open}` : styles.navMain
         }
       >
-        <LinkTemplate to="/login">Log in</LinkTemplate>
-        <LinkTemplate to="/registration">Sign up</LinkTemplate>
+        {authToken ? (
+          <Button btnType="button" onClick={handleLogOut}>
+            Log out
+          </Button>
+        ) : (
+          <>
+            <LinkTemplate to="/login">Log in</LinkTemplate>
+            <LinkTemplate to="/registration">Sign up</LinkTemplate>
+          </>
+        )}
+
       </nav>
     </header>
   );
