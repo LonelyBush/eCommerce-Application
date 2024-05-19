@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BaseAddress } from '@commercetools/platform-sdk';
@@ -19,10 +18,15 @@ import {
 
 import {
   CredentialsData,
+  ModalText,
   PostBody,
 } from '../../types/registration-form/registration-int';
 import CredentialsForm from '../../components/credentials-form/credentials-form';
 import AdressForm from '../../components/adress-form/address-forms';
+import createClients from '../../api/createClient';
+import PopUp from '../../components/ui/popup/popup';
+import { checkAuthClient } from '../../api/checkAuthClient';
+import authWithPassword from '../../api/authWithPassword';
 
 function RegistrationPage() {
   const [shippingValues, setShippingInput] = useState<BaseAddress>({
@@ -48,6 +52,11 @@ function RegistrationPage() {
 
   const [useDefaultShipping, setDefaultShipping] = useState<boolean>(false);
   const [useDefaultBilling, setDefaultBilling] = useState<boolean>(false);
+  const [modalText, setModalText] = useState<ModalText>({
+    title: '',
+    text: '',
+  });
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleInputChange = (
     addressType: 'billing' | 'shipping',
@@ -115,7 +124,7 @@ function RegistrationPage() {
     });
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const createArrOfAddresses = [
       {
@@ -139,7 +148,18 @@ function RegistrationPage() {
     if (useDefaultShipping) {
       postBody.defaultShippingAddress = 0;
     }
-    console.log(postBody);
+    try {
+      const response = await createClients(postBody);
+      setModalText({
+        ...modalText,
+        title: `Hello ${response.customerSignInResult?.customer.firstName} ${response.customerSignInResult?.customer.lastName}!`,
+        text: 'Your account has succesfully created!',
+      });
+      console.log(response.customerSignInResult?.customer.firstName);
+      setShowModal(true);
+    } catch (caughtError) {
+      console.log(caughtError);
+    }
   };
 
   const navigate = useNavigate();
@@ -148,6 +168,22 @@ function RegistrationPage() {
       navigate('/main');
     }
   });
+
+  const onCloseModal = async () => {
+    const loginData = {
+      email: credentialsValues.email,
+      password: credentialsValues.password,
+    };
+    try {
+      const response = await checkAuthClient(loginData);
+      console.log('Response from checkAuthClient:', response);
+      await authWithPassword(loginData);
+      navigate('/main');
+      console.log(localStorage.getItem('authToken'));
+    } catch (caughtError) {
+      if (caughtError instanceof Error) console.log(caughtError);
+    }
+  };
 
   return (
     <>
@@ -194,6 +230,13 @@ function RegistrationPage() {
           <Button btnType="submit">Submit</Button>
         </form>
       </div>
+      {showModal && (
+        <PopUp
+          onClose={onCloseModal}
+          title={modalText.title}
+          text={modalText.text}
+        />
+      )}
     </>
   );
 }

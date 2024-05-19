@@ -1,16 +1,16 @@
 import {
-  ClientBuilder,
-  type PasswordAuthMiddlewareOptions,
-} from '@commercetools/sdk-client-v2';
-import {
   CustomerDraft,
+  CustomerSignInResult,
   createApiBuilderFromCtpClient,
 } from '@commercetools/platform-sdk';
+import { ClientBuilder } from '@commercetools/sdk-client-v2';
+
 import {
   projectKey,
   authMiddlewareOptions,
   httpMiddlewareOptions,
 } from './constForApi';
+import ApiResponse from './intefaceApi';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
@@ -22,19 +22,31 @@ const apiRoot = createApiBuilderFromCtpClient(middleware).withProjectKey({
   projectKey,
 });
 
-export default function createClients(customerDraft: CustomerDraft) {
-  apiRoot
-    .customers()
-    .post({ body: customerDraft })
-    .execute()
-    .then((response) => {
-      console.log(
-        'Customer created successfully:',
-        response.body,
-        response.body.customer.firstName,
-      );
-    })
-    .catch((error) => {
-      console.error('Error creating customer:', error);
-    });
+export default function createClients(
+  customerDraft: CustomerDraft,
+): Promise<ApiResponse> {
+  return new Promise((resolve, reject) => {
+    apiRoot
+      .customers()
+      .post({ body: customerDraft })
+      .execute()
+      .then((response) => {
+        if (response.body.customer) {
+          console.log(
+            'Customer created successfully:',
+            response.body,
+            response.body.customer.firstName,
+          );
+          const customerSignInResult: CustomerSignInResult = {
+            customer: response.body.customer,
+          };
+          resolve({ customerSignInResult });
+        } else {
+          reject(new Error('Sign-Up failed'));
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }

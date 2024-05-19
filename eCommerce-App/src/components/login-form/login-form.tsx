@@ -9,7 +9,6 @@ import LinkTemplate from '../ui/link/link';
 import styles from './login-form.module.css';
 import { checkAuthClient } from '../../api/checkAuthClient';
 import authWithPassword from '../../api/authWithPassword';
-import createClients from '../../api/createClient';
 
 function LoginForm() {
   const navigate = useNavigate();
