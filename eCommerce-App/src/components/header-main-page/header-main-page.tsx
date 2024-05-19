@@ -1,8 +1,7 @@
-
-import logOutClient from '../../utils/logOutClient';
 import { useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
+import logOutClient from '../../utils/logOutClient';
 import LinkTemplate from '../ui/link/link';
 import Logo from '../ui/logo/logo';
 
@@ -10,18 +9,19 @@ import styles from './header-main-page.module.css';
 import Button from '../ui/button/button';
 
 function HeaderMainPage() {
-
   const navigate = useNavigate();
   const handleLogOut = () => {
     logOutClient();
     navigate('/main');
   };
-        
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const authToken = localStorage.getItem('authToken');
 
   return (
     <header className={styles.headerMain}>
@@ -54,7 +54,6 @@ function HeaderMainPage() {
             <LinkTemplate to="/registration">Sign up</LinkTemplate>
           </>
         )}
-
       </nav>
     </header>
   );
