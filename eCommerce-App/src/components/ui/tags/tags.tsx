@@ -6,7 +6,7 @@ function H1({ children }: ITags) {
 }
 
 function H2({ children }: ITags) {
-  return <h1 className={styles.smallTitle}>{children}</h1>;
+  return <h2 className={styles.smallTitle}>{children}</h2>;
 }
 
 function Container({ children }: ITags) {

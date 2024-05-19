@@ -22,7 +22,8 @@
 }
 
 @media (max-width: 580px) {
-    .title {
+    .title,
+    .smallTitle {
         font-size: 2rem;
       }
 }
