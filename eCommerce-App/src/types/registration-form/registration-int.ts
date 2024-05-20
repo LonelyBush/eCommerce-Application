@@ -71,3 +71,8 @@ export interface PostBody {
   defaultShippingAddress?: number;
   defaultBillingAddress?: number;
 }
+
+export interface ModalText {
+  title: string;
+  text: string;
+}
