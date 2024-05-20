@@ -57,6 +57,8 @@ function RegistrationPage() {
     text: '',
   });
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showFormError, setShowFormError] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
 
   const handleInputChange = (
     addressType: 'billing' | 'shipping',
@@ -126,6 +128,7 @@ function RegistrationPage() {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowFormError(false);
     const createArrOfAddresses = [
       {
         firstName: credentialsValues.firstName,
@@ -155,10 +158,24 @@ function RegistrationPage() {
         title: `Hello, ${response.customerSignInResult?.customer.firstName} ${response.customerSignInResult?.customer.lastName}!`,
         text: 'Your account has been succesfully created!',
       });
-      console.log(response.customerSignInResult?.customer.firstName);
       setShowModal(true);
+      const loginData = {
+        email: credentialsValues.email,
+        password: credentialsValues.password,
+      };
+      try {
+        const responseAuth = await checkAuthClient(loginData);
+        console.log('Response from checkAuthClient:', responseAuth);
+        await authWithPassword(loginData);
+      } catch (caughtError) {
+        if (caughtError instanceof Error) console.log(caughtError);
+      }
     } catch (caughtError) {
-      console.log(caughtError);
+      if (caughtError instanceof Error) {
+        setShowFormError(true);
+        setErrorText(`* ${caughtError.message.toLocaleLowerCase()}`);
+        console.log(caughtError.message);
+      }
     }
   };
 
@@ -170,18 +187,8 @@ function RegistrationPage() {
   });
 
   const onCloseModal = async () => {
-    const loginData = {
-      email: credentialsValues.email,
-      password: credentialsValues.password,
-    };
-    try {
-      const response = await checkAuthClient(loginData);
-      console.log('Response from checkAuthClient:', response);
-      await authWithPassword(loginData);
+    if (localStorage.getItem('authToken')) {
       navigate('/main');
-      console.log(localStorage.getItem('authToken'));
-    } catch (caughtError) {
-      if (caughtError instanceof Error) console.log(caughtError);
     }
   };
 
@@ -227,6 +234,7 @@ function RegistrationPage() {
             onChange={(e) => handleInputChange('billing', e)}
             values={billingValues}
           />
+          {showFormError && <span>{errorText}</span>}
           <Button btnType="submit">Submit</Button>
         </form>
       </div>

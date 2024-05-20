@@ -27,6 +27,12 @@
     text-align: center;
   } 
 
+.registrationForm > span {
+    color: red;
+    font-size: 0.8rem;
+    word-wrap: break-word;
+}
+
 @media(max-width: 500px){
     .registrationForm{
         padding: 1rem 0.5rem;
