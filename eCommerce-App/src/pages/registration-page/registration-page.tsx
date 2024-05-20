@@ -158,8 +158,18 @@ function RegistrationPage() {
         title: `Hello, ${response.customerSignInResult?.customer.firstName} ${response.customerSignInResult?.customer.lastName}!`,
         text: 'Your account has been succesfully created!',
       });
-      console.log(response.customerSignInResult?.customer.firstName);
       setShowModal(true);
+      const loginData = {
+        email: credentialsValues.email,
+        password: credentialsValues.password,
+      };
+      try {
+        const responseAuth = await checkAuthClient(loginData);
+        console.log('Response from checkAuthClient:', responseAuth);
+        await authWithPassword(loginData);
+      } catch (caughtError) {
+        if (caughtError instanceof Error) console.log(caughtError);
+      }
     } catch (caughtError) {
       if (caughtError instanceof Error) {
         setShowFormError(true);
@@ -177,18 +187,8 @@ function RegistrationPage() {
   });
 
   const onCloseModal = async () => {
-    const loginData = {
-      email: credentialsValues.email,
-      password: credentialsValues.password,
-    };
-    try {
-      const response = await checkAuthClient(loginData);
-      console.log('Response from checkAuthClient:', response);
-      await authWithPassword(loginData);
+    if (localStorage.getItem('authToken')) {
       navigate('/main');
-      console.log(localStorage.getItem('authToken'));
-    } catch (caughtError) {
-      if (caughtError instanceof Error) console.log(caughtError);
     }
   };
 
