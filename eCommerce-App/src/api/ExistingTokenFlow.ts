@@ -23,7 +23,7 @@ export default function authWithToken() {
     .get()
     .execute()
     .then((response) => {
-      console.log('Customer profile:', response.body);
+      console.log('Customer profile: ', response.body);
     })
     .catch((error) => {
       console.error('Error retrieving customer profile:', error);
