@@ -57,6 +57,8 @@ function RegistrationPage() {
     text: '',
   });
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showFormError, setShowFormError] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
 
   const handleInputChange = (
     addressType: 'billing' | 'shipping',
@@ -126,6 +128,7 @@ function RegistrationPage() {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowFormError(false);
     const createArrOfAddresses = [
       {
         firstName: credentialsValues.firstName,
@@ -158,7 +161,11 @@ function RegistrationPage() {
       console.log(response.customerSignInResult?.customer.firstName);
       setShowModal(true);
     } catch (caughtError) {
-      console.log(caughtError);
+      if (caughtError instanceof Error) {
+        setShowFormError(true);
+        setErrorText(`* ${caughtError.message.toLocaleLowerCase()}`);
+        console.log(caughtError.message);
+      }
     }
   };
 
@@ -227,6 +234,7 @@ function RegistrationPage() {
             onChange={(e) => handleInputChange('billing', e)}
             values={billingValues}
           />
+          {showFormError && <span>{errorText}</span>}
           <Button btnType="submit">Submit</Button>
         </form>
       </div>
