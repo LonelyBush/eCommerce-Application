@@ -29,7 +29,7 @@ function AdressForm({
         const getPostalCode = document.getElementsByName('postalCode');
         if (e.currentTarget.value === 'US') {
           getPostalCode[0].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
-        } else if (e.currentTarget.value === 'UK') {
+        } else if (e.currentTarget.value === 'UA') {
           getPostalCode[0].setAttribute('pattern', '^\\d{5}$');
         } else if (e.currentTarget.value === 'RU') {
           getPostalCode[0].setAttribute('pattern', '^\\d{6}$');
@@ -41,7 +41,7 @@ function AdressForm({
         const getPostalCode = document.getElementsByName('postalCode');
         if (e.currentTarget.value === 'US') {
           getPostalCode[1].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
-        } else if (e.currentTarget.value === 'UK') {
+        } else if (e.currentTarget.value === 'UA') {
           getPostalCode[1].setAttribute('pattern', '^\\d{5}$');
         } else if (e.currentTarget.value === 'RU') {
           getPostalCode[1].setAttribute('pattern', '^\\d{6}$');
@@ -56,7 +56,7 @@ function AdressForm({
     if (getShipSelect[0] instanceof HTMLSelectElement) {
       if (getShipSelect[0].value === 'US') {
         getPostalCode[1].setAttribute('pattern', '^\\d{5}(-\\d{4})?$');
-      } else if (getShipSelect[0].value === 'UK') {
+      } else if (getShipSelect[0].value === 'UA') {
         getPostalCode[1].setAttribute('pattern', '^\\d{5}$');
       } else if (getShipSelect[0].value === 'RU') {
         getPostalCode[1].setAttribute('pattern', '^\\d{6}$');

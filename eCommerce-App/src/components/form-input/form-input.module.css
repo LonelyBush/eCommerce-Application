@@ -42,3 +42,9 @@
 }
 
 
+@media(max-width: 500px){
+    .formInput > label{
+        font-size: 1rem;
+    }
+}
+

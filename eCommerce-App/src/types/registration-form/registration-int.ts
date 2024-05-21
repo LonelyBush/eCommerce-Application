@@ -70,6 +70,8 @@ export interface PostBody {
   addresses: BaseAddress[];
   defaultShippingAddress?: number;
   defaultBillingAddress?: number;
+  shippingAddresses?: number[];
+  billingAddresses?: number[];
 }
 
 export interface ModalText {

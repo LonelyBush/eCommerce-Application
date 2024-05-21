@@ -82,7 +82,7 @@ export const selectInput = {
       optionLabel: 'Russia',
     },
     {
-      value: 'UK',
+      value: 'UA',
       optionLabel: 'Ukraine',
     },
   ],

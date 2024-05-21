@@ -46,3 +46,10 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+
+  @media(max-width: 500px){
+    .labelContainer{
+      font-size: 1rem;
+    }
+  }
