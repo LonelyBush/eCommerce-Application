@@ -44,10 +44,15 @@ function HeaderMainPage() {
           isMenuOpen ? `${styles.navMain} ${styles.open}` : styles.navMain
         }
       >
+        <LinkTemplate to="/catalog">Catalog</LinkTemplate>
+        <LinkTemplate to="/products">Products</LinkTemplate>
         {authToken ? (
-          <Button btnType="button" onClick={handleLogOut}>
-            Log out
-          </Button>
+          <>
+            <LinkTemplate to="/profile">Profile</LinkTemplate>
+            <Button btnType="button" onClick={handleLogOut}>
+              Log out
+            </Button>
+          </>
         ) : (
           <>
             <LinkTemplate to="/login">Log in</LinkTemplate>

@@ -3,6 +3,9 @@ import LoginPage from '../pages/login-page/login-page';
 import RegistrationPage from '../pages/registration-page/registration-page';
 import MainPage from '../pages/main-page/main-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
+import CatalogPage from '../pages/catalog-page/catalog-page';
+import ProfilePage from '../pages/profile-page/profile-page';
+import ProductsPage from '../pages/products-page/products-page';
 
 function Router() {
   return (
@@ -11,6 +14,9 @@ function Router() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/main" element={<MainPage />} />
+      <Route path="/catalog" element={<CatalogPage />} />
+      <Route path="/products" element={<ProductsPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/*" element={<NotFoundPage />} />
     </Routes>
   );
