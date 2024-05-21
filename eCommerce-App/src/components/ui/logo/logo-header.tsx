@@ -3,9 +3,9 @@ import styles from './logo.module.css';
 
 function LogoHeader() {
   return (
-    <div className={styles.logoHeader}>
+    <header className={styles.logoHeader}>
       <Logo />
-    </div>
+    </header>
   );
 }
 
