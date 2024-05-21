@@ -68,3 +68,9 @@
 .selectInputForm > select:invalid[data-focused='true'] ~ span{
   display: block;
 }
+
+@media(max-width: 500px){
+  .selectInputForm > label {
+      font-size: 1rem;
+  }
+}

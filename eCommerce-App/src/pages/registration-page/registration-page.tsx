@@ -143,8 +143,12 @@ function RegistrationPage() {
         ...billingValues,
       },
     ];
+    const createArrOfShipping = [0];
+    const createArrOfBilling = [1];
     const postBody = { ...credentialsValues } as PostBody;
     postBody.addresses = createArrOfAddresses;
+    postBody.shippingAddresses = createArrOfShipping;
+    postBody.billingAddresses = createArrOfBilling;
     if (useDefaultBilling) {
       postBody.defaultBillingAddress = 1;
     }
