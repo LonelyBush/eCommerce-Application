@@ -8,14 +8,17 @@ function LoginPassword({
   setLoginData,
   setPasswordValid,
   setError,
+  eyeDisplay,
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
   setPasswordValid: React.Dispatch<React.SetStateAction<boolean>>;
   setError: React.Dispatch<React.SetStateAction<string>>;
+  eyeDisplay: boolean;
 }) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<string[]>([]);
+  const [borderStyle, setBorderStyle] = useState<string>('');
 
   const handlePasswordInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -46,7 +49,7 @@ function LoginPassword({
               isValid = /\d/.test(value);
               break;
             case 4:
-              isValid = /[!@#$%^&*]/.test(value);
+              isValid = /(?=.*[\W_])/.test(value);
               break;
             case 5:
               isValid = !/\s/.test(value);
@@ -65,7 +68,9 @@ function LoginPassword({
       return prevErrors;
     });
 
-    setPasswordValid(passwordError.length < 1 && loginData.password.length > 1);
+    setPasswordValid!(
+      passwordError.length < 1 && loginData.password.length > 1,
+    );
     setLoginData({ ...loginData, [name]: value });
   };
 
@@ -73,21 +78,23 @@ function LoginPassword({
     setPasswordValid(
       passwordError.length === 0 && loginData.password.length > 1,
     );
+    if (loginData.password.length > 0) {
+      setBorderStyle(
+        passwordError.length > 0 ? styles.borderError : styles.borderValid,
+      );
+    }
   }, [passwordError, loginData.password, setPasswordValid]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
   return (
     <>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className={styles.label} htmlFor="password">
         Enter password:
       </label>
-      <div
-        className={`${styles.passwordBlock} ${passwordError.length > 0 ? styles.borderError : ''}`}
-      >
+      <div className={`${styles.passwordBlock} ${borderStyle}`}>
         <input
           id="password"
           className={styles.passwordInput}
@@ -96,13 +103,17 @@ function LoginPassword({
           name="password"
           defaultValue={loginData.password}
           onChange={handlePasswordInputChange}
+          pattern="^(?!^\s)(?!.*\s$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$"
+          required
         />
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        <button
-          type="button"
-          className={`${styles.passwordEye} ${showPassword ? styles.passwordEyeClosed : styles.passwordEyeOpen}`}
-          onClick={togglePasswordVisibility}
-        />
+        {eyeDisplay && (
+          // eslint-disable-next-line jsx-a11y/control-has-associated-label
+          <button
+            type="button"
+            className={`${styles.passwordEye} ${showPassword ? styles.passwordEyeClosed : styles.passwordEyeOpen}`}
+            onClick={togglePasswordVisibility}
+          />
+        )}
       </div>
       {passwordError && (
         <div className={styles.error}>

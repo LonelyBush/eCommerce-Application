@@ -1,5 +1,8 @@
-import { ChangeEvent } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ChangeEvent, useState } from 'react';
 import { CredentialsProps } from '../../types/registration-form/registration-int';
+import LoginEmail from '../login-email/login-email';
+import LoginPassword from '../login-password/login-password';
 import FormInput from '../form-input/form-input';
 import styles from './credentials-form.module.css';
 
@@ -19,13 +22,17 @@ function isAtLeast13YearsOld(dateString: string) {
 }
 
 function CredentialsForm({
-  emailInput,
   nameInput,
   dateInput,
-  passwordInput,
   values,
   onChange,
+  setLoginData,
+  loginData,
 }: CredentialsProps) {
+  const [emailValid, setEmailValid] = useState<boolean>(false);
+  const [passwordValid, setPasswordValid] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  console.log(error, passwordValid, emailValid);
   const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     if (!isAtLeast13YearsOld(e.currentTarget.value)) {
       if (e.currentTarget.name === 'dateOfBirth')
@@ -36,18 +43,12 @@ function CredentialsForm({
   return (
     <div className={styles.inputsBlock}>
       <div className={styles.emailSection}>
-        {emailInput.map((input) => {
-          return (
-            <FormInput
-              key={input.id}
-              {...input}
-              onChangeInput={(e) => {
-                onChange(e);
-              }}
-              value={values[input.name as keyof typeof values]}
-            />
-          );
-        })}
+        <LoginEmail
+          loginData={loginData}
+          setLoginData={setLoginData}
+          setEmailValid={setEmailValid}
+          setError={setError}
+        />
       </div>
       <div className={styles.nameSection}>
         {nameInput.map((input) => {
@@ -79,18 +80,13 @@ function CredentialsForm({
         })}
       </div>
       <div className={styles.passwordSection}>
-        {passwordInput.map((input) => {
-          return (
-            <FormInput
-              key={input.id}
-              {...input}
-              onChangeInput={(e) => {
-                onChange(e);
-              }}
-              value={values[input.name as keyof typeof values]}
-            />
-          );
-        })}
+        <LoginPassword
+          eyeDisplay={false}
+          loginData={loginData}
+          setLoginData={setLoginData}
+          setPasswordValid={setPasswordValid}
+          setError={setError}
+        />
       </div>
     </div>
   );

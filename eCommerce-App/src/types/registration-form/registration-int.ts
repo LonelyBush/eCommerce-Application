@@ -1,13 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { BaseAddress } from '@commercetools/platform-sdk';
 import { ChangeEvent } from 'react';
+import { LoginFormType } from '../types';
 
 export interface CredentialsData {
-  email: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
-  password: string;
 }
 
 export interface AdressData {
@@ -37,14 +36,14 @@ export interface PropsOption {
 }
 
 export interface CredentialsProps {
-  emailInput: PropsOption[];
   nameInput: PropsOption[];
   dateInput: PropsOption[];
 
-  passwordInput: PropsOption[];
-
   values: CredentialsData;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+
+  setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
+  loginData: LoginFormType;
 }
 
 export interface AdressFormProps {

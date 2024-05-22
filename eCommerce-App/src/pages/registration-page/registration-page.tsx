@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BaseAddress } from '@commercetools/platform-sdk';
+import { LoginFormType } from '../../types/types';
 import styles from './registration-page.module.css';
 import Button from '../../components/ui/button/button';
 import Tags from '../../components/ui/tags/tags';
@@ -9,8 +10,6 @@ import LogoHeader from '../../components/ui/logo/logo';
 
 import {
   nameInput,
-  emailInput,
-  passwordInput,
   dateInput,
   selectInput,
   adressInputs,
@@ -41,12 +40,14 @@ function RegistrationPage() {
     city: '',
     country: '',
   });
-  const [credentialsValues, setCredentialsValues] = useState<CredentialsData>({
+  const [loginData, setLoginData] = useState<LoginFormType>({
     email: '',
+    password: '',
+  });
+  const [credentialsValues, setCredentialsValues] = useState<CredentialsData>({
     firstName: '',
     lastName: '',
     dateOfBirth: '',
-    password: '',
   });
   const [useSameAddress, setUseSameAddress] = useState<boolean>(false);
 
@@ -133,19 +134,23 @@ function RegistrationPage() {
       {
         firstName: credentialsValues.firstName,
         lastName: credentialsValues.lastName,
-        email: credentialsValues.email,
+        email: loginData.email,
         ...shippingValues,
       },
       {
         firstName: credentialsValues.firstName,
         lastName: credentialsValues.lastName,
-        email: credentialsValues.email,
+        email: loginData.email,
         ...billingValues,
       },
     ];
     const createArrOfShipping = [0];
     const createArrOfBilling = [1];
-    const postBody = { ...credentialsValues } as PostBody;
+    const postBody = {
+      email: loginData.email,
+      password: loginData.password,
+      ...credentialsValues,
+    } as PostBody;
     postBody.addresses = createArrOfAddresses;
     postBody.shippingAddresses = createArrOfShipping;
     postBody.billingAddresses = createArrOfBilling;
@@ -163,10 +168,6 @@ function RegistrationPage() {
         text: 'Your account has been succesfully created!',
       });
       setShowModal(true);
-      const loginData = {
-        email: credentialsValues.email,
-        password: credentialsValues.password,
-      };
       try {
         const responseAuth = await checkAuthClient(loginData);
         console.log('Response from checkAuthClient:', responseAuth);
@@ -207,8 +208,8 @@ function RegistrationPage() {
             <LinkTemplate to="/login">Log in</LinkTemplate>
           </p>
           <CredentialsForm
-            emailInput={emailInput}
-            passwordInput={passwordInput}
+            loginData={loginData}
+            setLoginData={setLoginData}
             dateInput={dateInput}
             nameInput={nameInput}
             values={credentialsValues}
