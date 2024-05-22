@@ -28,8 +28,8 @@ export default defineConfig(({ mode }) => {
       environment: 'jsdom',
       setupFiles: ['./src/test_setup/setupTests.ts'],
       coverage: {
-        provider: 'v8', 
-        reporter: ['text', 'json', 'html'], 
+        provider: 'v8',
+        reporter: ['text', 'json', 'html'],
       },
     },
     css: {
