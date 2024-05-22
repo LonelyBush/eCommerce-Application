@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { CredentialsProps } from '../../types/registration-form/registration-int';
 import LoginEmail from '../login-email/login-email';
 import LoginPassword from '../login-password/login-password';
@@ -32,7 +32,7 @@ function CredentialsForm({
   const [emailValid, setEmailValid] = useState<boolean>(false);
   const [passwordValid, setPasswordValid] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-
+  console.log(error, passwordValid, emailValid);
   const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     if (!isAtLeast13YearsOld(e.currentTarget.value)) {
       if (e.currentTarget.name === 'dateOfBirth')
