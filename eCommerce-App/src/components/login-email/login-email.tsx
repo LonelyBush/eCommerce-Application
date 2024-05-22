@@ -75,7 +75,7 @@ function LoginEmail({
         id="email"
         className={`${styles.input} ${emailError.length > 0 ? styles.borderError : ''}`}
         type="email"
-        placeholder="email"
+        placeholder="Email"
         name="email"
         defaultValue={loginData.email}
         onChange={handleEmailInputChange}

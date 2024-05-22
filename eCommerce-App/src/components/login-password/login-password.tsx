@@ -92,7 +92,7 @@ function LoginPassword({
           id="password"
           className={styles.passwordInput}
           type={showPassword ? 'text' : 'password'}
-          placeholder="password"
+          placeholder="Password"
           name="password"
           defaultValue={loginData.password}
           onChange={handlePasswordInputChange}
