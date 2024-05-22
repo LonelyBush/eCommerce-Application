@@ -17,3 +17,7 @@ body {
     color: var(--c-blue-600);
     overflow-x: hidden;
 }
+
+#root {
+    max-width: 1920px;
+}

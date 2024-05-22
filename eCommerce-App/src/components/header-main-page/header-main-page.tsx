@@ -48,6 +48,8 @@ function HeaderMainPage() {
         <LinkTemplate to="/products">Products</LinkTemplate>
         {authToken ? (
           <>
+            <LinkTemplate to="/main">Log in</LinkTemplate>
+            <LinkTemplate to="/main">Sign up</LinkTemplate>
             <LinkTemplate to="/profile">Profile</LinkTemplate>
             <Button btnType="button" onClick={handleLogOut}>
               Log out
