@@ -54,6 +54,10 @@
 .passwordBlock.borderError {
   border: 0.2rem solid red;
 }
+.input.borderValid,
+.passwordBlock.borderValid{
+  border: 0.2rem solid var(--c-green-400)
+}
 
 .passwordInput {
   width: 100%;

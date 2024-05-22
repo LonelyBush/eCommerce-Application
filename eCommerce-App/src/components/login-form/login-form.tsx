@@ -57,6 +57,7 @@ function LoginForm() {
           setError={setError}
         />
         <LoginPassword
+          eyeDisplay
           loginData={loginData}
           setLoginData={setLoginData}
           setPasswordValid={setPasswordValid}

@@ -16,6 +16,7 @@ function LoginEmail({
   setError: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [emailError, setEmailError] = useState<string[]>([]);
+  const [borderStyle, setBorderStyle] = useState<string>('');
 
   const handleEmailInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -63,6 +64,11 @@ function LoginEmail({
 
   useEffect(() => {
     setEmailValid(emailError.length === 0 && loginData.email.length > 1);
+    if (loginData.email.length > 0) {
+      setBorderStyle(
+        emailError.length > 0 ? styles.borderError : styles.borderValid,
+      );
+    }
   }, [emailError, loginData.email, setEmailValid]);
 
   return (
@@ -73,12 +79,13 @@ function LoginEmail({
       </label>
       <input
         id="email"
-        className={`${styles.input} ${emailError.length > 0 ? styles.borderError : ''}`}
+        className={`${styles.input} ${borderStyle}`}
         type="email"
-        placeholder="email"
+        placeholder="Email"
         name="email"
         defaultValue={loginData.email}
         onChange={handleEmailInputChange}
+        pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
       />
       {emailError && (
         <div className={styles.error}>

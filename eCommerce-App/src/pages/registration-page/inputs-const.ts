@@ -44,6 +44,7 @@ export const dateInput = [
     label: 'Date Of Birth',
     errorMessage: '*you must be at least 13 years old',
     required: true,
+    min: '1800-01-01',
   },
 ];
 
