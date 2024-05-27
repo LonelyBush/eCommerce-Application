@@ -1,7 +1,9 @@
-import './style.scss';
+import Router from './router/router';
+
+import './style.css';
 
 function App() {
-  return <div className="hello">Hello, World!</div>;
+  return <Router />;
 }
 
 export default App;

@@ -1,0 +1,76 @@
+.selectInputForm{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.1rem;
+}
+.selectInputForm > select {
+    padding: 15px;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    border: 0.2rem solid var(--c-mint-100);
+    border-radius: 1rem;
+    cursor: pointer;
+    background-image:
+    linear-gradient(45deg, transparent 50%, var(--c-mint-300) 50%),
+    linear-gradient(135deg, var(--c-mint-300) 50%, transparent 50%),
+    linear-gradient(to right, var(--c-mint-100), var(--c-mint-100));
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+
+.selectInputForm > label {
+    color: var(--c-mint-100);
+}
+.selectInputForm > select:focus{
+    border: 0.2rem solid var( --c-blue-800);
+    background-image:
+    linear-gradient(45deg, white 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, white 50%),
+    linear-gradient(to right, var(--c-mint-300), var(--c-mint-300));
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+  border-color: grey;
+  outline: 0;
+  }
+
+  .selectInputForm > span{
+    font-size: 0.8rem;
+    color: red;
+    word-wrap: break-word;
+    display: none;
+}
+  
+.selectInputForm > select:valid{
+  border: 0.2rem solid var(--c-green-400)
+  }
+  
+.selectInputForm > select:invalid[data-focused='true']{
+  border: 0.2rem solid red;
+}
+
+.selectInputForm > select:invalid[data-focused='true'] ~ span{
+  display: block;
+}
+
+@media(max-width: 500px){
+  .selectInputForm > label {
+      font-size: 1rem;
+  }
+}

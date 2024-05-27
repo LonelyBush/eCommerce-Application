@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ['dist/assets/*'],
   env: {
     browser: true,
     es2021: true,
@@ -38,5 +39,7 @@ module.exports = {
     ],
     '@typescript-eslint/no-explicit-any': 'error',
     'react/react-in-jsx-scope': 0,
+    'react/jsx-props-no-spreading': 0,
+    'import/no-extraneous-dependencies': 0,
   },
 };
