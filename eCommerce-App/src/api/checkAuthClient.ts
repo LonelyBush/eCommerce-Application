@@ -41,6 +41,8 @@ export function checkAuthClient(
             'Customer signed in successfully:',
             response.body.customer,
           );
+          const personalId = response.body.customer.id;
+          localStorage.setItem('personal-id', `${personalId}`);
           const customerSignInResult: CustomerSignInResult = {
             customer: response.body.customer,
           };
