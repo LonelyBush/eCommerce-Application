@@ -1,0 +1,34 @@
+@import '../../styles/colors.css';
+
+.productPage {
+  display: flex;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.productImage {
+  width: 400px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.productPage h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.productPage p {
+  font-size: 16px;
+  color: var(--c-gray);
+  margin-bottom: 30px;
+}
+
+.productPrice {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--c-black);
+}

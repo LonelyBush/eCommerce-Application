@@ -1,6 +1,8 @@
 import { CustomerSignInResult } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/customer';
+import { ProductProjection } from '@commercetools/platform-sdk';
 
-export default interface ApiResponse {
+export interface ApiResponse {
   customerSignInResult?: CustomerSignInResult;
+  productProjection?: ProductProjection;
   error?: Error;
 }
