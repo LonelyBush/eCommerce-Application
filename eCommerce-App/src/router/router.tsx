@@ -6,6 +6,7 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 import CatalogPage from '../pages/catalog-page/catalog-page';
 import ProfilePage from '../pages/profile-page/profile-page';
 import ProductsPage from '../pages/products-page/products-page';
+import ProductPage from '../components/product-page/product-page';
 
 function Router() {
   return (
@@ -17,6 +18,7 @@ function Router() {
       <Route path="/catalog" element={<CatalogPage />} />
       <Route path="/products" element={<ProductsPage />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/prod" element={<ProductPage />} />
       <Route path="/*" element={<NotFoundPage />} />
     </Routes>
   );
