@@ -45,7 +45,6 @@ function HeaderMainPage() {
         }
       >
         <LinkTemplate to="/catalog">Catalog</LinkTemplate>
-        <LinkTemplate to="/products">Products</LinkTemplate>
         {authToken ? (
           <>
             <LinkTemplate to="/main">Log in</LinkTemplate>
