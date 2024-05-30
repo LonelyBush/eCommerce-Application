@@ -12,10 +12,16 @@ function CatalogPage() {
     discount: 10,
   };
 
+  const position = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  };
+
   return (
     <>
       <HeaderMainPage />
-      <ProductCard productCard={productCard} />
+      <div style={position}><ProductCard productCard={productCard} /></div>
     </>
   );
 }
