@@ -4,12 +4,12 @@ import { IProductCard } from '../../components/ui/product-card/product-card-inte
 
 function CatalogPage() {
   const productCard: IProductCard = {
-    id: '',
+    id: 'gghgh',
     imageUrl: '',
-    name: '',
+    name: 'Product',
     description: '',
     price: 9,
-    discount: 0,
+    discount: 10,
   };
 
   return (

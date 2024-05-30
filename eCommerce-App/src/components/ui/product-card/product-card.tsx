@@ -25,8 +25,12 @@ function ProductCard({ productCard }: IProductCardProps) {
           <h3 className={styles.cardName}>{productCard.name}</h3>
           <div className={styles.cardFooter}>
             <div className={styles.pricesBlock}>
-            <p className={styles.cardDiscount}>{productCard.discount > 0 ? `${productCard.discount}%` : ''}</p>
-              <p className={styles.cardPrice}>{productCard.price.toFixed(2)} &#36;</p>
+              <p className={styles.cardDiscount}>
+                {productCard.discount > 0 ? `${productCard.discount}%` : ''}
+              </p>
+              <p className={styles.cardPrice}>
+                {productCard.price.toFixed(2)} &#36;
+              </p>
             </div>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button className={styles.cardCart} type="button" />
@@ -36,7 +40,7 @@ function ProductCard({ productCard }: IProductCardProps) {
             to={`/main/product/:id=${productCard.id}`}
             onClick={handleClick}
           >
-            Info
+            View Details
           </Button>
         </div>
       </div>
