@@ -1,0 +1,58 @@
+.profileRoot{
+    display: flex;
+}
+
+.profileContainer{
+    width: 100%;
+}
+
+.greetUser {
+    margin: 1.9rem 1.8rem 2.6rem;
+}
+
+.greetUser > h2{
+    text-align: start;
+}
+
+.profileWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileNavigation {
+    display: flex;
+    border-bottom: 0.1rem solid var(--c-mint-300);
+}
+
+.navComponent{
+    padding: 1rem;
+    color: var(--c-blue-800);
+    cursor: pointer;
+    background-color: transparent;
+
+}
+
+.navComponent:hover {
+    color: var(--c-mint-300);
+    border-bottom: 0.2rem solid var(--c-mint-300);
+}
+
+.navComponent.active{
+    color: var(--c-mint-300);
+    border-bottom: 0.2rem solid var(--c-mint-300);
+}
+
+.toastContainer{
+    width: 10rem;
+}
+
+.personalSection{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 3rem;
+}
+
+
+

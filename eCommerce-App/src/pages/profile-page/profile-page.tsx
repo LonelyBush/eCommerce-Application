@@ -5,7 +5,6 @@ function ProfilePage() {
   return (
     <>
       <HeaderMainPage />
-      <div> Profile Page</div>
       <PersonalInfoView />
     </>
   );

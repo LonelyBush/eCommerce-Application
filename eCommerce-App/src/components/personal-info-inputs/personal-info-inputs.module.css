@@ -1,0 +1,35 @@
+.toastBody{
+    font-family: "salina trial";
+     font-size: 0.8rem;
+     color: var(--c-black);
+}
+
+.btnSection {
+    display: flex;
+    gap: 2rem;
+}
+
+.btnSection > button {
+    width: 10rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.personalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.0rem;
+    max-width: 40rem;
+}
+
+.nameSection {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.personalForm > div > label {
+    color: var(--c-blue-800);
+}
+.nameSection > div > label {
+    color: var(--c-blue-800);
+}

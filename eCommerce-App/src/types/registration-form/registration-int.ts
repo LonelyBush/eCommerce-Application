@@ -22,7 +22,7 @@ interface SelectOptionProps {
 }
 
 export interface PropsOption {
-  label: string;
+  label?: string;
   placeholder?: string;
   name: string;
   id: string;
@@ -33,6 +33,7 @@ export interface PropsOption {
   errorMessage: string;
   required: boolean;
   options?: SelectOptionProps[];
+  defaultValue?: string;
 }
 
 export interface CredentialsProps {

@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { BaseAddress } from '@commercetools/platform-sdk';
 import fetchPersonalData from '../../api/fetchPersonalData';
 
-interface PersonalData {
+export interface PersonalData {
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
-  addresses?: BaseAddress[];
 }
 
 function UsePersonalInfo() {
@@ -14,7 +12,6 @@ function UsePersonalInfo() {
     firstName: '',
     lastName: '',
     dateOfBirth: '',
-    addresses: [],
   });
   useEffect(() => {
     async function getResponse() {
@@ -27,7 +24,6 @@ function UsePersonalInfo() {
           firstName: response.customer?.firstName,
           lastName: response.customer?.lastName,
           dateOfBirth: response.customer?.dateOfBirth,
-          addresses: response.customer?.addresses,
         });
       } catch (caughtError) {
         if (caughtError instanceof Error) {
