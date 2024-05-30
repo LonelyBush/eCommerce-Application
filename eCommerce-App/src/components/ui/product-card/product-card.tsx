@@ -23,11 +23,10 @@ function ProductCard({ productCard }: IProductCardProps) {
         </div>
         <div className={styles.cardInfoBlock}>
           <h3 className={styles.cardName}>{productCard.name}</h3>
-          <p className={styles.cardDescription}>{productCard.description}</p>
           <div className={styles.cardFooter}>
             <div className={styles.pricesBlock}>
-              <p className={styles.cardDiscount}>{productCard.discount}</p>
-              <p className={styles.cardPrice}>{productCard.price}</p>
+            <p className={styles.cardDiscount}>{productCard.discount > 0 ? `${productCard.discount}%` : ''}</p>
+              <p className={styles.cardPrice}>{productCard.price.toFixed(2)} &#36;</p>
             </div>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button className={styles.cardCart} type="button" />

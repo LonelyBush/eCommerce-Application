@@ -9,7 +9,7 @@ function CatalogPage() {
     name: '',
     description: '',
     price: 9,
-    discount: 5,
+    discount: 0,
   };
 
   return (
