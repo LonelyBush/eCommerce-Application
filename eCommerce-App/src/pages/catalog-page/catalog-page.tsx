@@ -15,13 +15,15 @@ function CatalogPage() {
   const position = {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   };
 
   return (
     <>
       <HeaderMainPage />
-      <div style={position}><ProductCard productCard={productCard} /></div>
+      <div style={position}>
+        <ProductCard productCard={productCard} />
+      </div>
     </>
   );
 }
