@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import UsePersonalInfo from './usePersonalInfo';
+import UsePersonalInfo from './usePersonalInfo-hook';
 import Tags from '../ui/tags/tags';
-import styles from './personalView.module.css';
-import PersonalInfoInputs from '../personal-info-inputs/personal-info-input';
+import styles from './profile-content.module.css';
+import PersonalInfoInputs from '../personal-view/personal-info-view';
 
 function PersonalInfoView() {
   const [activeTab, setActiveTab] = useState(1);

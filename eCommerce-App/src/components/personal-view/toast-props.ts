@@ -1,6 +1,6 @@
 import { Slide, ToastPosition } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styles from './personal-info-inputs.module.css';
+import styles from './personal-info-view.module.css';
 
 const toastProps = {
   position: 'top-right' as ToastPosition,

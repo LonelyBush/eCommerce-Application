@@ -7,8 +7,8 @@ import { infoInputs } from './personal-consts';
 import toastProps from './toast-props';
 import UsePersonalInfo, {
   PersonalData,
-} from '../personal-information/usePersonalInfo';
-import styles from './personal-info-inputs.module.css';
+} from '../profile-content/usePersonalInfo-hook';
+import styles from './personal-info-view.module.css';
 
 function PersonalInfoInputs() {
   const info = UsePersonalInfo();
