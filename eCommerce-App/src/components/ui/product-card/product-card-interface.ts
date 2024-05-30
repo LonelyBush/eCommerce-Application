@@ -4,5 +4,9 @@ export interface IProductCard {
   name: string;
   description: string;
   price: number;
-  discount?: number;
+  discount: number;
+}
+
+export interface IProductCardProps {
+  productCard: IProductCard;
 }

@@ -1,8 +1,10 @@
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
-import styles from './product-card.module.css';
+import { IProductCardProps } from './product-card-interface';
 import Button from '../button/button';
 
-function ProductCard() {
+import styles from './product-card.module.css';
+
+function ProductCard({ productCard }: IProductCardProps) {
   const { scrollToTop } = useScrollToTop();
 
   const handleClick = () => {
@@ -13,21 +15,28 @@ function ProductCard() {
     <article className={styles.cardBlock}>
       <div className={styles.cardContent}>
         <div className={styles.imgBlock}>
-          <img className={styles.cardImg} alt="product" />
+          <img
+            className={styles.cardImg}
+            src={productCard.imageUrl}
+            alt={productCard.name}
+          />
         </div>
         <div className={styles.cardInfoBlock}>
-          <h3 className={styles.cardName}>Product Name</h3>
-          <p className={styles.cardDescription}>Product Description</p>
+          <h3 className={styles.cardName}>{productCard.name}</h3>
+          <p className={styles.cardDescription}>{productCard.description}</p>
           <div className={styles.cardFooter}>
             <div className={styles.pricesBlock}>
-              <p className={styles.cardDiscount}>Discount</p>
-              <p className={styles.cardPrice}>Price</p>
+              <p className={styles.cardDiscount}>{productCard.discount}</p>
+              <p className={styles.cardPrice}>{productCard.price}</p>
             </div>
-            <button className={styles.cardCart} type="button">
-              Add to Cart
-            </button>
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button className={styles.cardCart} type="button" />
           </div>
-          <Button btnType="button" to="/products" onClick={handleClick}>
+          <Button
+            btnType="button"
+            to={`/main/product/:id=${productCard.id}`}
+            onClick={handleClick}
+          >
             Info
           </Button>
         </div>
