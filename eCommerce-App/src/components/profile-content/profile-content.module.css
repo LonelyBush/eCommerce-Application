@@ -33,11 +33,13 @@
 }
 
 .navComponent:hover {
+    font-weight: bold;
     color: var(--c-blue-600);
     border-bottom: 0.2rem solid var(--c-blue-600);
 }
 
 .navComponent.active{
+    font-weight: bold;
     color: var(--c-blue-600);
     border-bottom: 0.2rem solid var(--c-blue-600);
 }

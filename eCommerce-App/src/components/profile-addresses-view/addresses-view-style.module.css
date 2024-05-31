@@ -1,0 +1,34 @@
+.addressTable {
+    table-layout: fixed;
+    max-width: 90rem;
+    border-collapse: collapse;
+    overflow-x: scroll;
+
+}
+
+.userTableCell {
+    border: 0.1rem solid black;
+    text-align: center;
+    padding: 1rem;
+
+}
+
+.addressTypes {
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+    white-space: nowrap;
+}
+
+.defaultType{
+    border-radius: 0.5rem;
+    background-color: var(--c-green-400, 0.4);
+    color: var(--c-white);
+    padding: 0.5rem;
+}
+
+.addressType {
+    border-radius: 0.5rem;
+    background-color: var(--c-gray);
+    padding: 0.5rem;
+}

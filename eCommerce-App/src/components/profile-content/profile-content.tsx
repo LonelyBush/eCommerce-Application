@@ -2,7 +2,8 @@ import { useState } from 'react';
 import UsePersonalInfo from './usePersonalInfo-hook';
 import Tags from '../ui/tags/tags';
 import styles from './profile-content.module.css';
-import PersonalInfoInputs from '../personal-view/personal-info-view';
+import PersonalInfoInputs from '../profile-personal-view/personal-info-view';
+import AddressesView from '../profile-addresses-view/addresses-view';
 
 function PersonalInfoView() {
   const [activeTab, setActiveTab] = useState(1);
@@ -15,7 +16,7 @@ function PersonalInfoView() {
       case 1:
         return <PersonalInfoInputs />;
       case 2:
-        return <div>Addresses info</div>;
+        return <AddressesView />;
       case 3:
         return <div>Conf info</div>;
       default:
