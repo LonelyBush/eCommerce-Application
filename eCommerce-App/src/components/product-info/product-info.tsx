@@ -1,9 +1,9 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './product-info.module.css';
 import HeaderMainPage from '../header-main-page/header-main-page';
 import getProductById from '../../api/getProductById';
 
-function ProductPage() {
+function ProductInfo() {
   const [imageUrl, setImageUrl] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -65,4 +65,4 @@ function ProductPage() {
   );
 }
 
-export default ProductPage;
+export default ProductInfo;
