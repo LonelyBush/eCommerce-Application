@@ -6,6 +6,7 @@ import {
   IPrice,
 } from '../../components/ui/product-card/product-card-interface';
 import getProductById from '../../api/getProductById';
+import Loading from '../../components/ui/loading/loading';
 
 function CatalogPage() {
   const [productCard, setProductCard] = useState<IProductCard>({
@@ -40,12 +41,17 @@ function CatalogPage() {
           if (product.description) description = product.description['en-US'];
 
           let price = 0;
+          let discount = 0;
           if (product.masterVariant.prices) {
             const usPrice = product.masterVariant.prices.find(
               (priceArr: IPrice) => priceArr.country === 'US',
             );
             if (usPrice) {
               price = usPrice.value.centAmount / 100;
+              discount = usPrice.discounted?.value.centAmount ?? 0;
+              if (typeof discount === 'number') {
+                discount /= 100;
+              }
             }
           }
 
@@ -57,6 +63,7 @@ function CatalogPage() {
             key,
             description,
             price,
+            discount,
           }));
         }
       })
@@ -68,7 +75,7 @@ function CatalogPage() {
   const { imageUrl, name } = productCard;
 
   if (!imageUrl || !name) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

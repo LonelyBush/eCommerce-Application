@@ -38,12 +38,17 @@ function ProductInfo() {
           if (product.description) description = product.description['en-US'];
 
           let price = 0;
+          let discount = 0;
           if (product.masterVariant.prices) {
             const usPrice = product.masterVariant.prices.find(
               (priceArr: IPrice) => priceArr.country === 'US',
             );
             if (usPrice) {
               price = usPrice.value.centAmount / 100;
+              discount = usPrice.discounted?.value.centAmount ?? 0;
+              if (typeof discount === 'number') {
+                discount /= 100;
+              }
             }
           }
 
@@ -55,6 +60,7 @@ function ProductInfo() {
             key,
             description,
             price,
+            discount,
           }));
         }
       })
@@ -67,6 +73,12 @@ function ProductInfo() {
 
   if (!imageUrl || !name) {
     return <Loading />;
+  }
+
+  function getDiscount(): number {
+    return Math.floor(
+      ((productCard.price - productCard.discount) / productCard.price) * 100,
+    );
   }
 
   return (
@@ -83,6 +95,19 @@ function ProductInfo() {
         <p className={styles.productPageDescription}>
           {productCard.description}
         </p>
+        <div className={styles.productPagePrices}>
+          Price:&nbsp;
+          <span className={styles.productPagePrice}>{productCard.price}$</span>
+        </div>
+        {productCard.discount > 0 && (
+          <div className={styles.productPagePrices}>
+            Discount:&nbsp;{' '}
+            <span className={styles.productPageDiscount}>
+              {productCard.discount}$
+            </span>{' '}
+            <div className={styles.discountPercent}>{getDiscount()}%</div>
+          </div>
+        )}
       </div>
     </div>
   );
