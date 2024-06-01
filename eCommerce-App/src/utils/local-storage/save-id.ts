@@ -1,10 +1,8 @@
-function saveIdToLocalStorage(id: string) {
+export function saveIdToLocalStorage(id: string) {
   localStorage.setItem('product-id', id);
 }
 
-function getIdFromLocalStorage() {
+export function getIdFromLocalStorage() {
   const id = localStorage.getItem('product-id');
   return id ?? '';
 }
-
-export { saveIdToLocalStorage, getIdFromLocalStorage };
