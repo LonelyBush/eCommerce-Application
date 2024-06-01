@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
 import fetchPersonalData from '../../api/fetchPersonalData';
 
-interface AddressType {
+export interface AddressType {
   defaultBillingAddressId: string;
   defaultShippingAddressId: string;
   billingAddressIds: string[];

@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
+import Button from '../ui/button/button';
 import styles from './addresses-view-style.module.css';
 import UseAddressInfo from './useAddressInfo-hook';
+import AddAddressForm from './add-address-form';
 
 interface ColumnInterface {
   label: string;
@@ -12,7 +15,11 @@ function TableHead({ mainColumns }: { mainColumns: ColumnInterface[] }) {
     <thead>
       <tr>
         {mainColumns.map((column) => (
-          <th key={column.id} id={column.id} className={styles.userTableCell}>
+          <th
+            key={column.id}
+            id={column.id}
+            className={styles.userTableHeadCell}
+          >
             {column.label}
           </th>
         ))}
@@ -40,10 +47,10 @@ function TableContent({
     <tbody>
       {entries.map((entry, index) => {
         return (
-          <tr id={entry.id} key={entry.id}>
+          <tr id={entry.id} key={entry.id} className={styles.tableBodyRow}>
             {columns.map((column) => {
               return column.id === 'addressType' ? (
-                <td key={column.id} className={styles.userTableCell}>
+                <td key={column.id} className={styles.userTableBodyCell}>
                   <div className={styles.addressTypes}>
                     {defaultBillingAddressId === entry.id ? (
                       <div className={styles.defaultType}>Default billing</div>
@@ -68,7 +75,7 @@ function TableContent({
                   </div>
                 </td>
               ) : (
-                <td className={styles.userTableCell} key={column.id}>
+                <td className={styles.userTableBodyCell} key={column.id}>
                   {column.id === 'id'
                     ? index + 1
                     : entry[column.id as keyof BaseAddress]}
@@ -83,6 +90,7 @@ function TableContent({
 }
 
 function AddressesView() {
+  const [showAddressForm, setShowAddressForm] = useState<boolean>(false);
   const columns = [
     {
       label: 'Num',
@@ -111,19 +119,34 @@ function AddressesView() {
     },
   ];
   const info = UseAddressInfo();
+
+  const handleOnClick = () => {
+    setShowAddressForm(true);
+  };
   return (
-    <div>
-      <table className={styles.addressTable}>
-        <TableHead mainColumns={columns} />
-        <TableContent
-          columns={columns}
-          entries={info.addresses!}
-          shippingAddressIds={info.shippingAddressIds!}
-          billingAddressIds={info.billingAddressIds!}
-          defaultBillingAddressId={info.defaultBillingAddressId!}
-          defaultShippingAddressId={info.defaultShippingAddressId!}
-        />
-      </table>
+    <div className={styles.tableSection}>
+      {!showAddressForm ? (
+        <>
+          <table className={styles.addressTable}>
+            <TableHead mainColumns={columns} />
+            <TableContent
+              columns={columns}
+              entries={info.addresses!}
+              shippingAddressIds={info.shippingAddressIds!}
+              billingAddressIds={info.billingAddressIds!}
+              defaultBillingAddressId={info.defaultBillingAddressId!}
+              defaultShippingAddressId={info.defaultShippingAddressId!}
+            />
+          </table>
+          <div className={styles.btnSection}>
+            <Button onClick={handleOnClick} btnType="button">
+              Add address
+            </Button>
+          </div>
+        </>
+      ) : (
+        <AddAddressForm />
+      )}
     </div>
   );
 }

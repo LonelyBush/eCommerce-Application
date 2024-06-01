@@ -7,7 +7,7 @@
 }
 
 .greetUser {
-    margin: 1.9rem 1.8rem 2.6rem;
+    margin: 0.9rem 0.8rem 0.6rem;
 }
 
 .greetUser > h2{
@@ -29,6 +29,7 @@
     color: var(--c-blue-800);
     cursor: pointer;
     background-color: transparent;
+    font-size: 1rem;
 
 }
 

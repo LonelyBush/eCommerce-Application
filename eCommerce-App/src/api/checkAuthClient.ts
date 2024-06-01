@@ -42,7 +42,9 @@ export function checkAuthClient(
             response.body.customer,
           );
           const personalId = response.body.customer.id;
+          const personalVer = response.body.customer.version;
           localStorage.setItem('personal-id', `${personalId}`);
+          localStorage.setItem('version', `${personalVer}`);
           const customerSignInResult: CustomerSignInResult = {
             customer: response.body.customer,
           };
