@@ -8,6 +8,7 @@ function ProductPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+  const [discountPrice, setDiscountPrice] = useState('');
 
   useEffect(() => {
     getProductById()
@@ -26,6 +27,11 @@ function ProductPage() {
             if (usPrice) {
               const priceInDollars = usPrice.value.centAmount / 100;
               setPrice(String(priceInDollars));
+              const discountedCentAmount = usPrice.discounted?.value.centAmount;
+              if (typeof discountedCentAmount === 'number') {
+                const discountPriceInDollars = discountedCentAmount / 100;
+                setDiscountPrice(String(discountPriceInDollars));
+              }
             }
           }
         }
@@ -49,6 +55,9 @@ function ProductPage() {
           <p>{description}</p>
           <div className={styles.productPrice}>
             <span>Price:</span> ${price}
+            <div>
+              <span>Discount price:</span> ${discountPrice}
+            </div>
           </div>
         </div>
       </div>

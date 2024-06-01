@@ -9,7 +9,6 @@ import ProductsPage from '../pages/products-page/products-page';
 
 import ProductPage from '../components/product-page/product-page';
 
-
 function Router() {
   return (
     <Routes>

@@ -13,7 +13,6 @@ import {
 
 import { ApiResponse } from './intefaceApi';
 
-
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
   .withHttpMiddleware(httpMiddlewareOptions)
