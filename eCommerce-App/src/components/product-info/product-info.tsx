@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import styles from './product-info.module.css';
 import getProductById from '../../api/getProductById';
 import { getIdFromLocalStorage } from '../../utils/local-storage/save-id';
 import {
@@ -7,6 +6,8 @@ import {
   IPrice,
 } from '../ui/product-card/product-card-interface';
 import Loading from '../ui/loading/loading';
+import Tags from '../ui/tags/tags';
+import styles from './product-info.module.css';
 
 function ProductInfo() {
   const id: string | null = getIdFromLocalStorage();
@@ -69,18 +70,19 @@ function ProductInfo() {
   }
 
   return (
-    <div className={styles.productPage}>
-      <img
-        src={productCard.imageUrl}
-        alt={productCard.name}
-        className={styles.productImage}
-      />
-      <div className={styles.productAllDescription}>
-        <h1>{productCard.name}</h1>
-        <p>{productCard.description}</p>
-        <div className={styles.productPrice}>
-          <span>Price:</span> ${productCard.price}
-        </div>
+    <div className={styles.productPageBlock}>
+      <div className={styles.productPageImgBlock}>
+        <img
+          src={productCard.imageUrl}
+          alt={productCard.name}
+          className={styles.productPageImage}
+        />
+      </div>
+      <div className={styles.productPageInfo}>
+        <Tags.H1>{productCard.name}</Tags.H1>
+        <p className={styles.productPageDescription}>
+          {productCard.description}
+        </p>
       </div>
     </div>
   );
