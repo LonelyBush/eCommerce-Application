@@ -7,9 +7,6 @@ import CatalogPage from '../pages/catalog-page/catalog-page';
 import ProfilePage from '../pages/profile-page/profile-page';
 import ProductsPage from '../pages/products-page/products-page';
 
-import ProductPage from '../components/product-page/product-page';
-
-
 function Router() {
   return (
     <Routes>
@@ -19,11 +16,8 @@ function Router() {
       <Route path="/main" element={<MainPage />} />
       <Route path="/catalog" element={<CatalogPage />} />
       <Route path="/profile" element={<ProfilePage />} />
-
-      <Route path="/prod" element={<ProductPage />} />
-
       <Route path="/*" element={<NotFoundPage />} />
-      <Route path="/main/product/:id" element={<ProductsPage />} />
+      <Route path="/main/product/:key" element={<ProductsPage />} />
     </Routes>
   );
 }

@@ -1,6 +1,7 @@
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
 import Button from '../button/button';
+import { saveIdToLocalStorage } from '../../../utils/local-storage/save-id';
 
 import styles from './product-card.module.css';
 
@@ -9,6 +10,7 @@ function ProductCard({ productCard }: IProductCardProps) {
 
   const handleClick = () => {
     scrollToTop();
+    saveIdToLocalStorage(productCard.id);
   };
 
   return (
@@ -35,13 +37,15 @@ function ProductCard({ productCard }: IProductCardProps) {
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button className={styles.cardCart} type="button" />
           </div>
-          <Button
-            btnType="button"
-            to={`/main/product/:id=${productCard.id}`}
-            onClick={handleClick}
-          >
-            View Details
-          </Button>
+          <div className={styles.btnContainer}>
+            <Button
+              btnType="button"
+              to={`/main/product/:key=${productCard.key}`}
+              onClick={handleClick}
+            >
+              View Details
+            </Button>
+          </div>
         </div>
       </div>
     </article>

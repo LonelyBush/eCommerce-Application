@@ -17,8 +17,9 @@ const apiRoot = createApiBuilderFromCtpClient(middleware).withProjectKey({
   projectKey,
 });
 
-export default function getProductById(): Promise<ApiResponse> {
-  const productId = '1f262fbd-e389-4116-a0a7-aa78190a88b6';
+export default function getProductById(
+  productId: string,
+): Promise<ApiResponse> {
   return new Promise((resolve, reject) => {
     apiRoot
       .productProjections()
