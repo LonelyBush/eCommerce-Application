@@ -7,6 +7,7 @@ import {
 } from '../ui/product-card/product-card-interface';
 import Loading from '../ui/loading/loading';
 import Tags from '../ui/tags/tags';
+import ImgSlider from '../ui/each-img-slider/img-slider';
 import styles from './product-info.module.css';
 
 function ProductInfo() {
@@ -14,6 +15,7 @@ function ProductInfo() {
   const [productCard, setProductCard] = useState<IProductCard>({
     id: '',
     imageUrl: '',
+    imageUrlArray: [],
     name: '',
     key: '',
     description: '',
@@ -30,7 +32,11 @@ function ProductInfo() {
         if (product) {
           const { images } = product.masterVariant;
           let imageUrl = '';
-          if (images && images.length > 0) imageUrl = images[0].url;
+          let imageUrlArray: string[] = [];
+          if (images && images.length > 0) {
+            imageUrl = images[0].url;
+            imageUrlArray = images.map((image) => image.url);
+          }
 
           const name = product.name['en-US'];
           const key = product.key || '';
@@ -56,6 +62,7 @@ function ProductInfo() {
             ...prevState,
             id: product.id,
             imageUrl,
+            imageUrlArray,
             name,
             key,
             description,
@@ -83,12 +90,8 @@ function ProductInfo() {
 
   return (
     <div className={styles.productPageBlock}>
-      <div className={styles.productPageImgBlock}>
-        <img
-          src={productCard.imageUrl}
-          alt={productCard.name}
-          className={styles.productPageImage}
-        />
+      <div className={styles.productPageImgSlider}>
+        <ImgSlider productCard={productCard} />
       </div>
       <div className={styles.productPageInfo}>
         <Tags.H1>{productCard.name}</Tags.H1>

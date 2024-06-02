@@ -9,7 +9,6 @@
   border-radius: 1rem;
   background-color: var(--c-blue-600);
   transition: all 0.4s ease-out;
-  cursor: pointer;
 }
 
 .cardBlock:hover {
@@ -32,12 +31,6 @@
   object-fit: fill;
   transition: all 0.4s ease-out;
   transform: scale(1);
-}
-
-@media (hover: hover) and (pointer: fine) and (pointer: fine) {
-  .cardImg:hover {
-    transform: scale(1.1);
-  }
 }
 
 .cardInfoBlock {
@@ -74,9 +67,9 @@
   align-content: center;
 }
 
-.btnContainer  > button {
-    width: 10rem;
-    font-size: 1.2rem;
+.btnContainer > button {
+  width: 10rem;
+  font-size: 1.2rem;
 }
 
 .cardFooter {
@@ -98,4 +91,11 @@
 
 .checked {
   mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
+}
+
+@media (hover: hover) and (pointer: fine) and (pointer: fine) {
+  .cardImg:hover,
+  .cardCart:hover {
+    transform: scale(1.1);
+  }
 }

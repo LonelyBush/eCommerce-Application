@@ -1,6 +1,7 @@
 export interface IProductCard {
   id: string;
   imageUrl: string;
+  imageUrlArray: string[];
   name: string;
   key: string;
   description: string;

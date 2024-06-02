@@ -12,6 +12,7 @@ function CatalogPage() {
   const [productCard, setProductCard] = useState<IProductCard>({
     id: '',
     imageUrl: '',
+    imageUrlArray: [],
     name: '',
     key: '',
     description: '',
