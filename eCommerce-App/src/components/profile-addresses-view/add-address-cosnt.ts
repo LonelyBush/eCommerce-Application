@@ -53,6 +53,7 @@ export const addAdressFormInputs = [
     label: 'Adress',
     errorMessage: '*must contain at least one character',
     required: true,
+    pattern: '^.+$',
   },
 ];
 export const addressTypeCheckProps = [
@@ -74,5 +75,33 @@ export const defaultAddressCheckProps = [
   {
     id: 'defaultBilling',
     label: 'Default billing address',
+  },
+];
+
+export const columns = [
+  {
+    label: 'Num',
+    id: 'id',
+  },
+  {
+    label: 'Address',
+    id: 'streetName',
+  },
+  {
+    label: 'City',
+    id: 'city',
+  },
+  {
+    label: 'Country',
+    id: 'country',
+  },
+  {
+    label: 'Postal code',
+    id: 'postalCode',
+  },
+
+  {
+    label: 'Address Type',
+    id: 'addressType',
   },
 ];

@@ -6,10 +6,12 @@ import styles from './profile-content.module.css';
 import PersonalInfoInputs from '../profile-personal-view/personal-info-view';
 import AddressesTable from '../profile-addresses-view/addresses-table';
 import AddAddressForm from '../profile-addresses-view/add-address-form';
+import UseAddressInfo from '../profile-addresses-view/useAddressInfo-hook';
 
 function PersonalInfoView() {
   const [activeTab, setActiveTab] = useState(1);
   const info = UsePersonalInfo();
+  const addresInfo = UseAddressInfo();
   const navigate = useNavigate();
   const location = useLocation();
   const handleTabClick = (num: number, path: string) => {
@@ -18,23 +20,27 @@ function PersonalInfoView() {
   };
 
   useEffect(() => {
-    switch (location.pathname) {
-      case '/profile/personal':
-        setActiveTab(1);
-        break;
-      case '/profile/addresses':
-      case '/profile/addresses/new':
-      case '/profile/addresses/change':
-        setActiveTab(2);
-        break;
-      case '/profile/confidential':
-        setActiveTab(3);
-        break;
-      default:
-        setActiveTab(1);
-        navigate('personal');
+    const getAddressIds = addresInfo.addresses?.map((elem) => {
+      return elem.id;
+    });
+
+    if (location.pathname.startsWith('/profile/personal')) {
+      setActiveTab(1);
+    } else if (
+      location.pathname.startsWith('/profile/addresses') ||
+      getAddressIds?.some((id) => location.pathname.includes(id!))
+    ) {
+      setActiveTab(2);
+    } else if (location.pathname.startsWith('/profile/confidential')) {
+      setActiveTab(3);
+    } else {
+      setActiveTab(1);
+      navigate('personal');
     }
   }, [location.pathname]);
+  const getAddressIds = addresInfo.addresses?.map((elem) => {
+    return elem.id;
+  });
   return (
     <div className={styles.profileRoot}>
       <div className={styles.profileContainer}>
@@ -69,8 +75,16 @@ function PersonalInfoView() {
             <Routes>
               <Route path="/personal" element={<PersonalInfoInputs />} />
               <Route path="/addresses" element={<AddressesTable />}>
-                <Route path="new" element={<AddAddressForm />} />
-                <Route path="change" element={<div>Change Address</div>} />
+                <Route path="new" element={<AddAddressForm pathId="" />} />
+                {getAddressIds?.map((path) => {
+                  return (
+                    <Route
+                      key={path}
+                      path={path}
+                      element={<AddAddressForm pathId={path!} />}
+                    />
+                  );
+                })}
               </Route>
               <Route path="/confidential" element={<div>Conf info</div>} />
             </Routes>
