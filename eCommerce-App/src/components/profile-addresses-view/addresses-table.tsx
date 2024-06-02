@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { BaseAddress } from '@commercetools/platform-sdk';
 import Button from '../ui/button/button';
 import styles from './addresses-view-style.module.css';
 import UseAddressInfo from './useAddressInfo-hook';
-import AddAddressForm from './add-address-form';
 
 interface ColumnInterface {
   label: string;
@@ -43,11 +42,20 @@ function TableContent({
   defaultBillingAddressId: string;
   defaultShippingAddressId: string;
 }) {
+  const navigate = useNavigate();
   return (
     <tbody>
       {entries.map((entry, index) => {
         return (
-          <tr id={entry.id} key={entry.id} className={styles.tableBodyRow}>
+          <tr
+            onClick={() => {
+              navigate('change');
+              console.log(`${entry.id}`);
+            }}
+            id={entry.id}
+            key={entry.id}
+            className={styles.tableBodyRow}
+          >
             {columns.map((column) => {
               return column.id === 'addressType' ? (
                 <td key={column.id} className={styles.userTableBodyCell}>
@@ -89,8 +97,12 @@ function TableContent({
   );
 }
 
-function AddressesView() {
-  const [showAddressForm, setShowAddressForm] = useState<boolean>(false);
+function AddressesTable() {
+  const location = useLocation();
+  const isNestedRoute =
+    location.pathname.includes('new') || location.pathname.includes('change');
+
+  const navigate = useNavigate();
   const columns = [
     {
       label: 'Num',
@@ -121,13 +133,13 @@ function AddressesView() {
   const info = UseAddressInfo();
 
   const handleOnClick = () => {
-    setShowAddressForm(true);
+    navigate('new');
   };
   return (
-    <div className={styles.tableSection}>
-      {!showAddressForm ? (
-        <>
-          <table className={styles.addressTable}>
+    <>
+      {!isNestedRoute && (
+        <div className={styles.tableSection}>
+          <table className={`${styles.addressTable}`}>
             <TableHead mainColumns={columns} />
             <TableContent
               columns={columns}
@@ -138,17 +150,16 @@ function AddressesView() {
               defaultShippingAddressId={info.defaultShippingAddressId!}
             />
           </table>
-          <div className={styles.btnSection}>
+          <div className={`${styles.btnSection}`}>
             <Button onClick={handleOnClick} btnType="button">
               Add address
             </Button>
           </div>
-        </>
-      ) : (
-        <AddAddressForm />
+        </div>
       )}
-    </div>
+      <Outlet />
+    </>
   );
 }
 
-export default AddressesView;
+export default AddressesTable;

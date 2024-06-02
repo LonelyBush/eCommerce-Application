@@ -6,6 +6,12 @@
 
 }
 
+.addressTable.disable{
+    display: none;
+}
+
+
+
 .userTableHeadCell {
     text-align: center;
     padding: 1rem;
@@ -51,6 +57,7 @@
     gap: 1rem;
 }
 
+
 .addressType {
     border-radius: 0.5rem;
     background-color: rgb(138,135,135,0.4);
@@ -69,6 +76,11 @@
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
 }
+
+.btnSection.disable{
+    display: none;
+}
+
 
 .multi-select {
     position: relative;

@@ -16,7 +16,7 @@ function Router() {
       <Route path="/main" element={<MainPage />} />
       <Route path="/catalog" element={<CatalogPage />} />
       <Route path="/products" element={<ProductsPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile/*" element={<ProfilePage />} />
       <Route path="/*" element={<NotFoundPage />} />
     </Routes>
   );

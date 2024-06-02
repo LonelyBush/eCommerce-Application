@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
+import { useNavigate } from 'react-router-dom';
 import SelectInput from '../select-input/select-input';
 import FormInput from '../form-input/form-input';
 import Checkbox from '../ui/checkbox/checkbox';
@@ -23,6 +24,7 @@ interface DefaultAddressCheck {
 }
 
 function AddAddressForm() {
+  const navigate = useNavigate();
   const [values, setValues] = useState<BaseAddress>({
     streetName: '',
     postalCode: '',
@@ -62,8 +64,13 @@ function AddAddressForm() {
       });
     }
   };
+
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
-    <form>
+    <form className={`${styles.addressFormSection}`}>
       <SelectInput
         {...addAddressFormSelect}
         onChangeSelect={(e) => {
@@ -110,6 +117,9 @@ function AddAddressForm() {
         })}
       </fieldset>
       <Button btnType="submit">Submit</Button>
+      <Button btnType="button" onClick={handleBack}>
+        Back
+      </Button>
     </form>
   );
 }
