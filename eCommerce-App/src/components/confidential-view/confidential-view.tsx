@@ -28,7 +28,7 @@ function ConfidentialView() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.success('Personal information has been succesfully updated !');
+    toast.success('Password has been updated !');
     console.log(currentData, newPassword);
     console.log('send');
   };
