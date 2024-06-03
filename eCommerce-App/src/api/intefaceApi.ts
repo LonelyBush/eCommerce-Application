@@ -12,5 +12,6 @@ export default interface ApiResponse {
 
 export interface UpdateActionBody {
   version: number;
+  addressId?: string;
   actions: CustomerUpdateAction[];
 }

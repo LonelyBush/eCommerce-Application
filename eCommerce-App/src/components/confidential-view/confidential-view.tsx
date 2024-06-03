@@ -7,11 +7,13 @@ import toastProps from './toast-props';
 import UseConfidential from './useConfidential-hook';
 import styles from './confidential-view.module.css';
 import { LoginFormType } from '../../types/types';
+import changePassword from '../../api/changePassword';
 
 function ConfidentialView() {
   const info = UseConfidential();
   const [currentPasswordValid, setCurrentPasswordValid] =
     useState<boolean>(false);
+  const [responseError, setResponseError] = useState<boolean>(false);
   const [newPasswordValid, setNewPasswordValid] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<LoginFormType>({
     email: '',
@@ -28,19 +30,35 @@ function ConfidentialView() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.success('Password has been updated !');
-    console.log(currentData, newPassword);
-    console.log('send');
+    const updateBody = {
+      id: localStorage.getItem('personal-id')!,
+      version: Number(localStorage.getItem('version')),
+      currentPassword: currentData.password,
+      newPassword: newPassword.password,
+    };
+    const response = changePassword(updateBody);
+    toast.promise(response, {
+      pending: 'Loading...',
+      success: 'Your password has been succesfully updated !',
+      error: {
+        render({ data }) {
+          setResponseError(true);
+          return `Error: ${data}`;
+        },
+      },
+    });
   };
   return (
-    <>
+    <div className={styles.confidentialWrapper}>
       <form className={styles.confidentialForm} onSubmit={(e) => onSubmit(e)}>
         <LoginPassword
           eyeDisplay
           loginData={currentData}
           setLoginData={setCurrentData}
           setPasswordValid={setCurrentPasswordValid}
-          label="Current password:"
+          setResponseError={setResponseError}
+          responseError={responseError}
+          label="Current password"
         />
         <LoginPassword
           eyeDisplay
@@ -56,7 +74,7 @@ function ConfidentialView() {
         </div>
       </form>
       <ToastContainer {...toastProps} />
-    </>
+    </div>
   );
 }
 

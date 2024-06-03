@@ -15,10 +15,20 @@
     padding: 0.5rem 1rem;
 }
 
+.confidentialWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .confidentialForm {
     display: flex;
     flex-direction: column;
-    max-width: 40rem;
+    box-sizing: border-box;
+}
+
+.confidentialForm > div > p {
+    font-size: 0.8rem;
 }
 
 .confidentialForm > label {

@@ -53,7 +53,7 @@ function FormInput(props: PropsOption) {
           }
         }}
         data-focused={focused.toString()}
-        data-responseError={responseError}
+        data-responseerror={responseError}
       />
       <span>{errorMessage}</span>
     </div>
