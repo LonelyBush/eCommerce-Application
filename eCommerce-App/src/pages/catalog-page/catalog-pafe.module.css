@@ -1,0 +1,7 @@
+.allProductCard {
+  display: flex;
+}
+
+.productCard {
+  margin: 10px;
+}

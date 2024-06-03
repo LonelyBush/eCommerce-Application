@@ -1,0 +1,12 @@
+.priceInput {
+  border: 2px solid black;
+  width: 100px;
+  margin: 10px;
+  font-size: 16px;
+}
+
+.wrapperInputPrice {
+  display: flex;
+  margin: 10px;
+  align-items: center;
+}
