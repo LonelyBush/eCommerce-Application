@@ -1,23 +1,23 @@
 .sliderBtn {
-  position: relative;
+  position: absolute;
   min-width: 2rem;
-  height: 2rem; 
+  height: 2rem;
   mask-repeat: no-repeat;
   mask-size: contain;
   mask-position: center;
-  background-color: var( --c-blue-600);  
-  }
+  background-color: var(--c-blue-600);
+}
 
-  .prev {
-    mask-image: url('../../../assets/svg-icons/icon-arrow-left.svg');
-    right: 8%;
-  }
-  
-  .next {
-    mask-image: url('../../../assets/svg-icons/icon-arrow-right.svg');
-    left: 90%;
-  }
+.prev {
+  mask-image: url('../../../assets/svg-icons/icon-arrow-left.svg');
+  left: -9%;
+}
 
-  .sliderBtn:hover {
-    background-color: var(--c-green-400);  
-    }
+.next {
+  mask-image: url('../../../assets/svg-icons/icon-arrow-right.svg');
+  right: -9%;
+}
+
+.sliderBtn:hover {
+  background-color: var(--c-green-400);
+}

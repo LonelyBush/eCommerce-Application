@@ -1,3 +1,7 @@
+.sliderBlock {
+  position: relative;
+}
+
 .productPageImgBlock {
     min-width: 25rem;
     min-height: 30rem;
@@ -13,4 +17,12 @@
     height: 100%;
     object-fit: fill;
     transition: all 0.4s ease-out;
+  }
+
+  .sliderBtns {
+    position: absolute;
+    top: 50%;
+    width: 25rem;
+    height: 1rem;
+    z-index: 999;
   }

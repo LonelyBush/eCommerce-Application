@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: var(--c-mint-100);
   border-radius: 1rem;
   background-color: var(--c-blue-600);
@@ -14,6 +14,7 @@
 .cardBlock:hover {
   border-radius: 1rem;
   filter: drop-shadow(0.3rem 0.3rem 1rem var(--c-green-400));
+  background-color: var(--c-blue-800);
   transform: scale(1.01);
 }
 
@@ -36,8 +37,8 @@
 .cardInfoBlock {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  padding: 0.4rem 0.5rem;
+  gap: 0.5rem;
+  padding: 0.2rem 0.5rem;
 }
 
 .pricesBlock {
@@ -47,6 +48,7 @@
 }
 
 .cardName {
+  height: 3rem;
   text-align: center;
   color: var(--c-white);
 }
@@ -57,7 +59,7 @@
 
 .cardDiscount {
   font-weight: 600;
-  color: #d83939;
+  color: #dc6f6f;
   font-size: 1.25rem;
 }
 
@@ -76,7 +78,7 @@
   display: flex;
   align-items: last baseline;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 1rem 0;
 }
 
 .cardCart {
