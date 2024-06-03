@@ -74,7 +74,7 @@ function CatalogPage() {
     <>
       <HeaderMainPage />
       <div className={styles.catalogBlock}>
-        {productCards.map((productCard) => (
+      {productCards.slice(0, 18).map((productCard) => (
           <ProductCard key={productCard.id} productCard={productCard} />
         ))}
       </div>
