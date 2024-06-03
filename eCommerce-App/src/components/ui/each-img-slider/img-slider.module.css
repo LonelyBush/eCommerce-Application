@@ -23,6 +23,21 @@
     position: absolute;
     top: 50%;
     width: 25rem;
-    height: 1rem;
     z-index: 999;
   }
+
+  @media (max-width: 470px) {
+    .sliderBlock {
+     width: 20rem;
+    }
+
+    .productPageImgBlock {
+      min-width: 19.5rem;
+      width: 19.5rem;
+    }
+
+    .sliderBtns {
+      width: 20rem;
+    }
+  }
+  

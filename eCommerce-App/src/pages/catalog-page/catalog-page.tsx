@@ -7,7 +7,8 @@ import {
 } from '../../components/ui/product-card/product-card-interface';
 import getAllProducts from '../../api/getAllProduct';
 import Loading from '../../components/ui/loading/loading';
-import styles from './catalog-page.module.css'
+import styles from './catalog-page.module.css';
+
 function CatalogPage() {
   const [productCards, setProductCards] = useState<IProductCard[]>([]);
   const [loading, setLoading] = useState(true);
