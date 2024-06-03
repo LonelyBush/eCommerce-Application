@@ -28,15 +28,6 @@ export const infoInputs = [
     required: true,
     min: '1800-01-01',
   },
-  {
-    id: 'email',
-    name: 'email',
-    label: 'Email',
-    type: 'text',
-    required: true,
-    errorMessage: '*must be a valid email address',
-    pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$',
-  },
 ];
 
 export default infoInputs;

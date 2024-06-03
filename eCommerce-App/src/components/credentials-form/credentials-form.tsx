@@ -14,19 +14,10 @@ function CredentialsForm({
   setLoginData,
   loginData,
 }: CredentialsProps) {
-  const [emailValid, setEmailValid] = useState<boolean>(false);
-  const [passwordValid, setPasswordValid] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
-  console.log(error, passwordValid, emailValid);
   return (
     <div className={styles.inputsBlock}>
       <div className={styles.emailSection}>
-        <LoginEmail
-          loginData={loginData}
-          setLoginData={setLoginData}
-          setEmailValid={setEmailValid}
-          setError={setError}
-        />
+        <LoginEmail loginData={loginData} setLoginData={setLoginData} />
       </div>
       <div className={styles.nameSection}>
         {nameInput.map((input) => {
@@ -61,8 +52,6 @@ function CredentialsForm({
           eyeDisplay={false}
           loginData={loginData}
           setLoginData={setLoginData}
-          setPasswordValid={setPasswordValid}
-          setError={setError}
         />
       </div>
     </div>

@@ -62,6 +62,7 @@ function LoginForm() {
           setLoginData={setLoginData}
           setPasswordValid={setPasswordValid}
           setError={setError}
+          label={undefined}
         />
         {error && <div className={styles.error}>{error}</div>}
       </div>

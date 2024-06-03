@@ -7,6 +7,7 @@ import PersonalInfoInputs from '../profile-personal-view/personal-info-view';
 import AddressesTable from '../profile-addresses-view/addresses-table';
 import AddAddressForm from '../profile-addresses-view/add-address-form';
 import UseAddressInfo from '../profile-addresses-view/useAddressInfo-hook';
+import ConfidentialView from '../confidential-view/confidential-view';
 
 function PersonalInfoView() {
   const [activeTab, setActiveTab] = useState(1);
@@ -71,7 +72,7 @@ function PersonalInfoView() {
               Confidential information
             </button>
           </div>
-          <div className={styles.personalSection}>
+          <div className={styles.profileSection}>
             <Routes>
               <Route path="/personal" element={<PersonalInfoInputs />} />
               <Route path="/addresses" element={<AddressesTable />}>
@@ -86,7 +87,7 @@ function PersonalInfoView() {
                   );
                 })}
               </Route>
-              <Route path="/confidential" element={<div>Conf info</div>} />
+              <Route path="/confidential" element={<ConfidentialView />} />
             </Routes>
           </div>
         </div>

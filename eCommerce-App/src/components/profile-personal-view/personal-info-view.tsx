@@ -16,6 +16,7 @@ function PersonalInfoInputs() {
     firstName: '',
     lastName: '',
     dateOfBirth: '',
+    email: '',
   });
   const [showBtns, setShowBtn] = useState<boolean>(false);
 
@@ -54,7 +55,7 @@ function PersonalInfoInputs() {
           })}
         </div>
         {infoInputs.map((input) => {
-          return input.name === 'dateOfBirth' ? (
+          return input.name === 'dateOfBirth' || input.name === 'email' ? (
             <FormInput
               key={input.id}
               {...input}
@@ -67,7 +68,6 @@ function PersonalInfoInputs() {
             ''
           );
         })}
-
         <div className={styles.btnSection}>
           {showBtns && (
             <>

@@ -5,6 +5,7 @@ export interface PersonalData {
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
+  email?: string;
 }
 
 function UsePersonalInfo() {
@@ -12,6 +13,7 @@ function UsePersonalInfo() {
     firstName: '',
     lastName: '',
     dateOfBirth: '',
+    email: '',
   });
   useEffect(() => {
     async function getResponse() {
@@ -24,6 +26,7 @@ function UsePersonalInfo() {
           firstName: response.customer?.firstName,
           lastName: response.customer?.lastName,
           dateOfBirth: response.customer?.dateOfBirth,
+          email: response.customer?.email,
         });
       } catch (caughtError) {
         if (caughtError instanceof Error) {
