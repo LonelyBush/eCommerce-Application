@@ -1,0 +1,10 @@
+.pathContainer{
+    display: flex;
+    gap: 0.2rem;
+}
+
+.pathElement{
+    color: var(--c-green-400);
+    font-size: 1.3rem;
+    gap: 0.2rem;
+}

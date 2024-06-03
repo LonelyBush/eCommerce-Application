@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React, { useState, useEffect } from 'react';
 import { passwordValidationMessages } from '../login-form/login-const';
 import { LoginFormType } from '../../types/types';
@@ -9,12 +10,14 @@ function LoginPassword({
   setPasswordValid,
   setError,
   eyeDisplay,
+  label,
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
-  setPasswordValid: React.Dispatch<React.SetStateAction<boolean>>;
-  setError: React.Dispatch<React.SetStateAction<string>>;
+  setPasswordValid?: React.Dispatch<React.SetStateAction<boolean>>;
+  setError?: React.Dispatch<React.SetStateAction<string>>;
   eyeDisplay: boolean;
+  label?: string;
 }) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<string[]>([]);
@@ -25,7 +28,7 @@ function LoginPassword({
   ) => {
     event.preventDefault();
     const { name, value } = event.target;
-    setError('');
+    if (setError) setError('');
 
     setPasswordError((prevErrors) => {
       if (name === 'password') {
@@ -67,18 +70,19 @@ function LoginPassword({
 
       return prevErrors;
     });
-
-    setPasswordValid!(
-      passwordError.length < 1 && loginData.password.length > 1,
-    );
+    if (setPasswordValid)
+      setPasswordValid!(
+        passwordError.length < 1 && loginData.password!.length > 1,
+      );
     setLoginData({ ...loginData, [name]: value });
   };
 
   useEffect(() => {
-    setPasswordValid(
-      passwordError.length === 0 && loginData.password.length > 1,
-    );
-    if (loginData.password.length > 0) {
+    if (setPasswordValid)
+      setPasswordValid(
+        passwordError.length === 0 && loginData.password!.length > 1,
+      );
+    if (loginData.password!.length > 0) {
       setBorderStyle(
         passwordError.length > 0 ? styles.borderError : styles.borderValid,
       );
@@ -92,7 +96,7 @@ function LoginPassword({
     <>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className={styles.label} htmlFor="password">
-        Enter password:
+        {label || 'Enter password'}
       </label>
       <div className={`${styles.passwordBlock} ${borderStyle}`}>
         <input

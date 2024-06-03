@@ -15,7 +15,7 @@ function Router() {
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/main" element={<MainPage />} />
       <Route path="/catalog" element={<CatalogPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile/*" element={<ProfilePage />} />
       <Route path="/*" element={<NotFoundPage />} />
       <Route path="/main/product/:key" element={<ProductsPage />} />
     </Routes>
