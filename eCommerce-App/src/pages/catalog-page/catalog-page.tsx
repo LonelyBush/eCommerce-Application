@@ -5,35 +5,25 @@ import {
   IProductCard,
   IPrice,
 } from '../../components/ui/product-card/product-card-interface';
-import getProductById from '../../api/getProductById';
+import getAllProducts from '../../api/getAllProduct';
 import Loading from '../../components/ui/loading/loading';
+import styles from './catalog-page.module.css';
 
 function CatalogPage() {
-  const [productCard, setProductCard] = useState<IProductCard>({
-    id: '',
-    imageUrl: '',
-    name: '',
-    key: '',
-    description: '',
-    price: 0,
-    discount: 0,
-  });
-
-  const position = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
+  const [productCards, setProductCards] = useState<IProductCard[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProductById('1f262fbd-e389-4116-a0a7-aa78190a88b6')
+    getAllProducts()
       .then((response) => {
-        const product = response.productProjection;
-        console.log('product', product);
-        if (product) {
+        const products = response.productProjectionArr;
+        const mappedProductCards = products!.map((product) => {
           const { images } = product.masterVariant;
-          let imageUrl = '';
-          if (images && images.length > 0) imageUrl = images[0].url;
+          const imageUrlArray = images
+            ? images.map((img: { url: string }) => img.url)
+            : [];
+          const [imageUrl] =
+            imageUrlArray.length > 0 ? [imageUrlArray[0]] : [''];
 
           const name = product.name['en-US'];
           const key = product.key || '';
@@ -55,34 +45,38 @@ function CatalogPage() {
             }
           }
 
-          setProductCard((prevState) => ({
-            ...prevState,
+          return {
             id: product.id,
             imageUrl,
+            imageUrlArray,
             name,
             key,
             description,
             price,
             discount,
-          }));
-        }
+          };
+        });
+
+        setProductCards(mappedProductCards);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error('Error product', error);
+        console.error('Error fetching products', error);
+        setLoading(false);
       });
   }, []);
 
-  const { imageUrl, name } = productCard;
-
-  if (!imageUrl || !name) {
+  if (loading) {
     return <Loading />;
   }
 
   return (
     <>
       <HeaderMainPage />
-      <div style={position}>
-        <ProductCard productCard={productCard} />
+      <div className={styles.catalogBlock}>
+        {productCards.map((productCard) => (
+          <ProductCard key={productCard.id} productCard={productCard} />
+        ))}
       </div>
     </>
   );

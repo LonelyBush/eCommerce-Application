@@ -7,6 +7,7 @@
   background-color: rgba(37, 34, 34, 0.7);
   opacity: 1;
   visibility: visible;
+  z-index: 1001;
 }
 .popupBody {
   min-height: 100%;
@@ -29,6 +30,14 @@
   border-radius: 1rem;
 }
 
+.popupContentImg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+
 .popupTitle {
   font-size: 2.5rem;
   color: var(--c-mint-300);
@@ -37,6 +46,21 @@
 .popupText{
   font-size: 1.5rem;
   color: var(--c-white);
+}
+
+.popupImageBlock {
+  max-width: 35rem;
+  max-height: 35rem;
+  height: 35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popupImage {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
 @media (max-width: 760px) {
