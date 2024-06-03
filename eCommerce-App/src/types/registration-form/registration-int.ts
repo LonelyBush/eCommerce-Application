@@ -34,6 +34,7 @@ export interface PropsOption {
   required: boolean;
   options?: SelectOptionProps[];
   defaultValue?: string;
+  responseError?: boolean;
 }
 
 export interface CredentialsProps {

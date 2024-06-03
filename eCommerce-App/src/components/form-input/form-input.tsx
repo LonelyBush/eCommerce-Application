@@ -19,7 +19,15 @@ function isAtLeast13YearsOld(dateString: string) {
 
 function FormInput(props: PropsOption) {
   const [focused, setFocused] = useState(false);
-  const { label, id, onChangeInput, errorMessage, type, ...inputProps } = props;
+  const {
+    label,
+    id,
+    onChangeInput,
+    errorMessage,
+    type,
+    responseError,
+    ...inputProps
+  } = props;
 
   const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     if (!isAtLeast13YearsOld(e.currentTarget.value)) {
@@ -45,6 +53,7 @@ function FormInput(props: PropsOption) {
           }
         }}
         data-focused={focused.toString()}
+        data-responseError={responseError}
       />
       <span>{errorMessage}</span>
     </div>

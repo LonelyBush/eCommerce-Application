@@ -25,10 +25,13 @@
 .formInput > input:valid{
     border: 0.2rem solid var(--c-green-400)
 }
-
+.formInput > input[data-responseError='true']{
+    border: 0.2rem solid red;
+}
 .formInput > input:invalid[data-focused='true']{
     border: 0.2rem solid red;
 }
+
 
 .formInput > span{
     font-size: 0.8rem;
@@ -36,10 +39,13 @@
     word-wrap: break-word;
     display: none;
 }
-
+.formInput > input[data-responseerror='true'] ~ span{
+    display: block;
+}
 .formInput > input:invalid[data-focused='true'] ~ span{
     display: block;
 }
+
 
 
 @media(max-width: 500px){
