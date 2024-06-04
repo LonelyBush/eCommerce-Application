@@ -17,18 +17,16 @@ const apiRoot = createApiBuilderFromCtpClient(middleware).withProjectKey({
   projectKey,
 });
 
-export default function getAllProducts(): Promise<ApiResponse> {
-  const minPrice = 1;
-  const maxPrice = 2;
+export default function getAllProducts(query?: object): Promise<ApiResponse> {
+  //   const priceFilter = `variants.price.centAmount:range (4000 to 6000)`;
   return new Promise((resolve, reject) => {
     apiRoot
       .productProjections()
       .search()
-      .get({
-        queryArgs: {
-          filter: `masterVariant(prices(currencyCode="USD" and centAmount >= ${minPrice} and centAmount <= ${maxPrice}))`,
-        },
-      })
+      //   .get({
+      //     queryArgs: { [`text.en-US`]: 'Beer', filter: [priceFilter] },
+      //   })
+      .get(query)
       .execute()
       .then((response) => {
         console.log('res', response);

@@ -1,118 +1,112 @@
-import { useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import HeaderMainPage from '../../components/header-main-page/header-main-page';
-// import ProductCard from '../../components/ui/product-card/product-card';
+import ProductCard from '../../components/ui/product-card/product-card';
 import {
   IProductCard,
   IPrice,
 } from '../../components/ui/product-card/product-card-interface';
-// import getProductById from '../../api/getProductById';
-import PriceInput from '../../components/price-input/price-input';
 import getAllProducts from '../../api/getAllProduct';
-// import styles from './catalog-pafe.module.css';
+import Loading from '../../components/ui/loading/loading';
+import styles from './catalog-page.module.css';
+import PriceInput from '../../components/price-input/price-input';
 
 function CatalogPage() {
-  // const [productCards, setProductCards] = useState<IProductCard[]>([]);
-  // const [queryArgs, setQueryArgs] = useState<object>({});
-  // const minPrice1 = 1;
-  // const maxPrice1 = 2;
-  // const queryArgs = {
-  //   where: [
-  //     `masterVariant(prices(value(centAmount >= ${minPrice1 * 100} and centAmount <= ${maxPrice1 * 100})))`,
-  //   ],
-  // };
+  const [productCards, setProductCards] = useState<IProductCard[]>([]);
+  const [query, setQuery] = useState<object>({});
+  const [loading, setLoading] = useState(true);
 
-  // const [productCard, setProductCard] = useState<IProductCard>({
-  //   id: '',
-  //   imageUrl: '',
-  //   name: '',
-  //   key: '',
-  //   description: '',
-  //   price: 0,
-  //   discount: 0,
-  // });
+  const handlePriceChange = useCallback(
+    (minPrice: number, maxPrice: number) => {
+      console.log(
+        `Минимальная цена: ${minPrice}, Максимальная цена: ${maxPrice}`,
+      );
+      const priceFilter = `variants.price.centAmount:range (${minPrice * 100} to ${maxPrice * 100})`;
+      const newQuery = {
+        queryArgs: { filter: [priceFilter] },
+      };
+      setQuery(newQuery);
+    },
+    [],
+  );
 
   useEffect(() => {
-    getAllProducts().then((res) => {
-      console.log('prod', res.productProjectionArr);
-    });
+    setLoading(true);
+    getAllProducts(query)
+      .then((response) => {
+        const products = response.productProjectionArr;
+        const mappedProductCards = products!.map((product) => {
+          const { images } = product.masterVariant;
+          const imageUrlArray = images
+            ? images.map((img: { url: string }) => img.url)
+            : [];
+          const [imageUrl] =
+            imageUrlArray.length > 0 ? [imageUrlArray[0]] : [''];
 
-    getAllProducts()
-      .then((res) => {
-        const newProductCards: IProductCard[] = res.productProjectionArr
-          ?.map((product) => {
-            if (product) {
-              const { images } = product.masterVariant;
-              let imageUrl = '';
-              if (images && images.length > 0) imageUrl = images[0].url;
+          const name = product.name['en-US'];
+          const key = product.key || '';
+          let description = '';
+          if (product.description) description = product.description['en-US'];
 
-              const name = product.name['en-US'];
-              const key = product.key || '';
-              let description = '';
-              if (product.description)
-                description = product.description['en-US'];
-
-              let price = 0;
-              let discount = 0;
-              if (product.masterVariant.prices) {
-                const usPrice = product.masterVariant.prices.find(
-                  (priceArr: IPrice) => priceArr.country === 'US',
-                );
-                if (usPrice) {
-                  price = usPrice.value.centAmount / 100;
-                  discount = usPrice.discounted?.value.centAmount ?? 0;
-                  if (typeof discount === 'number') {
-                    discount /= 100;
-                  }
-                }
+          let price = 0;
+          let discount = 0;
+          if (product.masterVariant.prices) {
+            const usPrice = product.masterVariant.prices.find(
+              (priceArr: IPrice) => priceArr.country === 'US',
+            );
+            if (usPrice) {
+              price = usPrice.value.centAmount / 100;
+              discount = usPrice.discounted?.value.centAmount ?? 0;
+              if (typeof discount === 'number') {
+                discount /= 100;
               }
-
-              return {
-                id: product.id,
-                imageUrl,
-                name,
-                key,
-                description,
-                price,
-                discount,
-              };
             }
-            return null;
-          })
-          .filter((card) => card !== null) as IProductCard[];
+          }
 
-        setProductCards(newProductCards);
+          return {
+            id: product.id,
+            imageUrl,
+            imageUrlArray,
+            name,
+            key,
+            description,
+            price,
+            discount,
+          };
+        });
+
+        setProductCards(mappedProductCards);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error('Error loading products:', error);
+        console.error('Error fetching products', error);
+        setLoading(false);
       });
-  }, []);
+  }, [query]);
 
-  // const { imageUrl, name } = productCard;
+  if (loading) {
+    return <Loading />;
+  }
 
-  // if (!imageUrl || !name) {
-  //   return <div>Loading...</div>;
-  // }
-  //     })
-
-  const handlePriceChange = (minPrice: number, maxPrice: number) => {
-    console.log(
-      `Минимальная цена: ${minPrice}, Максимальная цена: ${maxPrice}`,
-    );
-
-    // const newQueryArgs = {
-    //   where: [
-    //     `masterVariant(prices(value(centAmount >= ${minPrice * 100} and centAmount <= ${maxPrice * 100})))`,
-    //   ],
-    // };
-    // // setQueryArgs(newQueryArgs);
-  };
+  //   .get({
+  //     queryArgs: { [`text.en-US`]: 'Beer', filter: [priceFilter] },
+  //   })
 
   return (
     <>
       <HeaderMainPage />
-
-      <div>
+      <div className={styles.priceInput}>
         <PriceInput onPriceChange={handlePriceChange} />
+      </div>
+      <div className={styles.catalogBlock}>
+        {productCards.length > 0 ? (
+          productCards
+            .slice(0, 4)
+            .map((productCard) => (
+              <ProductCard key={productCard.id} productCard={productCard} />
+            ))
+        ) : (
+          <p>No products found based on the selected criteria</p>
+        )}
       </div>
     </>
   );

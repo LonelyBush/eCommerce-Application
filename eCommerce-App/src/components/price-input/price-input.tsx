@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import styles from './price-input.module.css';
 
 interface PriceInputProps {
@@ -10,7 +10,26 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const handleMinPriceChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value === '' ? '' : Number(e.target.value);
+      setMinPrice(value);
+    },
+    [],
+  );
+
+  const handleMaxPriceChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value === '' ? '' : Number(e.target.value);
+      setMaxPrice(value);
+    },
+    [],
+  );
+
+  const handleBlur = useCallback(() => {
+    console.log(
+      `handleBlur called with minPrice: ${minPrice}, maxPrice: ${maxPrice}`,
+    );
     if (minPrice !== '' && maxPrice !== '' && minPrice > maxPrice) {
       setError('The minimum price cannot be greater than the maximum');
     } else {
@@ -20,20 +39,6 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
       }
     }
   }, [minPrice, maxPrice, onPriceChange]);
-
-  const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-    if (value > 0 || e.target.value === '') {
-      setMinPrice(e.target.value === '' ? '' : value);
-    }
-  };
-
-  const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-    if (value > 0 || e.target.value === '') {
-      setMaxPrice(e.target.value === '' ? '' : value);
-    }
-  };
 
   return (
     <div className={styles.wrapperInputPrice}>
@@ -45,6 +50,7 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
           value={minPrice}
           placeholder="min price"
           onChange={handleMinPriceChange}
+          onBlur={handleBlur}
         />
       </div>
       <span> - </span>
@@ -56,11 +62,11 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
           value={maxPrice}
           placeholder="max price"
           onChange={handleMaxPriceChange}
+          onBlur={handleBlur}
         />
       </div>
       {error && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   );
 }
-
-export default PriceInput;
+export default memo(PriceInput);
