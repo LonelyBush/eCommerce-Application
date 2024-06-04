@@ -81,7 +81,9 @@ function CatalogPage() {
         console.error('Error fetching products', error);
         setLoading(false);
       });
+
   }, [query]);
+
 
   if (loading) {
     return <Loading />;
@@ -94,6 +96,7 @@ function CatalogPage() {
   return (
     <>
       <HeaderMainPage />
+
       <div className={styles.priceInput}>
         <PriceInput onPriceChange={handlePriceChange} />
       </div>
@@ -107,6 +110,7 @@ function CatalogPage() {
         ) : (
           <p>No products found based on the selected criteria</p>
         )}
+
       </div>
     </>
   );

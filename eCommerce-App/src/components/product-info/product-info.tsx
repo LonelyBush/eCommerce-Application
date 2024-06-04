@@ -7,6 +7,7 @@ import {
 } from '../ui/product-card/product-card-interface';
 import Loading from '../ui/loading/loading';
 import Tags from '../ui/tags/tags';
+import ImgSlider from '../ui/each-img-slider/img-slider';
 import styles from './product-info.module.css';
 import getAllProducts from '../../api/getAllProduct';
 
@@ -15,6 +16,7 @@ function ProductInfo() {
   const [productCard, setProductCard] = useState<IProductCard>({
     id: '',
     imageUrl: '',
+    imageUrlArray: [],
     name: '',
     key: '',
     description: '',
@@ -34,7 +36,11 @@ function ProductInfo() {
         if (product) {
           const { images } = product.masterVariant;
           let imageUrl = '';
-          if (images && images.length > 0) imageUrl = images[0].url;
+          let imageUrlArray: string[] = [];
+          if (images && images.length > 0) {
+            imageUrl = images[0].url;
+            imageUrlArray = images.map((image) => image.url);
+          }
 
           const name = product.name['en-US'];
           const key = product.key || '';
@@ -42,12 +48,17 @@ function ProductInfo() {
           if (product.description) description = product.description['en-US'];
 
           let price = 0;
+          let discount = 0;
           if (product.masterVariant.prices) {
             const usPrice = product.masterVariant.prices.find(
               (priceArr: IPrice) => priceArr.country === 'US',
             );
             if (usPrice) {
               price = usPrice.value.centAmount / 100;
+              discount = usPrice.discounted?.value.centAmount ?? 0;
+              if (typeof discount === 'number') {
+                discount /= 100;
+              }
             }
           }
 
@@ -55,10 +66,12 @@ function ProductInfo() {
             ...prevState,
             id: product.id,
             imageUrl,
+            imageUrlArray,
             name,
             key,
             description,
             price,
+            discount,
           }));
         }
       })
@@ -73,20 +86,35 @@ function ProductInfo() {
     return <Loading />;
   }
 
+  function getDiscount(): number {
+    return Math.floor(
+      ((productCard.price - productCard.discount) / productCard.price) * 100,
+    );
+  }
+
   return (
     <div className={styles.productPageBlock}>
-      <div className={styles.productPageImgBlock}>
-        <img
-          src={productCard.imageUrl}
-          alt={productCard.name}
-          className={styles.productPageImage}
-        />
+      <div className={styles.productPageImgSlider}>
+        <ImgSlider productCard={productCard} />
       </div>
       <div className={styles.productPageInfo}>
         <Tags.H1>{productCard.name}</Tags.H1>
         <p className={styles.productPageDescription}>
           {productCard.description}
         </p>
+        <div className={styles.productPagePrices}>
+          Price:&nbsp;
+          <span className={styles.productPagePrice}>{productCard.price}$</span>
+        </div>
+        {productCard.discount > 0 && (
+          <div className={styles.productPagePrices}>
+            Discount:&nbsp;{' '}
+            <span className={styles.productPageDiscount}>
+              {productCard.discount}$
+            </span>{' '}
+            <div className={styles.discountPercent}>{getDiscount()}%</div>
+          </div>
+        )}
       </div>
     </div>
   );
