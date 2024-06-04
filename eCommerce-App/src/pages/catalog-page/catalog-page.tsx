@@ -54,9 +54,15 @@ function CatalogPage() {
     }
   };
 
+
+  //   .get({
+  //     queryArgs: { [`text.en-US`]: 'Beer', filter: [priceFilter] },
+  //   })
+
   return (
     <>
       <HeaderMainPage />
+
       <div className={styles.wrapperFilter}>
         <div>
           <PriceInput onPriceChange={handlePriceInputChange} />
@@ -65,7 +71,6 @@ function CatalogPage() {
           <SearchInput onSearchChange={handleSearchChange} />
         </div>
       </div>
-
       <Catalog query={query} />
     </>
   );

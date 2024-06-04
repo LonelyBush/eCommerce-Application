@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React, { useState, useEffect } from 'react';
 import { emailValidationMessages } from '../login-form/login-const';
 import { LoginFormType } from '../../types/types';
@@ -12,8 +13,8 @@ function LoginEmail({
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
-  setEmailValid: React.Dispatch<React.SetStateAction<boolean>>;
-  setError: React.Dispatch<React.SetStateAction<string>>;
+  setEmailValid?: React.Dispatch<React.SetStateAction<boolean>>;
+  setError?: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [emailError, setEmailError] = useState<string[]>([]);
   const [borderStyle, setBorderStyle] = useState<string>('');
@@ -23,7 +24,7 @@ function LoginEmail({
   ) => {
     event.preventDefault();
     const { name, value } = event.target;
-    setError('');
+    if (setError) setError('');
 
     setEmailError((prevErrors) => {
       if (name === 'email') {
@@ -58,13 +59,15 @@ function LoginEmail({
 
       return prevErrors;
     });
-    setEmailValid(emailError.length === 0 && loginData.email.length > 1);
+    if (setEmailValid)
+      setEmailValid(emailError.length === 0 && loginData.email!.length > 1);
     setLoginData({ ...loginData, [name]: value });
   };
 
   useEffect(() => {
-    setEmailValid(emailError.length === 0 && loginData.email.length > 1);
-    if (loginData.email.length > 0) {
+    if (setEmailValid)
+      setEmailValid(emailError.length === 0 && loginData.email!.length > 1);
+    if (loginData.email!.length > 0) {
       setBorderStyle(
         emailError.length > 0 ? styles.borderError : styles.borderValid,
       );
