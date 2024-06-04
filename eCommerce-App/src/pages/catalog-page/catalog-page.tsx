@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import HeaderMainPage from '../../components/header-main-page/header-main-page';
 import ProductCard from '../../components/ui/product-card/product-card';
 import {
@@ -8,13 +8,30 @@ import {
 import getAllProducts from '../../api/getAllProduct';
 import Loading from '../../components/ui/loading/loading';
 import styles from './catalog-page.module.css';
+import PriceInput from '../../components/price-input/price-input';
 
 function CatalogPage() {
   const [productCards, setProductCards] = useState<IProductCard[]>([]);
+  const [query, setQuery] = useState<object>({});
   const [loading, setLoading] = useState(true);
 
+  const handlePriceChange = useCallback(
+    (minPrice: number, maxPrice: number) => {
+      console.log(
+        `Минимальная цена: ${minPrice}, Максимальная цена: ${maxPrice}`,
+      );
+      const priceFilter = `variants.price.centAmount:range (${minPrice * 100} to ${maxPrice * 100})`;
+      const newQuery = {
+        queryArgs: { filter: [priceFilter] },
+      };
+      setQuery(newQuery);
+    },
+    [],
+  );
+
   useEffect(() => {
-    getAllProducts()
+    setLoading(true);
+    getAllProducts(query)
       .then((response) => {
         const products = response.productProjectionArr;
         const mappedProductCards = products!.map((product) => {
@@ -64,19 +81,36 @@ function CatalogPage() {
         console.error('Error fetching products', error);
         setLoading(false);
       });
-  }, []);
+
+  }, [query]);
+
 
   if (loading) {
     return <Loading />;
   }
 
+  //   .get({
+  //     queryArgs: { [`text.en-US`]: 'Beer', filter: [priceFilter] },
+  //   })
+
   return (
     <>
       <HeaderMainPage />
+
+      <div className={styles.priceInput}>
+        <PriceInput onPriceChange={handlePriceChange} />
+      </div>
       <div className={styles.catalogBlock}>
-        {productCards.map((productCard) => (
-          <ProductCard key={productCard.id} productCard={productCard} />
-        ))}
+        {productCards.length > 0 ? (
+          productCards
+            .slice(0, 4)
+            .map((productCard) => (
+              <ProductCard key={productCard.id} productCard={productCard} />
+            ))
+        ) : (
+          <p>No products found based on the selected criteria</p>
+        )}
+
       </div>
     </>
   );

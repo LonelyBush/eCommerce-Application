@@ -9,6 +9,7 @@ import Loading from '../ui/loading/loading';
 import Tags from '../ui/tags/tags';
 import ImgSlider from '../ui/each-img-slider/img-slider';
 import styles from './product-info.module.css';
+import getAllProducts from '../../api/getAllProduct';
 
 function ProductInfo() {
   const id: string | null = getIdFromLocalStorage();
@@ -24,6 +25,9 @@ function ProductInfo() {
   });
 
   useEffect(() => {
+    getAllProducts().then((res) => {
+      console.log('allProducts', res);
+    });
     if (!id) return;
     getProductById(id)
       .then((response) => {
