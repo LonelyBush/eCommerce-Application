@@ -1,11 +1,6 @@
-.catalogBlock {
+.wrapperFilter {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
-}
-
-.priceInput {
+  margin: 20px;
   margin-left: 60px;
 }
+
