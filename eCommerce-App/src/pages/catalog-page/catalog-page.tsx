@@ -1,113 +1,72 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import HeaderMainPage from '../../components/header-main-page/header-main-page';
-import ProductCard from '../../components/ui/product-card/product-card';
-import {
-  IProductCard,
-  IPrice,
-} from '../../components/ui/product-card/product-card-interface';
-import getAllProducts from '../../api/getAllProduct';
-import Loading from '../../components/ui/loading/loading';
 import styles from './catalog-page.module.css';
 import PriceInput from '../../components/price-input/price-input';
+import SearchInput from '../../components/search-input/search-input';
+import Catalog from '../../components/catalog/catalog';
 
 function CatalogPage() {
-  const [productCards, setProductCards] = useState<IProductCard[]>([]);
   const [query, setQuery] = useState<object>({});
-  const [loading, setLoading] = useState(true);
+  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
+  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
+  const [search, setSearch] = useState<string | undefined>(undefined);
 
   const handlePriceChange = useCallback(
-    (minPrice: number, maxPrice: number) => {
-      console.log(
-        `Минимальная цена: ${minPrice}, Максимальная цена: ${maxPrice}`,
-      );
-      const priceFilter = `variants.price.centAmount:range (${minPrice * 100} to ${maxPrice * 100})`;
+    (newMinPrice?: number, newMaxPrice?: number, newSearch?: string) => {
+      let priceFilter = '';
+      if ((newMinPrice === undefined || newMinPrice === 0) && newMaxPrice) {
+        priceFilter = `variants.price.centAmount:range (0 to ${newMaxPrice * 100})`;
+      }
+      if ((newMaxPrice === undefined || newMaxPrice === 0) && newMinPrice) {
+        priceFilter = `variants.price.centAmount:range (${newMinPrice * 100} to 99999)`;
+      }
+      if (newMaxPrice && newMinPrice) {
+        priceFilter = `variants.price.centAmount:range (${newMinPrice * 100} to ${newMaxPrice * 100})`;
+      }
+
       const newQuery = {
-        queryArgs: { filter: [priceFilter] },
+        queryArgs: {
+          ...(newSearch ? { [`text.en-US`]: newSearch } : {}),
+          filter: priceFilter ? [priceFilter] : [],
+        },
       };
       setQuery(newQuery);
     },
     [],
   );
 
-  useEffect(() => {
-    setLoading(true);
-    getAllProducts(query)
-      .then((response) => {
-        const products = response.productProjectionArr;
-        const mappedProductCards = products!.map((product) => {
-          const { images } = product.masterVariant;
-          const imageUrlArray = images
-            ? images.map((img: { url: string }) => img.url)
-            : [];
-          const [imageUrl] =
-            imageUrlArray.length > 0 ? [imageUrlArray[0]] : [''];
+  const handlePriceInputChange = (
+    newMinPrice?: number,
+    newMaxPrice?: number,
+  ) => {
+    setMinPrice(newMinPrice);
+    setMaxPrice(newMaxPrice);
+    handlePriceChange(newMinPrice, newMaxPrice, search);
+  };
 
-          const name = product.name['en-US'];
-          const key = product.key || '';
-          let description = '';
-          if (product.description) description = product.description['en-US'];
-
-          let price = 0;
-          let discount = 0;
-          if (product.masterVariant.prices) {
-            const usPrice = product.masterVariant.prices.find(
-              (priceArr: IPrice) => priceArr.country === 'US',
-            );
-            if (usPrice) {
-              price = usPrice.value.centAmount / 100;
-              discount = usPrice.discounted?.value.centAmount ?? 0;
-              if (typeof discount === 'number') {
-                discount /= 100;
-              }
-            }
-          }
-
-          return {
-            id: product.id,
-            imageUrl,
-            imageUrlArray,
-            name,
-            key,
-            description,
-            price,
-            discount,
-          };
-        });
-
-        setProductCards(mappedProductCards);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching products', error);
-        setLoading(false);
-      });
-  }, [query]);
-
-  if (loading) {
-    return <Loading />;
-  }
-
-  //   .get({
-  //     queryArgs: { [`text.en-US`]: 'Beer', filter: [priceFilter] },
-  //   })
+  const handleSearchChange = (newSearch: string) => {
+    if (newSearch.trim() === '') {
+      setSearch(undefined);
+      handlePriceChange(minPrice, maxPrice, undefined);
+    } else {
+      setSearch(newSearch);
+      handlePriceChange(minPrice, maxPrice, newSearch);
+    }
+  };
 
   return (
     <>
       <HeaderMainPage />
-      <div className={styles.priceInput}>
-        <PriceInput onPriceChange={handlePriceChange} />
+      <div className={styles.wrapperFilter}>
+        <div>
+          <PriceInput onPriceChange={handlePriceInputChange} />
+        </div>
+        <div>
+          <SearchInput onSearchChange={handleSearchChange} />
+        </div>
       </div>
-      <div className={styles.catalogBlock}>
-        {productCards.length > 0 ? (
-          productCards
-            .slice(0, 4)
-            .map((productCard) => (
-              <ProductCard key={productCard.id} productCard={productCard} />
-            ))
-        ) : (
-          <p>No products found based on the selected criteria</p>
-        )}
-      </div>
+
+      <Catalog query={query} />
     </>
   );
 }

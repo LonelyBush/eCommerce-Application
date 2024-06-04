@@ -14,27 +14,30 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value === '' ? '' : Number(e.target.value);
       setMinPrice(value);
+      if (value === '') {
+        onPriceChange(0, Number(maxPrice));
+      }
     },
-    [],
+    [maxPrice, onPriceChange],
   );
 
   const handleMaxPriceChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value === '' ? '' : Number(e.target.value);
       setMaxPrice(value);
+      if (value === '') {
+        onPriceChange(Number(minPrice), 0);
+      }
     },
-    [],
+    [minPrice, onPriceChange],
   );
 
   const handleBlur = useCallback(() => {
-    console.log(
-      `handleBlur called with minPrice: ${minPrice}, maxPrice: ${maxPrice}`,
-    );
     if (minPrice !== '' && maxPrice !== '' && minPrice > maxPrice) {
       setError('The minimum price cannot be greater than the maximum');
     } else {
       setError(null);
-      if (minPrice !== '' && maxPrice !== '') {
+      if (minPrice !== '' || maxPrice !== '') {
         onPriceChange(Number(minPrice), Number(maxPrice));
       }
     }
