@@ -1,6 +1,7 @@
 .wrapperFilter {
   display: flex;
-  margin: 20px;
-  margin-left: 60px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
-

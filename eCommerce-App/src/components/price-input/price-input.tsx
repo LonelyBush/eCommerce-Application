@@ -56,7 +56,6 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
           onBlur={handleBlur}
         />
       </div>
-      <span> - </span>
       <div>
         <input
           className={styles.priceInput}

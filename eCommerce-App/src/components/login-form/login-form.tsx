@@ -28,7 +28,7 @@ function LoginForm() {
       const response = await checkAuthClient(loginData);
       console.log('Response from checkAuthClient:', response);
       await authWithPassword(loginData);
-      navigate('/main');
+      navigate('/catalog');
       console.log(localStorage.getItem('authToken'));
     } catch (caughtError) {
       if (caughtError instanceof Error)
@@ -38,7 +38,7 @@ function LoginForm() {
 
   useEffect(() => {
     if (localStorage.getItem('authToken')) {
-      navigate('/main');
+      navigate('/catalog');
     }
   });
 
