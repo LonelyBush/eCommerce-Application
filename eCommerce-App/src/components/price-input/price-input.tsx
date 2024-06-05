@@ -33,7 +33,6 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
   );
 
   const handleBlur = useCallback(() => {
-
     if (minPrice !== '' && maxPrice !== '' && minPrice > maxPrice) {
       setError('The minimum price cannot be greater than the maximum');
     } else {
