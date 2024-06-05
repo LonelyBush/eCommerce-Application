@@ -112,7 +112,7 @@ function LoginPassword({
           type={showPassword ? 'text' : 'password'}
           placeholder="Password"
           name="password"
-          data-responseError={responseError}
+          data-responseerror={responseError}
           defaultValue={loginData.password}
           onChange={handlePasswordInputChange}
           pattern="^(?!^\s)(?!.*\s$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$"
