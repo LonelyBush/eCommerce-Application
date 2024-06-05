@@ -1,7 +1,11 @@
 import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
-import { BaseAddress } from '@commercetools/platform-sdk';
+import {
+  BaseAddress,
+  CustomerAddAddressAction,
+  CustomerChangeAddressAction,
+} from '@commercetools/platform-sdk';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import SelectInput from '../select-input/select-input';
 import FormInput from '../form-input/form-input';
 import Checkbox from '../ui/checkbox/checkbox';
@@ -15,6 +19,8 @@ import styles from './addresses-view-style.module.css';
 import Button from '../ui/button/button';
 import UseAddressInfo from './useAddressInfo-hook';
 import toastProps from './toast-props';
+import updateAction from '../../api/updateAction';
+import { getDefaultAddressAction } from './actionUtils';
 
 interface AddressTypesCheck {
   billing: boolean;
@@ -106,28 +112,62 @@ function AddAddressForm({ pathId }: { pathId: string }) {
   };
 
   const handleBack = () => {
-    navigate(-1);
+    navigate('/profile/addresses');
   };
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('render');
-    /*
-    if (pathId) {
-      const response = updateAction(localStorage.getItem('personal-id')!, {
-        version: Number(localStorage.getItem('version')),
-        actions,
-      });
-      toast.promise(response, {
-        pending: 'Loading...',
-        success: 'Your address has been succesfully updated!',
-        error: {
-          render({ data }) {
-            return `Error: ${data}`;
-          },
+    const addressKey = Date.now().toString(16);
+
+    const setAddressAction:
+      | CustomerAddAddressAction
+      | CustomerChangeAddressAction = {
+      action: pathId ? 'changeAddress' : 'addAddress',
+      addressId: pathId || undefined,
+      address: { key: pathId ? undefined : addressKey, ...values },
+    };
+    const setDefaultAddressBillingAction = getDefaultAddressAction(
+      'billing',
+      defaultAddresses.defaultBilling,
+      pathId,
+      addressKey,
+      addressInfo.defaultBillingAddressId,
+    );
+    const setDefaultAddressShippingAction = getDefaultAddressAction(
+      'shipping',
+      defaultAddresses.defaultShipping,
+      pathId,
+      addressKey,
+      addressInfo.defaultShippingAddressId,
+    );
+    console.log(
+      setDefaultAddressBillingAction,
+      setDefaultAddressShippingAction,
+    );
+    const successMes = pathId
+      ? 'Your address has been succesfully updated!'
+      : 'New address has been succesfully created!';
+
+    const response = updateAction(localStorage.getItem('personal-id')!, {
+      version: Number(localStorage.getItem('version')),
+      actions: [
+        setAddressAction,
+        setDefaultAddressBillingAction,
+        setDefaultAddressShippingAction,
+      ],
+    });
+    toast.promise(response, {
+      pending: 'Loading...',
+      success: {
+        render() {
+          return successMes;
         },
-      });
-    }
-    */
+      },
+      error: {
+        render({ data }) {
+          return `Error: ${data}`;
+        },
+      },
+    });
   };
 
   return (
