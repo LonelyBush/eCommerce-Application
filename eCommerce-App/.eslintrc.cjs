@@ -37,6 +37,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    'react/require-default-props': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     'react/react-in-jsx-scope': 0,
     'react/jsx-props-no-spreading': 0,
