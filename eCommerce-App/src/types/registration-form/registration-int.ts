@@ -20,7 +20,6 @@ interface SelectOptionProps {
   value: string;
   optionLabel: string;
 }
-0
 export interface PropsOption {
   label?: string;
   placeholder?: string;

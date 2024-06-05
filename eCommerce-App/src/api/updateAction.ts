@@ -9,7 +9,7 @@ import {
   authMiddlewareOptions,
   httpMiddlewareOptions,
 } from './constForApi';
-import ApiResponse, { UpdateActionBody } from './intefaceApi';
+import { ApiResponse, UpdateActionBody } from './intefaceApi';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)

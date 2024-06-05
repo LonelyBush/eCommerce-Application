@@ -79,7 +79,6 @@ function PersonalInfoInputs() {
             <FormInput
               key={input.id}
               responseError={input.name === 'email' ? responseError : false}
-
               {...input}
               onChangeInput={(e) => {
                 handleOnChange(e);

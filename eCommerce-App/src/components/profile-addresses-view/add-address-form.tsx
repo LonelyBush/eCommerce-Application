@@ -1,4 +1,3 @@
-
 import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
 import { useNavigate } from 'react-router-dom';
@@ -135,6 +134,7 @@ function AddAddressForm({ pathId }: { pathId: string }) {
     <form
       className={`${styles.addressFormSection}`}
       onSubmit={(e) => onSubmit(e)}
+    >
       <SelectInput
         {...addAddressFormSelect}
         onChangeSelect={(e) => {
