@@ -9,6 +9,7 @@ import UsePersonalInfo, {
   PersonalData,
 } from '../profile-content/usePersonalInfo-hook';
 import styles from './personal-info-view.module.css';
+import updateAction from '../../api/updateAction';
 
 function PersonalInfoInputs() {
   const info = UsePersonalInfo();
@@ -18,7 +19,8 @@ function PersonalInfoInputs() {
     dateOfBirth: '',
     email: '',
   });
-  const [showBtns, setShowBtn] = useState<boolean>(false);
+  const [showBtn, setShowBtn] = useState<boolean>(false);
+  const [responseError, setResponseError] = useState<boolean>(false);
 
   useEffect(() => {
     setValues({ ...info });
@@ -26,14 +28,32 @@ function PersonalInfoInputs() {
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setShowBtn(true);
+    setResponseError(false);
     setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowBtn(false);
-    toast.success('Personal information has been succesfully updated !');
-    console.log('send');
+    const response = updateAction(localStorage.getItem('personal-id')!, {
+      version: Number(localStorage.getItem('version')),
+      actions: [
+        { action: 'setFirstName', firstName: values.firstName },
+        { action: 'setLastName', lastName: values.lastName },
+        { action: 'changeEmail', email: values.email! },
+        { action: 'setDateOfBirth', dateOfBirth: values.dateOfBirth },
+      ],
+    });
+    toast.promise(response, {
+      pending: 'Loading...',
+      success: 'Personal information has been succesfully updated !',
+      error: {
+        render({ data }) {
+          setResponseError(true);
+          return `Error: ${data}`;
+        },
+      },
+    });
   };
   return (
     <>
@@ -58,6 +78,8 @@ function PersonalInfoInputs() {
           return input.name === 'dateOfBirth' || input.name === 'email' ? (
             <FormInput
               key={input.id}
+              responseError={input.name === 'email' ? responseError : false}
+
               {...input}
               onChangeInput={(e) => {
                 handleOnChange(e);
@@ -69,21 +91,7 @@ function PersonalInfoInputs() {
           );
         })}
         <div className={styles.btnSection}>
-          {showBtns && (
-            <>
-              <Button btnType="submit">Confirm changes</Button>
-              <Button
-                btnType="button"
-                onClick={() => {
-                  setShowBtn(false);
-                  setValues({ ...info });
-                  toast.warn('Changes reverted !');
-                }}
-              >
-                Revert changes
-              </Button>
-            </>
-          )}
+          {showBtn && <Button btnType="submit">Confirm changes</Button>}
         </div>
       </form>
       <ToastContainer {...toastProps} />

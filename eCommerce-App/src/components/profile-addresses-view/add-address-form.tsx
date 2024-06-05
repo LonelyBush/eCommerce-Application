@@ -1,6 +1,8 @@
-import { useState, ChangeEvent, useEffect } from 'react';
+
+import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import SelectInput from '../select-input/select-input';
 import FormInput from '../form-input/form-input';
 import Checkbox from '../ui/checkbox/checkbox';
@@ -13,6 +15,7 @@ import {
 import styles from './addresses-view-style.module.css';
 import Button from '../ui/button/button';
 import UseAddressInfo from './useAddressInfo-hook';
+import toastProps from './toast-props';
 
 interface AddressTypesCheck {
   billing: boolean;
@@ -106,9 +109,32 @@ function AddAddressForm({ pathId }: { pathId: string }) {
   const handleBack = () => {
     navigate(-1);
   };
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('render');
+    /*
+    if (pathId) {
+      const response = updateAction(localStorage.getItem('personal-id')!, {
+        version: Number(localStorage.getItem('version')),
+        actions,
+      });
+      toast.promise(response, {
+        pending: 'Loading...',
+        success: 'Your address has been succesfully updated!',
+        error: {
+          render({ data }) {
+            return `Error: ${data}`;
+          },
+        },
+      });
+    }
+    */
+  };
 
   return (
-    <form className={`${styles.addressFormSection}`}>
+    <form
+      className={`${styles.addressFormSection}`}
+      onSubmit={(e) => onSubmit(e)}
       <SelectInput
         {...addAddressFormSelect}
         onChangeSelect={(e) => {
@@ -165,6 +191,7 @@ function AddAddressForm({ pathId }: { pathId: string }) {
       <Button btnType="button" onClick={handleBack}>
         Back
       </Button>
+      <ToastContainer {...toastProps} />
     </form>
   );
 }

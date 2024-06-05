@@ -9,7 +9,7 @@ import {
   authMiddlewareOptions,
   httpMiddlewareOptions,
 } from './constForApi';
-import ApiResponse from './intefaceApi';
+import ApiResponse, { UpdateActionBody } from './intefaceApi';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
@@ -21,23 +21,27 @@ const apiRoot = createApiBuilderFromCtpClient(middleware).withProjectKey({
   projectKey,
 });
 
-export default function fetchPersonalData(
+export default function updateAction(
   personalId: string,
+  updateBody: UpdateActionBody,
 ): Promise<ApiResponse> {
   return new Promise((resolve, reject) => {
     apiRoot
       .customers()
       .withId({ ID: personalId })
-      .get()
+      .post({
+        body: updateBody,
+      })
       .execute()
       .then((response) => {
         if (response.body) {
           const customer: Customer = {
             ...response.body,
           };
+          localStorage.setItem('version', `${customer.version}`);
           resolve({ customer });
         } else {
-          reject(new Error('Fetching of profile data is failed'));
+          reject(new Error('Update was failed !'));
         }
       })
       .catch((error) => {

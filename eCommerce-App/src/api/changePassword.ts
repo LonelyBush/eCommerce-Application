@@ -1,6 +1,7 @@
 import {
   createApiBuilderFromCtpClient,
   Customer,
+  CustomerChangePassword,
 } from '@commercetools/platform-sdk';
 import { ClientBuilder } from '@commercetools/sdk-client-v2';
 
@@ -21,23 +22,24 @@ const apiRoot = createApiBuilderFromCtpClient(middleware).withProjectKey({
   projectKey,
 });
 
-export default function fetchPersonalData(
-  personalId: string,
+export default function changePassword(
+  updateBody: CustomerChangePassword,
 ): Promise<ApiResponse> {
   return new Promise((resolve, reject) => {
     apiRoot
       .customers()
-      .withId({ ID: personalId })
-      .get()
+      .password()
+      .post({ body: updateBody })
       .execute()
       .then((response) => {
         if (response.body) {
           const customer: Customer = {
             ...response.body,
           };
+          localStorage.setItem('version', `${customer.version}`);
           resolve({ customer });
         } else {
-          reject(new Error('Fetching of profile data is failed'));
+          reject(new Error('Change of password was failed !'));
         }
       })
       .catch((error) => {
