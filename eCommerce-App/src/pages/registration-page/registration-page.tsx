@@ -193,7 +193,7 @@ function RegistrationPage() {
 
   const onCloseModal = async () => {
     if (localStorage.getItem('authToken')) {
-      navigate('/main');
+      navigate('/catalog');
     }
   };
 
