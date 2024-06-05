@@ -4,7 +4,9 @@ import {
   CustomerSignin,
   CustomerSignInResult,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/customer';
-import ApiResponse from './intefaceApi';
+
+import { ApiResponse } from './intefaceApi';
+
 import {
   projectKey,
   authMiddlewareOptions,

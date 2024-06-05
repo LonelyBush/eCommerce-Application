@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
-import logOutClient from '../../utils/logOutClient';
+import logOutClient from '../../utils/local-storage/logOutClient';
 import LinkTemplate from '../ui/link/link';
 import Logo from '../ui/logo/logo';
 
@@ -45,7 +45,6 @@ function HeaderMainPage() {
         }
       >
         <LinkTemplate to="/catalog">Catalog</LinkTemplate>
-        <LinkTemplate to="/products">Products</LinkTemplate>
         {authToken ? (
           <>
             <LinkTemplate to="/main">Log in</LinkTemplate>

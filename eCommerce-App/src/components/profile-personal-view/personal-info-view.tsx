@@ -55,7 +55,6 @@ function PersonalInfoInputs() {
       },
     });
   };
-
   return (
     <>
       <form className={styles.personalForm} onSubmit={(e) => onSubmit(e)}>
@@ -80,6 +79,7 @@ function PersonalInfoInputs() {
             <FormInput
               key={input.id}
               responseError={input.name === 'email' ? responseError : false}
+
               {...input}
               onChangeInput={(e) => {
                 handleOnChange(e);
