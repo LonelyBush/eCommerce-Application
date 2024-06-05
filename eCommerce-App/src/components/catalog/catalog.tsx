@@ -12,7 +12,7 @@ interface CatalogProps {
   query?: object;
 }
 
-function Catalog({ query }: CatalogProps) {
+function Catalog({ query = {} }: CatalogProps) {
   const [productCards, setProductCards] = useState<IProductCard[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -88,9 +88,5 @@ function Catalog({ query }: CatalogProps) {
     </div>
   );
 }
-
-Catalog.defaultProps = {
-  query: {},
-};
 
 export default Catalog;
