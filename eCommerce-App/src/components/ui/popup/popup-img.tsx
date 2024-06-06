@@ -5,7 +5,7 @@ import { IProductCard } from '../product-card/product-card-interface';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Button from '../button/button';
-import styles from './popup.module.css';
+import styles from './popup-img.module.css';
 
 interface PopUpProps {
   productCard: IProductCard;
@@ -19,6 +19,8 @@ function PopUpImg({ productCard, initialImageUrl, onClose }: PopUpProps) {
       <div className={styles.popupBody}>
         <div className={styles.popupContentImg}>
           <Swiper
+            style={{ marginLeft: 'unset', marginRight: 'unset' }}
+            className={styles.swiper}
             modules={[Navigation]}
             navigation={{
               nextEl: '.next',
