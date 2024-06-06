@@ -35,6 +35,7 @@
 
 .tableBodyRow{
     cursor: pointer;
+    word-break:break-all
 }
 
 .tableBodyRow:hover{
@@ -198,6 +199,7 @@
         font-weight: bold;
         color: var(--c-blue-800);
         margin-right: 0.4rem;
+        word-break: normal;
     }
 }
 
