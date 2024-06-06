@@ -5,6 +5,7 @@ import PriceInput from '../../components/price-input/price-input';
 import SearchInput from '../../components/search-input/search-input';
 import Catalog from '../../components/catalog/catalog';
 import SortSelect from '../../components/sort-select/sort-select';
+import CategorySelect from '../../components/tree-categories/tree-categories';
 
 function CatalogPage() {
   const [query, setQuery] = useState<object>({});
@@ -12,6 +13,9 @@ function CatalogPage() {
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
   const [search, setSearch] = useState<string | undefined>(undefined);
   const [sortOption, setSortOption] = useState<string | undefined>(undefined);
+  const [categoryOption, setCategoryOption] = useState<string | undefined>(
+    undefined,
+  );
 
   const handlePriceChange = useCallback(
     (
@@ -19,6 +23,7 @@ function CatalogPage() {
       newMaxPrice?: number,
       newSearch?: string,
       selectedSort?: string,
+      selectedCategory?: string,
     ) => {
       let priceFilter = '';
       if ((newMinPrice === undefined || newMinPrice === 0) && newMaxPrice) {
@@ -31,12 +36,11 @@ function CatalogPage() {
         priceFilter = `variants.price.centAmount:range (${newMinPrice * 100} to ${newMaxPrice * 100})`;
       }
 
-      console.log(selectedSort);
       const newQuery = {
         queryArgs: {
           sort: [selectedSort],
           ...(newSearch ? { [`text.en-US`]: newSearch } : {}),
-          filter: priceFilter ? [priceFilter] : [],
+          filter: [priceFilter, `categories.id:"${selectedCategory}"`],
         },
       };
       setQuery(newQuery);
@@ -44,13 +48,21 @@ function CatalogPage() {
     [],
   );
 
+  // filter: [`categories.id:"${categoryId}"`],
+
   const handlePriceInputChange = (
     newMinPrice?: number,
     newMaxPrice?: number,
   ) => {
     setMinPrice(newMinPrice);
     setMaxPrice(newMaxPrice);
-    handlePriceChange(newMinPrice, newMaxPrice, search, sortOption);
+    handlePriceChange(
+      newMinPrice,
+      newMaxPrice,
+      search,
+      sortOption,
+      categoryOption,
+    );
   };
 
   const handleSearchChange = (newSearch: string) => {
@@ -59,18 +71,37 @@ function CatalogPage() {
       handlePriceChange(minPrice, maxPrice, undefined);
     } else {
       setSearch(newSearch);
-      handlePriceChange(minPrice, maxPrice, newSearch, sortOption);
+      handlePriceChange(
+        minPrice,
+        maxPrice,
+        newSearch,
+        sortOption,
+        categoryOption,
+      );
     }
   };
 
   const handleSortChange = (newSelectedSort: string) => {
     setSortOption(newSelectedSort);
-    handlePriceChange(minPrice, maxPrice, search, newSelectedSort);
+    handlePriceChange(
+      minPrice,
+      maxPrice,
+      search,
+      newSelectedSort,
+      categoryOption,
+    );
   };
 
-  //   .get({
-  //     queryArgs: { [`text.en-US`]: 'Beer', filter: [priceFilter] },
-  //   })
+  const handleCategoryChange = (newSelectedCategory: string) => {
+    setCategoryOption(newSelectedCategory);
+    handlePriceChange(
+      minPrice,
+      maxPrice,
+      search,
+      sortOption,
+      newSelectedCategory,
+    );
+  };
 
   return (
     <>
@@ -84,6 +115,9 @@ function CatalogPage() {
         </div>
         <div>
           <SortSelect onSortChange={handleSortChange} />
+        </div>
+        <div>
+          <CategorySelect onCategoryChange={handleCategoryChange} />
         </div>
       </div>
       <Catalog query={query} />
