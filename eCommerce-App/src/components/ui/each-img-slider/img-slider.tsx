@@ -66,7 +66,11 @@ function ImgSlider({ productCard }: IProductCardProps) {
         </div>
       </div>
       {isPopUp && (
-        <PopUpImg productCard={productCard} initialImageUrl={currentImgUrl} onClose={handleClosePopUp} />
+        <PopUpImg
+          productCard={productCard}
+          initialImageUrl={currentImgUrl}
+          onClose={handleClosePopUp}
+        />
       )}
     </>
   );
