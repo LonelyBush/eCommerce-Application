@@ -1,7 +1,4 @@
-import {
-  CustomerSetDefaultBillingAddressAction,
-  CustomerSetDefaultShippingAddressAction,
-} from '@commercetools/platform-sdk';
+import { CustomerUpdateAction } from '@commercetools/platform-sdk';
 
 export function getDefaultAddressAction(
   type: string,
@@ -9,9 +6,7 @@ export function getDefaultAddressAction(
   pathId: string | undefined,
   addressKey: string | undefined,
   addressInfo: string | undefined,
-):
-  | CustomerSetDefaultBillingAddressAction
-  | CustomerSetDefaultShippingAddressAction {
+): CustomerUpdateAction {
   if (defaultCheck) {
     return {
       action:
@@ -19,7 +14,7 @@ export function getDefaultAddressAction(
           ? 'setDefaultBillingAddress'
           : 'setDefaultShippingAddress',
       addressId: pathId || undefined,
-      addressKey: !pathId ? addressKey : undefined,
+      addressKey: pathId === '' ? addressKey : undefined,
     };
   }
   if (addressInfo !== pathId) {
@@ -29,7 +24,7 @@ export function getDefaultAddressAction(
           ? 'setDefaultBillingAddress'
           : 'setDefaultShippingAddress',
       addressId: addressInfo,
-      addressKey: !pathId ? addressKey : undefined,
+      addressKey: addressInfo === '' ? addressKey : undefined,
     };
   }
   return {
@@ -40,4 +35,30 @@ export function getDefaultAddressAction(
   };
 }
 
-export function setTypeAction() {}
+export function setTypeAction(
+  type: string,
+  typeCheck: boolean,
+  pathId: string | undefined,
+  addressKey: string | undefined,
+  addressInfo: string[] | undefined,
+): CustomerUpdateAction | null {
+  if (typeCheck) {
+    return {
+      action:
+        type === 'billing' ? 'addBillingAddressId' : 'addShippingAddressId',
+      addressId: pathId || undefined,
+      addressKey: pathId === '' ? addressKey : undefined,
+    };
+  }
+  if (addressInfo?.includes(pathId!)) {
+    return {
+      action:
+        type === 'billing'
+          ? 'removeBillingAddressId'
+          : 'removeShippingAddressId',
+      addressId: pathId || undefined,
+      addressKey: pathId === '' ? addressKey : undefined,
+    };
+  }
+  return null;
+}

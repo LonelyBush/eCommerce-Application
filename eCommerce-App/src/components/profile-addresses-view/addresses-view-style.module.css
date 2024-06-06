@@ -6,24 +6,31 @@
 }
 .addressTable {
     table-layout: fixed;
-    max-width: 90rem;
     border-collapse: collapse;
-    overflow-x: scroll;
-
 }
 
 .addressTable.disable{
     display: none;
 }
 
-
+.addressFormSection{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
 
 .userTableHeadCell {
     text-align: center;
-    padding: 1rem;
+    padding: 0.8rem;
     border-top: 0.1rem solid var(--c-mint-300);
     border-bottom: 0.1rem solid var(--c-mint-300);
     color: var(--c-blue-800);
+}
+
+.btnSection{
+    display: flex;
+    gap: 0.7rem;
+    order: 2;
 }
 
 .tableBodyRow{
@@ -37,7 +44,7 @@
 
 .userTableBodyCell {
     text-align: center;
-    padding: 1rem;
+    padding: 0.8rem;
     border-top: 0.1rem solid var(--c-mint-100);
     color: var(--c-blue-800);
 }
@@ -46,6 +53,7 @@
     display: flex;
     flex-direction: row;
     gap: 0.4rem;
+    flex-wrap: wrap;
     white-space: nowrap;
 }
 
@@ -55,6 +63,7 @@
     padding: 0.5rem;
     color: var( --c-green-400);
     font-weight: bold;
+    font-size: 0.8rem;
 }
 
 .tableSection{
@@ -62,7 +71,14 @@
     flex-direction: column;
     gap: 1rem;
 }
-
+.addressInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.addressInputs.disable {
+    pointer-events: none
+}
 
 .addressType {
     border-radius: 0.5rem;
@@ -70,6 +86,7 @@
     padding: 0.5rem;
     color: var( --c-gray);
     font-weight: bold;
+    font-size: 0.8rem;
 }
 
 .btnSection{
@@ -134,8 +151,61 @@
     color: var(--c-mint-100);
 }
 
-  @media(max-width: 1200px){
+.tableHead {
+    display: table-header-group;
+}
+
+  @media(max-width: 920px){
+    .tableSection{
+        font-size: 1rem;
+    }
+}
+@media(max-width: 760px){
     .tableSection{
         font-size: 0.8rem;
+    }
+    .userTableBodyCell{
+        padding: 0.2rem;
+    }
+
+    .userTableHeadCell{
+        padding: 0.2rem;
+    }
+    .addressType{
+        font-size: 0.6;
+    }
+    .defaultType{
+        font-size: 0.6;
+    }
+
+
+}
+
+@media (max-width: 500px){
+    .tableHead{
+        display: none;
+    }
+    .tableBodyRow{
+        border-top: 0.1rem solid var(--c-mint-300);
+        border-bottom: 0.1rem solid var(--c-mint-300);
+    }
+    .userTableBodyCell{
+        display: flex;
+        border: none;
+    }
+    .userTableBodyCell::before{
+        content: attr(data-cell) ':';
+        font-weight: bold;
+        color: var(--c-blue-800);
+        margin-right: 0.4rem;
+    }
+}
+
+@media (max-width: 600px){
+    .btnSection{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
     }
 }
