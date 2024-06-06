@@ -1,11 +1,16 @@
-import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
+import {
+  createApiBuilderFromCtpClient,
+  Customer,
+  CustomerChangePassword,
+} from '@commercetools/platform-sdk';
 import { ClientBuilder } from '@commercetools/sdk-client-v2';
-import { ApiResponse } from './intefaceApi';
+
 import {
   projectKey,
   authMiddlewareOptions,
   httpMiddlewareOptions,
 } from './constForApi';
+import { ApiResponse } from './intefaceApi';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
@@ -17,23 +22,24 @@ const apiRoot = createApiBuilderFromCtpClient(middleware).withProjectKey({
   projectKey,
 });
 
-export default function getAllProducts(query?: object): Promise<ApiResponse> {
-  //   const priceFilter = `variants.price.centAmount:range (4000 to 6000)`;
+export default function changePassword(
+  updateBody: CustomerChangePassword,
+): Promise<ApiResponse> {
   return new Promise((resolve, reject) => {
     apiRoot
-      .productProjections()
-      .search()
-      //   .get({
-      //     queryArgs: { [`text.en-US`]: 'Beer', filter: [priceFilter] },
-      //   })
-      .get(query)
+      .customers()
+      .password()
+      .post({ body: updateBody })
       .execute()
       .then((response) => {
-        console.log('res', response);
         if (response.body) {
-          resolve({ productProjectionArr: response.body.results });
+          const customer: Customer = {
+            ...response.body,
+          };
+          localStorage.setItem('version', `${customer.version}`);
+          resolve({ customer });
         } else {
-          reject(new Error('Response body is empty or not an array'));
+          reject(new Error('Change of password was failed !'));
         }
       })
       .catch((error) => {

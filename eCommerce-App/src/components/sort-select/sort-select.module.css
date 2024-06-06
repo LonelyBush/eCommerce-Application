@@ -1,0 +1,7 @@
+.sortSelect {
+  border: 3px solid var(--c-blue-800);
+  border-radius: 7px;
+  width: 100px;
+  margin: 10px;
+  font-size: 16px;
+}

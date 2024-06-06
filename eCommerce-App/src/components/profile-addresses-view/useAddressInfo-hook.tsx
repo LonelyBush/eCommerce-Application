@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
+import { useLocation } from 'react-router-dom';
 import fetchPersonalData from '../../api/fetchPersonalData';
 
 export interface AddressType {
@@ -28,6 +29,7 @@ export interface ClientAddressData {
 }
 
 function UseAddressInfo() {
+  const location = useLocation();
   const [personalData, setPersonalData] = useState<ClientAddressData>({
     addresses: [],
     defaultBillingAddressId: '',
@@ -56,7 +58,7 @@ function UseAddressInfo() {
       }
     }
     getResponse();
-  }, []);
+  }, [location]);
   return personalData;
 }
 

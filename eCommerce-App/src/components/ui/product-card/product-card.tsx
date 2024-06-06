@@ -1,3 +1,4 @@
+import React from 'react';
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
 import Button from '../button/button';
@@ -54,4 +55,4 @@ function ProductCard({ productCard }: IProductCardProps) {
   );
 }
 
-export default ProductCard;
+export default React.memo(ProductCard);
