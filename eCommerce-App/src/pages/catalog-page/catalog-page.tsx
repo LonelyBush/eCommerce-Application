@@ -75,7 +75,6 @@ function CatalogPage() {
   return (
     <>
       <HeaderMainPage />
-
       <div className={styles.wrapperFilter}>
         <div>
           <PriceInput onPriceChange={handlePriceInputChange} />
