@@ -10,7 +10,7 @@ import ProductsPage from '../pages/products-page/products-page';
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/main" replace />} />
+      <Route path="/" element={<Navigate to="/catalog" replace />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/main" element={<MainPage />} />

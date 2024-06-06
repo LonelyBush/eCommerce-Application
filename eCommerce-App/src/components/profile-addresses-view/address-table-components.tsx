@@ -9,7 +9,7 @@ interface ColumnInterface {
 
 export function TableHead({ mainColumns }: { mainColumns: ColumnInterface[] }) {
   return (
-    <thead>
+    <thead className={styles.tableHead}>
       <tr>
         {mainColumns.map((column) => (
           <th
@@ -56,7 +56,11 @@ export function TableContent({
           >
             {tableColumns.map((column) => {
               return column.id === 'addressType' ? (
-                <td key={column.id} className={styles.userTableBodyCell}>
+                <td
+                  key={column.id}
+                  className={styles.userTableBodyCell}
+                  data-cell={column.label}
+                >
                   <div className={styles.addressTypes}>
                     {defaultBillingAddressId === entry.id ? (
                       <div className={styles.defaultType}>Default billing</div>
@@ -81,7 +85,11 @@ export function TableContent({
                   </div>
                 </td>
               ) : (
-                <td className={styles.userTableBodyCell} key={column.id}>
+                <td
+                  data-cell={column.label}
+                  className={styles.userTableBodyCell}
+                  key={column.id}
+                >
                   {column.id === 'id'
                     ? index + 1
                     : entry[column.id as keyof BaseAddress]}

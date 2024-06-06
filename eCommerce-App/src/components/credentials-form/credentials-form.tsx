@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ChangeEvent, useState } from 'react';
 import { CredentialsProps } from '../../types/registration-form/registration-int';
 import LoginEmail from '../login-email/login-email';
 import LoginPassword from '../login-password/login-password';

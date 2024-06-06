@@ -1,4 +1,6 @@
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import toastProps from './toast-props';
 import Button from '../ui/button/button';
 import styles from './addresses-view-style.module.css';
 import UseAddressInfo from './useAddressInfo-hook';
@@ -42,6 +44,7 @@ function AddressesTable() {
           </div>
         </div>
       )}
+      <ToastContainer {...toastProps} />
       <Outlet />
     </>
   );

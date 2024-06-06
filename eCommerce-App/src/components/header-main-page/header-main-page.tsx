@@ -12,7 +12,7 @@ function HeaderMainPage() {
   const navigate = useNavigate();
   const handleLogOut = () => {
     logOutClient();
-    navigate('/main');
+    navigate('/catalog');
   };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,8 +47,8 @@ function HeaderMainPage() {
         <LinkTemplate to="/catalog">Catalog</LinkTemplate>
         {authToken ? (
           <>
-            <LinkTemplate to="/main">Log in</LinkTemplate>
-            <LinkTemplate to="/main">Sign up</LinkTemplate>
+            <LinkTemplate to="/catalog">Log in</LinkTemplate>
+            <LinkTemplate to="/catalog">Sign up</LinkTemplate>
             <LinkTemplate to="/profile">Profile</LinkTemplate>
             <Button btnType="button" onClick={handleLogOut}>
               Log out

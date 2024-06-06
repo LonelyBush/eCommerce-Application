@@ -11,13 +11,17 @@ function LoginPassword({
   setError,
   eyeDisplay,
   label,
+  responseError,
+  setResponseError,
 }: {
   loginData: LoginFormType;
   setLoginData: React.Dispatch<React.SetStateAction<LoginFormType>>;
   setPasswordValid?: React.Dispatch<React.SetStateAction<boolean>>;
+  setResponseError?: React.Dispatch<React.SetStateAction<boolean>>;
   setError?: React.Dispatch<React.SetStateAction<string>>;
   eyeDisplay: boolean;
   label?: string;
+  responseError?: boolean;
 }) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<string[]>([]);
@@ -27,6 +31,7 @@ function LoginPassword({
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     event.preventDefault();
+    if (setResponseError) setResponseError(false);
     const { name, value } = event.target;
     if (setError) setError('');
 
@@ -98,13 +103,16 @@ function LoginPassword({
       <label className={styles.label} htmlFor="password">
         {label || 'Enter password'}
       </label>
-      <div className={`${styles.passwordBlock} ${borderStyle}`}>
+      <div
+        className={`${styles.passwordBlock} ${responseError ? styles.borderError : borderStyle}`}
+      >
         <input
           id="password"
           className={styles.passwordInput}
           type={showPassword ? 'text' : 'password'}
           placeholder="Password"
           name="password"
+          data-responseerror={responseError}
           defaultValue={loginData.password}
           onChange={handlePasswordInputChange}
           pattern="^(?!^\s)(?!.*\s$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$"

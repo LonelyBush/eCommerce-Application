@@ -23,10 +23,10 @@ function UsePersonalInfo() {
         );
         setPersonalData({
           ...personalData,
-          firstName: response.customer?.firstName,
-          lastName: response.customer?.lastName,
-          dateOfBirth: response.customer?.dateOfBirth,
-          email: response.customer?.email,
+          firstName: response.customer?.firstName || '',
+          lastName: response.customer?.lastName || '',
+          dateOfBirth: response.customer?.dateOfBirth || '',
+          email: response.customer?.email || '',
         });
       } catch (caughtError) {
         if (caughtError instanceof Error) {
