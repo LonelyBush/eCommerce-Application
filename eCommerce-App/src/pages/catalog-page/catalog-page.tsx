@@ -35,14 +35,26 @@ function CatalogPage() {
       if (newMaxPrice && newMinPrice) {
         priceFilter = `variants.price.centAmount:range (${newMinPrice * 100} to ${newMaxPrice * 100})`;
       }
-
-      const newQuery = {
-        queryArgs: {
-          sort: [selectedSort],
-          ...(newSearch ? { [`text.en-US`]: newSearch } : {}),
-          filter: [priceFilter, `categories.id:"${selectedCategory}"`],
-        },
-      };
+      console.log('a', selectedCategory);
+      let newQuery = {};
+      if (selectedCategory === undefined || selectedCategory === '') {
+        newQuery = {
+          queryArgs: {
+            sort: [selectedSort],
+            ...(newSearch ? { [`text.en-US`]: newSearch } : {}),
+            filter: [priceFilter],
+          },
+        };
+      }
+      if (selectedCategory) {
+        newQuery = {
+          queryArgs: {
+            sort: [selectedSort],
+            ...(newSearch ? { [`text.en-US`]: newSearch } : {}),
+            filter: [priceFilter, `categories.id:"${selectedCategory}"`],
+          },
+        };
+      }
       setQuery(newQuery);
     },
     [],
