@@ -26,7 +26,7 @@ function SearchInput({ onSearchChange }: SearchInputProps) {
   }, [search, onSearchChange]);
 
   return (
-    <div>
+    <div className={styles.searchInputBlock}>
       <input
         className={styles.searchInput}
         type="text"
@@ -36,6 +36,12 @@ function SearchInput({ onSearchChange }: SearchInputProps) {
         onChange={handleSearchChange}
         onBlur={handleBlur}
         autoComplete="off"
+      />
+      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+      <button
+        type="button"
+        className={styles.searchBtn}
+        // onClick={togglePasswordVisibility}
       />
     </div>
   );

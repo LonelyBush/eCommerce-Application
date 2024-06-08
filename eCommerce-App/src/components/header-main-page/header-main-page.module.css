@@ -15,8 +15,50 @@
   font-size: 1rem;
 }
 
-.navMain > button {
-font-size: 1rem;
+.iconProfile {
+  mask-image: url('../../assets/svg-icons/profile-icon.svg');
+}
+
+.iconLogIn {
+  mask-image: url('../../assets/svg-icons/login.svg');
+}
+
+.iconCatalog {
+  mask-image: url('../../assets/svg-icons/catalog.svg');
+}
+
+.iconMain {
+  mask-image: url('../../assets/svg-icons/home.svg');
+}
+
+.iconSignUp {
+  mask-image: url('../../assets/svg-icons/signup.svg');
+}
+
+.iconLogOut {
+  min-width: 2rem;
+  height: 2rem;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  background-color: var(--c-green-400);
+  mask-image: url('../../assets/svg-icons/logout.svg');
+  cursor: pointer;
+}
+
+.textLink {
+  display: block;
+  color: var(--c-green-400);
+  padding-bottom: 0.3rem;
+  position: relative;
+  font-size: 0.7rem;
+  transition: all 0.4s ease-in;
+}
+
+.linkBlock:hover {
+  cursor: pointer;
+  filter: drop-shadow(0.3rem 0.3rem 1rem var(--c-green-400));
+  transform: scale(1.1);
 }
 
 .burgerMenu {
@@ -83,12 +125,16 @@ font-size: 1rem;
     z-index: 1000;
   }
 
-  .navMain > button {
-    font-size: 1.2rem;
-    }
-
   .navMain.open {
     transform: translateX(0%);
     right: 0;
+  }
+
+  .textLink {
+    font-size: 2rem;
+  }
+
+  .iconLogOut {
+    display: none;
   }
 }

@@ -2,11 +2,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
 import logOutClient from '../../utils/local-storage/logOutClient';
-import LinkTemplate from '../ui/link/link';
+import LinkTemplateIcon from '../ui/link/link-icon';
 import Logo from '../ui/logo/logo';
 
 import styles from './header-main-page.module.css';
-import Button from '../ui/button/button';
 
 function HeaderMainPage() {
   const navigate = useNavigate();
@@ -44,20 +43,36 @@ function HeaderMainPage() {
           isMenuOpen ? `${styles.navMain} ${styles.open}` : styles.navMain
         }
       >
-        <LinkTemplate to="/catalog">Catalog</LinkTemplate>
+        <LinkTemplateIcon to="/catalog" className={styles.iconCatalog}>
+          Catalog
+        </LinkTemplateIcon>
+        <LinkTemplateIcon to="/main" className={styles.iconMain}>
+          Main
+        </LinkTemplateIcon>
         {authToken ? (
           <>
-            <LinkTemplate to="/catalog">Log in</LinkTemplate>
-            <LinkTemplate to="/catalog">Sign up</LinkTemplate>
-            <LinkTemplate to="/profile">Profile</LinkTemplate>
-            <Button btnType="button" onClick={handleLogOut}>
-              Log out
-            </Button>
+            <LinkTemplateIcon to="/profile" className={styles.iconProfile}>
+              Profile
+            </LinkTemplateIcon>
+            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+            <div
+              onClick={handleLogOut}
+              className={styles.linkBlock}
+              role="button"
+              tabIndex={0}
+            >
+              <div className={styles.iconLogOut} />
+              <span className={styles.textLink}> Log out</span>
+            </div>
           </>
         ) : (
           <>
-            <LinkTemplate to="/login">Log in</LinkTemplate>
-            <LinkTemplate to="/registration">Sign up</LinkTemplate>
+            <LinkTemplateIcon to="/login" className={styles.iconLogIn}>
+              Log in
+            </LinkTemplateIcon>
+            <LinkTemplateIcon to="/registration" className={styles.iconSignUp}>
+              Sign up
+            </LinkTemplateIcon>
           </>
         )}
       </nav>
