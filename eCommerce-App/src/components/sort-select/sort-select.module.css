@@ -1,7 +1,34 @@
+
 .sortSelect {
-  border: 3px solid var(--c-blue-800);
-  border-radius: 7px;
-  width: 100px;
-  margin: 10px;
-  font-size: 16px;
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none; 
+  border: none; 
+  background: none; 
+  padding: 0; 
+  margin: 0; 
+  width: 100%; 
+  font-size: inherit; 
+  color: inherit; 
+  cursor: pointer;
+}
+
+.sortSelectBlock {
+  display: flex;
+  padding: 0.1rem 0.5rem;
+  margin: 1rem 0;
+  width: 10rem;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  color: var(--c-blue-600);
+  border: 0.2rem solid var(--c-mint-100);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.sortOption {
+  padding: 0.2rem 0.5rem;
+  margin: 1rem;
+  cursor: pointer;
+  background-color: var(--c-mint-100);
 }

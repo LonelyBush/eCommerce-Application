@@ -16,9 +16,9 @@ function SelectInput(props: PropsOption) {
     value,
   } = props;
   return (
-    <div className={styles.selectInputForm}>
-      <label htmlFor={id}>{label} </label>
-      <select
+    <div className={styles.selectCategoryBlock}>
+      <label htmlFor={id} className={styles.labelCategory}>{label} </label>
+      <select className={styles.selectCategory}
         onBlur={() => setFocused(true)}
         data-focused={focused.toString()}
         onChange={(e) => onChangeSelect!(e)}
@@ -34,7 +34,7 @@ function SelectInput(props: PropsOption) {
           );
         })}
       </select>
-      <span>{errorMessage}</span>
+      <span className={styles.errorCategory}>{errorMessage}</span>
     </div>
   );
 }

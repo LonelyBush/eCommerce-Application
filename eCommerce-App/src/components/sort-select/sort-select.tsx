@@ -11,13 +11,13 @@ function SortSelect({ onSortChange }: SortSelectProps) {
   };
 
   return (
-    <div className={styles.sortSelect}>
-      <select onChange={handleSelectChange}>
-        <option value="">sort by...</option>
-        <option value="price desc">price ↓</option>
-        <option value="price asc">price ↑</option>
-        <option value="name.en-US asc">name A-Z</option>
-        <option value="name.en-US desc">name Z-A</option>
+    <div className={styles.sortSelectBlock}>
+      <select className={styles.sortSelect} onChange={handleSelectChange}>
+        <option className={styles.sortOption} value="">sort by...</option>
+        <option className={styles.sortOption} value="price desc">price ↓</option>
+        <option className={styles.sortOption} value="price asc">price ↑</option>
+        <option className={styles.sortOption} value="name.en-US asc">name A-Z</option>
+        <option className={styles.sortOption} value="name.en-US desc">name Z-A</option>
       </select>
     </div>
   );
