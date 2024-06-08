@@ -1,7 +1,21 @@
+
 .categorySelect {
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none; 
+  border: none; 
+  background: none; 
+  padding: 0; 
+  margin: 0; 
+  width: 100%; 
+  font-size: inherit; 
+  color: inherit; 
+  cursor: pointer;
+}
+
+.categorySelectBlock {
   display: flex;
   padding: 0.1rem 0.5rem;
-  margin: 1rem 0;
   width: 10rem;
   box-sizing: border-box;
   font-size: 1.2rem;
@@ -9,4 +23,10 @@
   border: 0.2rem solid var(--c-mint-100);
   border-radius: 1rem;
   cursor: pointer;
+}
+
+.categoryOption {
+  cursor: pointer;
+  color: var(--c-blue-600);
+  background-color: var(--c-mint-100);
 }

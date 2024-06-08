@@ -32,11 +32,11 @@ function CategorySelect({ onCategoryChange }: CategorySelectProps) {
   };
 
   return (
-    <div className={styles.categorySelect}>
-      <select onChange={handleSelectChange}>
+    <div className={styles.categorySelectBlock}>
+      <select className={styles.categorySelect} onChange={handleSelectChange}>
         <option value="">Category</option>
         {categories.map((category) => (
-          <option key={category.id} value={category.id}>
+          <option className={styles.categoryOption} key={category.id} value={category.id}>
             {category.name['en-US']}
           </option>
         ))}

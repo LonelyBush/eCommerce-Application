@@ -14,19 +14,19 @@ function SortSelect({ onSortChange }: SortSelectProps) {
     <div className={styles.sortSelectBlock}>
       <select className={styles.sortSelect} onChange={handleSelectChange}>
         <option className={styles.sortOption} value="">
-          sort by...
+          Sort by...
         </option>
         <option className={styles.sortOption} value="price desc">
-          price ↓
+          Price ↓
         </option>
         <option className={styles.sortOption} value="price asc">
-          price ↑
+          Price ↑
         </option>
         <option className={styles.sortOption} value="name.en-US asc">
-          name A-Z
+          Name A-Z
         </option>
         <option className={styles.sortOption} value="name.en-US desc">
-          name Z-A
+          Name Z-A
         </option>
       </select>
     </div>
