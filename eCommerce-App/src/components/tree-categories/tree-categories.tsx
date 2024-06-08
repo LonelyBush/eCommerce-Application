@@ -36,7 +36,11 @@ function CategorySelect({ onCategoryChange }: CategorySelectProps) {
       <select className={styles.categorySelect} onChange={handleSelectChange}>
         <option value="">Category</option>
         {categories.map((category) => (
-          <option className={styles.categoryOption} key={category.id} value={category.id}>
+          <option
+            className={styles.categoryOption}
+            key={category.id}
+            value={category.id}
+          >
             {category.name['en-US']}
           </option>
         ))}
