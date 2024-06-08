@@ -2,6 +2,7 @@
   color: var(--c-green-400);
   padding-bottom: 0.3rem;
   position: relative;
+  font-size: 1.5rem;
 }
 
 .link::before {
@@ -25,8 +26,46 @@
   color: var(--c-mint-100);
 }
 
+.textLink {
+  display: block;
+  color: var(--c-green-400);
+  padding-bottom: 0.3rem;
+  position: relative;
+  font-size: 0.7rem;
+  transition: all 0.4s ease-in;
+}
+
+.linkBlock:hover {
+  cursor: pointer;
+  filter: drop-shadow(0.3rem 0.3rem 1rem var(--c-green-400));
+  transform: scale(1.1);
+}
+
+.iconHeader {
+  min-width: 2rem;
+  height: 2rem;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  background-color: var(--c-green-400);
+}
+
+@media (max-width: 768px) {
+  .textLink {
+    font-size: 2rem;
+  }
+
+  .iconHeader {
+    display: none;
+  }
+
+  .iconLogOut {
+    display: none;
+  }
+}
+
 @media (max-width: 600px) {
   .link {
-   font-size: 1rem;
+    font-size: 1rem;
   }
 }
