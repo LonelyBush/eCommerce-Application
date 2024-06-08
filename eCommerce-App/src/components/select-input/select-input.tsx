@@ -17,8 +17,11 @@ function SelectInput(props: PropsOption) {
   } = props;
   return (
     <div className={styles.selectCategoryBlock}>
-      <label htmlFor={id} className={styles.labelCategory}>{label} </label>
-      <select className={styles.selectCategory}
+      <label htmlFor={id} className={styles.labelCategory}>
+        {label}{' '}
+      </label>
+      <select
+        className={styles.selectCategory}
         onBlur={() => setFocused(true)}
         data-focused={focused.toString()}
         onChange={(e) => onChangeSelect!(e)}

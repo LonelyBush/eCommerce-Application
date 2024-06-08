@@ -99,9 +99,6 @@ function ProductInfo() {
       </div>
       <div className={styles.productPageInfo}>
         <Tags.H1>{productCard.name}</Tags.H1>
-        <p className={styles.productPageDescription}>
-          {productCard.description}
-        </p>
         <div className={styles.productPagePrices}>
           Price:&nbsp;
           <span className={styles.productPagePrice}>{productCard.price}$</span>
@@ -115,6 +112,9 @@ function ProductInfo() {
             <div className={styles.discountPercent}>{getDiscount()}%</div>
           </div>
         )}
+        <p className={styles.productPageDescription}>
+          {productCard.description}
+        </p>
       </div>
     </div>
   );

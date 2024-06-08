@@ -38,11 +38,11 @@ function SearchInput({ onSearchChange }: SearchInputProps) {
         autoComplete="off"
       />
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button
-            type="button"
-            className={styles.searchBtn} 
-            // onClick={togglePasswordVisibility}
-          />
+      <button
+        type="button"
+        className={styles.searchBtn}
+        // onClick={togglePasswordVisibility}
+      />
     </div>
   );
 }
