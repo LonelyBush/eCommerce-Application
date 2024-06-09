@@ -1,0 +1,44 @@
+.toastBody{
+    font-family: "salina trial";
+     font-size: 0.8rem;
+     color: var(--c-black);
+}
+
+.btnSection {
+    display: flex;
+    gap: 2rem;
+}
+
+.btnSection > button {
+    width: 10rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+
+.confidentialWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confidentialForm {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.confidentialForm > div > p {
+    font-size: 0.8rem;
+}
+
+.confidentialForm > label {
+    color: var(--c-blue-800);
+}
+@media (max-width: 500px) {
+
+    .btnSection {
+        flex-direction: column;
+    }
+}
+

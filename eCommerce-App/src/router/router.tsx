@@ -10,14 +10,14 @@ import ProductsPage from '../pages/products-page/products-page';
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/main" replace />} />
+      <Route path="/" element={<Navigate to="/catalog" replace />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/main" element={<MainPage />} />
       <Route path="/catalog" element={<CatalogPage />} />
-      <Route path="/products" element={<ProductsPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile/*" element={<ProfilePage />} />
       <Route path="/*" element={<NotFoundPage />} />
+      <Route path="/main/product/:key" element={<ProductsPage />} />
     </Routes>
   );
 }

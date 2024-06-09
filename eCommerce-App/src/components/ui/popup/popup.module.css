@@ -7,6 +7,7 @@
   background-color: rgba(37, 34, 34, 0.7);
   opacity: 1;
   visibility: visible;
+  z-index: 1001;
 }
 .popupBody {
   min-height: 100%;

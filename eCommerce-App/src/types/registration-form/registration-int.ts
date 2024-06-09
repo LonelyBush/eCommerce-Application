@@ -20,9 +20,8 @@ interface SelectOptionProps {
   value: string;
   optionLabel: string;
 }
-
 export interface PropsOption {
-  label: string;
+  label?: string;
   placeholder?: string;
   name: string;
   id: string;
@@ -33,6 +32,8 @@ export interface PropsOption {
   errorMessage: string;
   required: boolean;
   options?: SelectOptionProps[];
+  defaultValue?: string;
+  responseError?: boolean;
 }
 
 export interface CredentialsProps {

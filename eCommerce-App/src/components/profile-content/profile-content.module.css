@@ -1,0 +1,82 @@
+.profileRoot{
+    display: flex;
+}
+
+.profileContainer{
+    width: 100%;
+}
+
+.greetUser {
+    margin: 0.9rem 0.8rem 0.6rem;
+}
+
+.greetUser > h2{
+    text-align: start;
+}
+
+.profileWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileNavigation {
+    display: flex;
+    border-bottom: 0.1rem solid var(--c-mint-300);
+}
+
+.navComponent{
+    padding: 1rem;
+    color: var(--c-blue-800);
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 1rem;
+
+}
+
+.navComponent:hover {
+    font-weight: bold;
+    color: var(--c-blue-600);
+    border-bottom: 0.2rem solid var(--c-blue-600);
+}
+
+.navComponent.active{
+    font-weight: bold;
+    color: var(--c-blue-600);
+    border-bottom: 0.2rem solid var(--c-blue-600);
+}
+
+.toastContainer{
+    width: 10rem;
+}
+
+.profileSection{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem;
+}
+@media (max-width: 800px) {
+    .profileSection {
+        align-items: normal;
+    }
+}
+@media (max-width: 500px) {
+    .profileSection {
+        padding: 2rem 3rem;
+    }
+}
+@media (max-width: 420px) {
+    .greetUser > h2 {
+        font-size: 1.7rem;
+    }
+}
+@media (max-width: 400px) {
+    .profileNavigation {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
