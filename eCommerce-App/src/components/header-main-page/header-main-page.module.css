@@ -35,6 +35,14 @@
   mask-image: url('../../assets/svg-icons/signup.svg');
 }
 
+.iconCart {
+  mask-image: url('../../assets/svg-icons/cart.svg');
+}
+
+.iconAboutUs {
+  mask-image: url('../../assets/svg-icons/about-us.svg');
+}
+
 .iconLogOut {
   min-width: 2rem;
   height: 2rem;
