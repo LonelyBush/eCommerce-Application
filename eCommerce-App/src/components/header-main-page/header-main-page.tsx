@@ -49,6 +49,12 @@ function HeaderMainPage() {
         <LinkTemplateIcon to="/main" className={styles.iconMain}>
           Main
         </LinkTemplateIcon>
+        <LinkTemplateIcon to="/about-us" className={styles.iconAboutUs}>
+          About us
+        </LinkTemplateIcon>
+        <LinkTemplateIcon to="/cart" className={styles.iconCart}>
+          Cart
+        </LinkTemplateIcon>
         {authToken ? (
           <>
             <LinkTemplateIcon to="/profile" className={styles.iconProfile}>
