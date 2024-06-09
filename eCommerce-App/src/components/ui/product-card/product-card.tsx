@@ -43,7 +43,7 @@ function ProductCard({ productCard }: IProductCardProps) {
           <div className={styles.btnContainer}>
             <Button
               btnType="button"
-              to={`/main/product/:key=${productCard.key}`}
+              to={`/catalog/product/:key=${productCard.key}`}
               onClick={handleClick}
             >
               View Details
