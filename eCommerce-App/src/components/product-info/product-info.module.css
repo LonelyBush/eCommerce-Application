@@ -33,7 +33,7 @@
 }
 
 .productPageDiscount {
-  color: red;
+  color: var(--c-red);
   padding-right: 1rem;
 }
 

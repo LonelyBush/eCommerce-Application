@@ -35,6 +35,14 @@
   mask-image: url('../../assets/svg-icons/signup.svg');
 }
 
+.iconCart {
+  mask-image: url('../../assets/svg-icons/cart.svg');
+}
+
+.iconAboutUs {
+  mask-image: url('../../assets/svg-icons/about-us.svg');
+}
+
 .iconLogOut {
   min-width: 2rem;
   height: 2rem;
@@ -130,11 +138,17 @@
     right: 0;
   }
 
-  .textLink {
-    font-size: 2rem;
+  .linkBlock {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
   .iconLogOut {
-    display: none;
+    order: 1;
+  }
+
+  .textLink {
+    font-size: 2rem;
   }
 }

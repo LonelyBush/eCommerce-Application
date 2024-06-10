@@ -60,7 +60,7 @@
 
 .cardDiscount {
   font-weight: 600;
-  color: #dc6f6f;
+  color: var(--c-red);
   font-size: 1.25rem;
 }
 

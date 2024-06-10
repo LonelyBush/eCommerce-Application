@@ -65,11 +65,13 @@
   }
 
   .iconHeader {
-    display: none;
+    order: 1;
   }
 
-  .iconLogOut {
-    display: none;
+  .linkBlock {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 }
 
