@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logOutClient from '../../utils/local-storage/logOutClient';
 import LinkTemplateIcon from '../ui/link/link-icon';
 import Logo from '../ui/logo/logo';
+import CartHeader from '../ui/cart-header/cart-header';
 
 import styles from './header-main-page.module.css';
 
@@ -15,6 +15,11 @@ function HeaderMainPage() {
   };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [countCart, setCountCart] = useState<number>(16);
+
+  useEffect(() => {
+    setCountCart(0);
+  }); // запрос для получения количества елементов в корзине
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -52,9 +57,7 @@ function HeaderMainPage() {
         <LinkTemplateIcon to="/about-us" className={styles.iconAboutUs}>
           About us
         </LinkTemplateIcon>
-        <LinkTemplateIcon to="/cart" className={styles.iconCart}>
-          Cart
-        </LinkTemplateIcon>
+        <CartHeader countCart={countCart} />
         {authToken ? (
           <>
             <LinkTemplateIcon to="/profile" className={styles.iconProfile}>

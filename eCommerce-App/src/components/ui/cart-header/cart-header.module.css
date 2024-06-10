@@ -1,0 +1,22 @@
+.cartBlock {
+position: relative;
+cursor: pointer;
+}
+
+.iconCart {
+    mask-image: url('../../../assets/svg-icons/cart.svg');
+  }
+
+.count {
+    width: 1.3rem;
+    height: 1.3rem;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 25%;
+    left: 60%;
+    font-size: 0.95rem;
+    border-radius: 50%;
+    background-color: var(--c-red);
+}
