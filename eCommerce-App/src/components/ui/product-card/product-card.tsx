@@ -1,21 +1,24 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
-import Button from '../button/button';
 import { saveIdToLocalStorage } from '../../../utils/local-storage/save-id';
 
 import styles from './product-card.module.css';
 
 function ProductCard({ productCard }: IProductCardProps) {
+  const navigate = useNavigate();
   const { scrollToTop } = useScrollToTop();
 
   const handleClick = () => {
     scrollToTop();
     saveIdToLocalStorage(productCard.id);
+    navigate(`/catalog/product/:key=${productCard.key}`);
   };
 
   return (
-    <article className={styles.cardBlock}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <article className={styles.cardBlock} onClick={handleClick}>
       <div className={styles.cardContent}>
         <div className={styles.imgBlock}>
           <img
@@ -39,15 +42,6 @@ function ProductCard({ productCard }: IProductCardProps) {
             </div>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button className={styles.cardCart} type="button" />
-          </div>
-          <div className={styles.btnContainer}>
-            <Button
-              btnType="button"
-              to={`/catalog/product/:key=${productCard.key}`}
-              onClick={handleClick}
-            >
-              View Details
-            </Button>
           </div>
         </div>
       </div>
