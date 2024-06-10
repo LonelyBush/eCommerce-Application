@@ -20,3 +20,13 @@ cursor: pointer;
     border-radius: 50%;
     background-color: var(--c-red);
 }
+
+@media (max-width: 768px) {
+  .count  {
+    display: flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 35%;
+    left: 90%;
+  }
+}

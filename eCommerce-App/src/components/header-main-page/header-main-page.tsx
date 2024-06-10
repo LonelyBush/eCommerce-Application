@@ -15,10 +15,10 @@ function HeaderMainPage() {
   };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [countCart, setCountCart] = useState<number>(16);
+  const [countCart, setCountCart] = useState<number>(0);
 
   useEffect(() => {
-    setCountCart(0);
+    setCountCart(10);
   }); // запрос для получения количества елементов в корзине
 
   const toggleMenu = () => {
