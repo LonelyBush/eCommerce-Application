@@ -1,7 +1,8 @@
 .catalogBlock {
   display: flex;
   flex-wrap: wrap;
+  gap: 1.5rem;
+  flex-grow: 2;
+  padding: 1rem 1rem;
   justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
 }

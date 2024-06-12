@@ -73,12 +73,11 @@ function Catalog({ query = {} }: CatalogProps) {
   if (loading) {
     return <Loading />;
   }
-
   return (
     <div className={styles.catalogBlock}>
       {productCards.length > 0 ? (
         productCards
-          .slice(0, 4)
+          .slice(0, 8)
           .map((productCard) => (
             <ProductCard key={productCard.id} productCard={productCard} />
           ))

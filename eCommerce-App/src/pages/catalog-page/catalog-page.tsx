@@ -5,7 +5,7 @@ import PriceInput from '../../components/price-input/price-input';
 import SearchInput from '../../components/search-input/search-input';
 import Catalog from '../../components/catalog/catalog';
 import SortSelect from '../../components/sort-select/sort-select';
-import CategorySelect from '../../components/tree-categories/tree-categories';
+import { AccordionCatalog } from '../../components/catalog-accordion/catalog-accordion';
 
 function CatalogPage() {
   const [query, setQuery] = useState<object>({});
@@ -128,11 +128,11 @@ function CatalogPage() {
         <div>
           <SortSelect onSortChange={handleSortChange} />
         </div>
-        <div>
-          <CategorySelect onCategoryChange={handleCategoryChange} />
-        </div>
       </div>
-      <Catalog query={query} />
+      <div className={styles.catalogCategorySection}>
+        <AccordionCatalog onCategoryChange={handleCategoryChange} />
+        <Catalog query={query} />
+      </div>
     </>
   );
 }
