@@ -108,6 +108,7 @@
   background-color: var(--c-green-400);
 }
 
-.checked {
+.cardCart:disabled {
   mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
+  cursor: default;
 }
