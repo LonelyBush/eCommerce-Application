@@ -112,3 +112,10 @@
   mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
   cursor: default;
 }
+
+
+@media (max-width: 768px){
+  .cardBlock {
+    width: 17rem;
+  }
+}
