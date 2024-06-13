@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
@@ -9,12 +10,23 @@ import styles from './product-card.module.css';
 function ProductCard({ productCard }: IProductCardProps) {
   const navigate = useNavigate();
   const { scrollToTop } = useScrollToTop();
-
+  const [isCartActive, setIsCartActive] = useState<boolean>(true);
   const handleClick = () => {
     scrollToTop();
     saveIdToLocalStorage(productCard.id);
     navigate(`/catalog/product/:key=${productCard.key}`);
   };
+
+  const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setIsCartActive(false);
+  };
+
+  useEffect(() => {
+    // const includeProduct=cartArray.some(item => item.id ===  productCard.id)
+    // setIsCartActive(includeProduct)
+    setIsCartActive(isCartActive);
+  });
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
@@ -41,7 +53,12 @@ function ProductCard({ productCard }: IProductCardProps) {
               </p>
             </div>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button className={styles.cardCart} type="button" />
+            <button
+              className={styles.cardCart}
+              type="button"
+              disabled={!isCartActive}
+              onClick={addToCart}
+            />
           </div>
         </div>
       </div>
