@@ -98,6 +98,7 @@ function Catalog({ query = {} }: CatalogProps) {
         )}
       </div>
       <Pagination
+        className={styles.pagination}
         count={Math.ceil(productCards.length / itemsPerPage)}
         page={page}
         onChange={handleChange}
