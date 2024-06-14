@@ -1,4 +1,12 @@
+
 .catalogBlock {
+  display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.catalogInner {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
