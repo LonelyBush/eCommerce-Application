@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
-import { saveIdToLocalStorage } from '../../../utils/local-storage/save-id';
+import { saveToLocalStorage } from '../../../utils/local-storage/ls-handler';
 
 import styles from './product-card.module.css';
 
@@ -13,7 +13,7 @@ function ProductCard({ productCard }: IProductCardProps) {
   const [isCartActive, setIsCartActive] = useState<boolean>(true);
   const handleClick = () => {
     scrollToTop();
-    saveIdToLocalStorage(productCard.id);
+    saveToLocalStorage('product-id', productCard.id);
     navigate(`/catalog/product/:key=${productCard.key}`);
   };
 

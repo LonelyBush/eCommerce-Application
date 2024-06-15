@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BaseAddress } from '@commercetools/platform-sdk';
 import { useLocation } from 'react-router-dom';
 import fetchPersonalData from '../../api/fetchPersonalData';
+import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
 
 export interface AddressType {
   defaultBillingAddressId: string;
@@ -41,7 +42,7 @@ function UseAddressInfo() {
     async function getResponse() {
       try {
         const response = await fetchPersonalData(
-          localStorage.getItem('personal-id')!,
+          getFromLocalStorage('personal-id'),
         );
         setPersonalData({
           ...personalData,

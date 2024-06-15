@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import getProductById from '../../api/getProductById';
-import { getIdFromLocalStorage } from '../../utils/local-storage/save-id';
+import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
 import {
   IProductCard,
   IPrice,
@@ -12,7 +12,7 @@ import styles from './product-info.module.css';
 import getAllProducts from '../../api/getAllProduct';
 
 function ProductInfo() {
-  const id: string | null = getIdFromLocalStorage();
+  const id: string | null = getFromLocalStorage('product-id');
   const [productCard, setProductCard] = useState<IProductCard>({
     id: '',
     imageUrl: '',
