@@ -102,6 +102,7 @@ function Catalog({ query = {} }: CatalogProps) {
         count={Math.ceil(productCards.length / itemsPerPage)}
         page={page}
         onChange={handleChange}
+        sx={{ button: { color: 'inherit' } }}
       />
     </div>
   );

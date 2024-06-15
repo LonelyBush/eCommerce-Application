@@ -118,20 +118,16 @@ function CatalogPage() {
   return (
     <>
       <HeaderMainPage />
-      <div className={styles.wrapperFilter}>
-        <div>
-          <PriceInput onPriceChange={handlePriceInputChange} />
-        </div>
-        <div>
-          <SearchInput onSearchChange={handleSearchChange} />
-        </div>
-        <div>
-          <SortSelect onSortChange={handleSortChange} />
-        </div>
-      </div>
       <div className={styles.catalogCategorySection}>
         <AccordionCatalog onCategoryChange={handleCategoryChange} />
-        <Catalog query={query} />
+        <div className={styles.catalogWrapper}>
+          <div className={styles.wrapperFilter}>
+            <SortSelect onSortChange={handleSortChange} />
+            <PriceInput onPriceChange={handlePriceInputChange} />
+            <SearchInput onSearchChange={handleSearchChange} />
+          </div>
+          <Catalog query={query} />
+        </div>
       </div>
     </>
   );

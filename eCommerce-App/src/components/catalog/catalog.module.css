@@ -11,6 +11,10 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   flex-grow: 2;
-  padding: 1rem 1rem;
+  padding: 1.7rem 1rem;
   justify-content: center;
+}
+
+.pagination {
+  color: inherit
 }
