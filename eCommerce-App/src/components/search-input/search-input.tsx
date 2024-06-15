@@ -31,7 +31,7 @@ function SearchInput({ onSearchChange }: SearchInputProps) {
         className={styles.searchInput}
         type="text"
         value={search}
-        placeholder="search"
+        placeholder="Search"
         pattern="[a-zA-Z]*"
         onChange={handleSearchChange}
         onBlur={handleBlur}
