@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import fetchPersonalData from '../../api/fetchPersonalData';
+import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
 
 export interface PersonalData {
   firstName?: string;
@@ -19,7 +20,7 @@ function UsePersonalInfo() {
     async function getResponse() {
       try {
         const response = await fetchPersonalData(
-          localStorage.getItem('personal-id')!,
+          getFromLocalStorage('personal-id'),
         );
         setPersonalData({
           ...personalData,
