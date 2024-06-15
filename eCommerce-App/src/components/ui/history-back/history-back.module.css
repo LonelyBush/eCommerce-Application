@@ -1,0 +1,30 @@
+.backElement{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    position: relative;
+    background-color: transparent;
+    margin-top: 0.6rem;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    transition: all 0.4s ease-out;
+}
+
+
+.backElement::before {
+    content: '';
+    position: relative;
+    border-bottom: 0.2rem solid var(--c-green-400);
+    border-left: 0.2rem solid var(--c-green-400);
+    box-sizing: border-box;
+    width: 1.1rem;
+    height: 1.1rem;
+    transform: rotate(45deg);
+    margin-right: 0.4rem;
+    transition: all 0.4s ease-out;
+}
+
+.backElement:hover {
+    color: var(--c-green-400);
+}
+
