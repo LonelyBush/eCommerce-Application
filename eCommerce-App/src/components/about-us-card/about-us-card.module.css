@@ -1,0 +1,99 @@
+.cardBlock {
+    min-width: 20rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--c-blue-600);
+    border-radius: 0.2rem;
+    transition: all 0.4s ease-out;
+    box-shadow: 0rem 0.3rem 0.6rem var(--c-blue-800);
+  }
+  
+  .imgBlock {
+    width: 18rem;
+    height: 18rem;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: 18rem;
+  }
+
+  .yana {
+    background-image: url('../../assets/img/yana.jpg');
+  }
+
+  .roman {
+    background-image: url('../../assets/img/roman.jpg');
+  }
+
+  .nikita {
+    background-image: url('../../assets/logo/logo-un.png');
+  }
+
+  .cardInfoBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .cardName {
+    text-align: center;
+    height: 2rem;
+    font-weight: 600;
+  }
+
+  .cardStatusInner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .iconGitHub {
+    min-width: 2rem;
+    height: 2rem;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: center;
+    background-color: var(--c-blue-800);
+    mask-image: url('../../assets/svg-icons/icon-github.svg');
+  }
+
+  .iconGitHub:hover {
+  transform: scale(1.1);
+  }
+
+  .info {
+   font-weight: 600;
+  }
+
+  .summary {
+    font-weight: 600;
+  }
+  
+  .contributionItem::before {
+    content: "•"; 
+    margin-right: 0.5rem; 
+  }
+  
+  @media (max-width: 768px) {
+    .cardBlock {
+      width: 17rem;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .cardBlock {
+      min-width: 18rem;
+    }
+
+    .imgBlock {
+      width: 17rem;
+      height: 17rem;
+      background-size: 17rem;
+    }
+  }
