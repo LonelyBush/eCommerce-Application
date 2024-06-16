@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
-import { saveIdToLocalStorage } from '../../../utils/local-storage/save-id';
-// import getOrCreateCart from '../../../api/createCartOLD';
+import { saveToLocalStorage } from '../../../utils/local-storage/ls-handler';
+
 
 import styles from './product-card.module.css';
 import getAllProductFromCart from '../../../api/getAllProductFromCart';
@@ -12,12 +12,12 @@ import addLineItemToCart from '../../../api/addLineItemToCart';
 
 function ProductCard({ productCard }: IProductCardProps) {
   const navigate = useNavigate();
-  const { scrollToTop } = useScrollToTop();
+  const { scrollToTop } = useScrollToTop(0);
   const [isCartActive, setIsCartActive] = useState<boolean>(true);
   const [cartUpdated, setCartUpdated] = useState(false);
   const handleClick = () => {
     scrollToTop();
-    saveIdToLocalStorage(productCard.id);
+    saveToLocalStorage('product-id', productCard.id);
     navigate(`/catalog/product/:key=${productCard.key}`);
   };
 

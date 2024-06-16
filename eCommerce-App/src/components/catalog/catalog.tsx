@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import Pagination from '@mui/material/Pagination';
 import ProductCard from '../ui/product-card/product-card';
 import {
   IProductCard,
@@ -15,6 +16,8 @@ interface CatalogProps {
 function Catalog({ query = {} }: CatalogProps) {
   const [productCards, setProductCards] = useState<IProductCard[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     setLoading(true);
@@ -74,17 +77,33 @@ function Catalog({ query = {} }: CatalogProps) {
     return <Loading />;
   }
 
+  const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  const displayedProducts = productCards.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage,
+  );
+
   return (
     <div className={styles.catalogBlock}>
-      {productCards.length > 0 ? (
-        productCards
-          .slice(0, 4)
-          .map((productCard) => (
+      <div className={styles.catalogInner}>
+        {displayedProducts.length > 0 ? (
+          displayedProducts.map((productCard) => (
             <ProductCard key={productCard.id} productCard={productCard} />
           ))
-      ) : (
-        <p>No products found based on the selected criteria</p>
-      )}
+        ) : (
+          <p>No products found based on the selected criteria</p>
+        )}
+      </div>
+      <Pagination
+        className={styles.pagination}
+        count={Math.ceil(productCards.length / itemsPerPage)}
+        page={page}
+        onChange={handleChange}
+        sx={{ button: { color: 'inherit' } }}
+      />
     </div>
   );
 }

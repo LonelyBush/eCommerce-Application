@@ -10,13 +10,13 @@
   transition: all 0.4s ease-out;
   box-shadow: 0rem 0.3rem 0.6rem var(--c-blue-800);
 }
-.cardContent{
+
+.cardContent {
   display: flex;
   flex-direction: column;
 }
 
-
-.cardBlock:hover  {
+.cardBlock:hover {
   border-radius: 0.2rem;
   filter: drop-shadow(0rem 0.2rem 0.3rem var(--c-green-200));
   background-color: var(--c-blue-600);
@@ -108,7 +108,17 @@
   background-color: var(--c-green-400);
 }
 
+.cardCart:hover {
+  transform: scale(1.1);
+}
+
 .cardCart:disabled {
   mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
   cursor: default;
+}
+
+@media (max-width: 768px) {
+  .cardBlock {
+    width: 17rem;
+  }
 }
