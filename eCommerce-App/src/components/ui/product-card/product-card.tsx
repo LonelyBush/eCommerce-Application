@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
 import { saveIdToLocalStorage } from '../../../utils/local-storage/save-id';
-import getOrCreateCart from '../../../api/createCart';
+// import getOrCreateCart from '../../../api/createCartOLD';
 
 import styles from './product-card.module.css';
 
@@ -24,11 +24,11 @@ function ProductCard({ productCard }: IProductCardProps) {
   };
 
   useEffect(() => {
-    // const includeProduct=cartArray.some(item => item.id ===  productCard.id)
-    // setIsCartActive(includeProduct)
-    setIsCartActive(isCartActive);
-    getOrCreateCart(productCard.id);
-    console.log(productCard.id);
+    // const includeProduct = cartArray.some((item) => item.id === productCard.id);
+    // setIsCartActive(includeProduct);
+    // setIsCartActive(isCartActive);
+    // getOrCreateCart(productCard.id);
+    // console.log(productCard.id);
   });
 
   return (
