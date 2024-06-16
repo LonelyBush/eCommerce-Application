@@ -1,0 +1,24 @@
+.cartContentSection{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.cartTitle{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+.cartTitle > p {
+    margin-top: 0.4rem;
+    font-size: 1.4rem;
+    opacity: 0.8;
+}
+
+.mainCartView{
+    display: flex;
+    justify-content: space-between;
+}
