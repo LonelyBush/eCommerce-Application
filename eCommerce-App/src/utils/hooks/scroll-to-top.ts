@@ -1,4 +1,4 @@
-function useScrollTo(numb:number) {
+function useScrollTo(numb: number) {
   const scrollToTop = (): void => {
     window.scrollTo({
       top: numb,

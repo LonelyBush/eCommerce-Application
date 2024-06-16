@@ -8,15 +8,10 @@ function Footer() {
         <div className={styles.logoRS} />
       </Link>
       <p className={styles.year}>2024 &copy;</p>
-      <Link to='/about-us' className={styles.linkBlock}>
-      <div
-        className={styles.iconGitHub}
-      />
-      <span
-        className={styles.text}
-      >Our team
-      </span>
-    </Link>
+      <Link to="/about-us" className={styles.linkBlock}>
+        <div className={styles.iconGitHub} />
+        <span className={styles.text}>Our team</span>
+      </Link>
     </footer>
   );
 }
