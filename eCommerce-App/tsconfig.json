@@ -6,7 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "types": ["@testing-library/jest-dom"],
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -23,6 +22,6 @@
     "noImplicitAny": true
   },
 
-  "include": [".eslintrc.cjs", "src"],
+  "include": [".eslintrc.cjs", "src", "./declarations.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

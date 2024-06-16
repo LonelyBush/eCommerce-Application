@@ -18,6 +18,7 @@ module.exports = {
         node: true,
       },
       files: ['.eslintrc.{js,cjs}'],
+      excludedFiles: ['./declarations.d.ts'],
       parserOptions: {
         sourceType: 'script',
       },
@@ -27,7 +28,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    project: ['./tsconfig.json', './tsconfig.node.json', './declarations.d.ts'],
   },
   plugins: ['@typescript-eslint', 'react', 'prettier'],
   rules: {
