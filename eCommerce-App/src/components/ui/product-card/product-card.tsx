@@ -9,7 +9,7 @@ import styles from './product-card.module.css';
 
 function ProductCard({ productCard }: IProductCardProps) {
   const navigate = useNavigate();
-  const { scrollToTop } = useScrollToTop();
+  const { scrollToTop } = useScrollToTop(0);
   const [isCartActive, setIsCartActive] = useState<boolean>(true);
   const handleClick = () => {
     scrollToTop();

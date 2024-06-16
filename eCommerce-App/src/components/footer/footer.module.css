@@ -1,0 +1,55 @@
+.footer {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--c-blue-800);
+  color: var(--c-green-400);
+}
+
+.iconGitHub {
+  min-width: 2rem;
+  height: 2rem;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  background-color: var(--c-green-400);
+  mask-image: url('../../assets/svg-icons/icon-github.svg');
+}
+
+.teamBlock {
+  display: flex;
+  gap: 1rem;
+}
+
+.footerNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  font-size: 1rem;
+}
+
+.footerNav > * {
+  font-size: 0.7rem;
+}
+
+.linkBlock {
+  display: inline-block;
+}
+
+.linkBlock:hover {
+  cursor: pointer;
+  filter: drop-shadow(0.3rem 0.3rem 1rem var(--c-green-400));
+  transform: scale(1.1);
+}
+
+.logoRS {
+  min-width: 6rem;
+  height: 3rem;
+  background-image: url('../../assets/logo/logo-rss.svg');
+  background-repeat: no-repeat;
+  background-size: 6rem;
+}
