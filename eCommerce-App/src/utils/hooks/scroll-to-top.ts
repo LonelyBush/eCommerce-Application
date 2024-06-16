@@ -1,11 +1,11 @@
-function useScrollToTop() {
+function useScrollTo(numb:number) {
   const scrollToTop = (): void => {
     window.scrollTo({
-      top: 0,
+      top: numb,
       behavior: 'smooth',
     });
   };
 
   return { scrollToTop };
 }
-export default useScrollToTop;
+export default useScrollTo;

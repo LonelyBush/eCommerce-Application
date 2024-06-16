@@ -10,6 +10,7 @@
   transition: all 0.4s ease-out;
   box-shadow: 0rem 0.3rem 0.6rem var(--c-blue-800);
 }
+
 .cardContent {
   display: flex;
   flex-direction: column;

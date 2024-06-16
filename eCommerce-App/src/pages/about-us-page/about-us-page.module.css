@@ -1,15 +1,48 @@
-.schoolBlock {
+.contentInner {
+    min-height: 80vh;
+    padding: 2rem;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+.schoolBlock {
+    max-width: 70rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    color: var(--c-blue-600);
+    border-radius: 0.2rem;
+    box-shadow: 0rem 0.3rem 0.6rem var(--c-blue-800);
+}
+
 .logoLink {
   display: inline-block;
 }
 
 .logoRS {
-  min-width: 26rem;
-  height: 23rem;
-  cursor: pointer;
+  min-width: 10rem;
+  height: 10rem;
   background-image: url('../../assets/logo/rss-logo.svg');
   background-size: 20rem;
   background-repeat: no-repeat;
+  background-position: center;
+}
+
+.logoRS:hover {
+  cursor: pointer;
+transform: scale(1.1);
+}
+
+@media (max-width: 500px) {
+  .schoolBlock {
+   font-size: 1rem;
+}
+
+.logoRS {
+  min-width: 16rem;
+  height: 6rem;
+  background-size: 15rem;
+}
 }
