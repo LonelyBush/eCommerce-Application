@@ -7,10 +7,6 @@ export interface IAboutUs {
   contribution: string[];
 }
 
-export interface IAllInfoAboutUs {
-  IAboutUs: IAboutUs[];
-}
-
 const contributions: string[][] = [
   [
     'Setting up CommerceTools project and API client',
