@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import createCart from './api/createCart';
-import addLineItemToCart from './api/addLineItemToCart';
-import getAllProductFromCart from './api/getAllProductFromCart';
 
 const appContainer = document.createElement('div');
 appContainer.id = 'root';
@@ -18,13 +16,6 @@ if (!localStorage.getItem('cart-id')) {
   });
 }
 
-addLineItemToCart(
-  localStorage.getItem('cart-id'),
-  '1f262fbd-e389-4116-a0a7-aa78190a88b6',
-  1,
-  1,
-);
-getAllProductFromCart(localStorage.getItem('cart-id'));
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>

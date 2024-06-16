@@ -7,11 +7,14 @@ import { saveIdToLocalStorage } from '../../../utils/local-storage/save-id';
 // import getOrCreateCart from '../../../api/createCartOLD';
 
 import styles from './product-card.module.css';
+import getAllProductFromCart from '../../../api/getAllProductFromCart';
+import addLineItemToCart from '../../../api/addLineItemToCart';
 
 function ProductCard({ productCard }: IProductCardProps) {
   const navigate = useNavigate();
   const { scrollToTop } = useScrollToTop();
   const [isCartActive, setIsCartActive] = useState<boolean>(true);
+  const [cartUpdated, setCartUpdated] = useState(false);
   const handleClick = () => {
     scrollToTop();
     saveIdToLocalStorage(productCard.id);
@@ -20,16 +23,30 @@ function ProductCard({ productCard }: IProductCardProps) {
 
   const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    setIsCartActive(false);
+    addLineItemToCart(
+      localStorage.getItem('cart-id'),
+      productCard.id,
+      1,
+      1,
+    ).then((response) => {
+      console.log(response);
+      setCartUpdated((prev) => !prev);
+    });
   };
 
   useEffect(() => {
+    getAllProductFromCart(localStorage.getItem('cart-id')).then((response) => {
+      const includeProduct = response.lineItems.some(
+        (item) => item.productId === productCard.id,
+      );
+      setIsCartActive(includeProduct);
+    });
     // const includeProduct = cartArray.some((item) => item.id === productCard.id);
     // setIsCartActive(includeProduct);
     // setIsCartActive(isCartActive);
     // getOrCreateCart(productCard.id);
     // console.log(productCard.id);
-  });
+  }, [cartUpdated]);
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
@@ -59,7 +76,7 @@ function ProductCard({ productCard }: IProductCardProps) {
             <button
               className={styles.cardCart}
               type="button"
-              disabled={!isCartActive}
+              disabled={isCartActive}
               onClick={addToCart}
             />
           </div>
