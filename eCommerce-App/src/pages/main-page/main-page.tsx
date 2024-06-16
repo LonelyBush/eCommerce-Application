@@ -1,15 +1,12 @@
 import HeaderMainPage from '../../components/header-main-page/header-main-page';
-
-const containerStyle: object = {
-  textAlign: 'center',
-  marginTop: 60,
-};
+import Footer from '../../components/footer/footer';
 
 function MainPage() {
   return (
     <>
       <HeaderMainPage />
-      <p style={containerStyle}> The main page</p>
+      <div>main</div>
+      <Footer />
     </>
   );
 }

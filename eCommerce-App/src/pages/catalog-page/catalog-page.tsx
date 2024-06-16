@@ -6,6 +6,7 @@ import SearchInput from '../../components/search-input/search-input';
 import Catalog from '../../components/catalog/catalog';
 import SortSelect from '../../components/sort-select/sort-select';
 import { AccordionCatalog } from '../../components/catalog-accordion/catalog-accordion';
+import Footer from '../../components/footer/footer';
 
 function CatalogPage() {
   const [query, setQuery] = useState<object>({});
@@ -129,6 +130,7 @@ function CatalogPage() {
           <Catalog query={query} />
         </div>
       </div>
+      <Footer />
     </>
   );
 }

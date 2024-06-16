@@ -1,0 +1,31 @@
+.footer {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem;
+  background-color: var(--c-blue-800);
+  color: var(--c-white);
+}
+
+.footerNav {
+  display: flex;
+  gap: 1rem;
+}
+
+.iconGitHub {
+  mask-image: url('../../assets/svg-icons/icon-github.svg');
+}
+
+.logoLink {
+  display: inline-block;
+}
+
+.logoRS {
+  min-width: 6rem;
+  height: 3rem;
+  cursor: pointer;
+  background-image: url('../../assets/logo/logo-rss.svg');
+  background-repeat: no-repeat;
+  background-size: 6rem;
+}

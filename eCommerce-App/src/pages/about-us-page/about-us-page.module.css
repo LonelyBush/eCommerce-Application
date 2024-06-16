@@ -1,0 +1,15 @@
+.schoolBlock {
+    display: flex;
+}
+.logoLink {
+  display: inline-block;
+}
+
+.logoRS {
+  min-width: 26rem;
+  height: 23rem;
+  cursor: pointer;
+  background-image: url('../../assets/logo/rss-logo.svg');
+  background-size: 20rem;
+  background-repeat: no-repeat;
+}
