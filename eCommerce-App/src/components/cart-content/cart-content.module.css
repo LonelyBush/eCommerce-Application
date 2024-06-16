@@ -9,7 +9,7 @@
     align-items: center;
     gap: 1rem;
     margin-top: 1rem;
-    margin-left: 2rem;
+    margin-left: 20rem;
     margin-bottom: 1rem;
 }
 .cartTitle > p {
@@ -21,4 +21,43 @@
 .mainCartView{
     display: flex;
     justify-content: space-between;
+    margin: 0 20rem;
+}
+
+.deleteAllIcon {
+    display: block;
+  width: 2rem;
+  height: 2rem;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  background-color: var(--c-blue-600);
+  transition: all 0.4s ease-out;
+  mask-image: url('../../assets/svg-icons/trash-bin.svg');
+  cursor: pointer;
+}
+
+.deleteAllBlock{
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: all 0.4s ease-out;
+    margin-top: 0.4rem;
+    margin-left: 1.5rem;
+}
+
+.hide{
+    display: none;
+    transition: all 0.4s ease-out;
+}
+
+.deleteAllIcon:hover{
+    background-color: var(--c-green-400);
+}
+
+.deleteAllIcon:hover + .hide {
+    display: block;
+    color: var(--c-green-400);
+    transition: all 0.4s ease-out;
 }
