@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
-import { saveToLocalStorage } from '../../../utils/local-storage/ls-handler';
-
+import {
+  getFromLocalStorage,
+  saveToLocalStorage,
+} from '../../../utils/local-storage/ls-handler';
 
 import styles from './product-card.module.css';
 import getAllProductFromCart from '../../../api/getAllProductFromCart';
@@ -24,7 +26,7 @@ function ProductCard({ productCard }: IProductCardProps) {
   const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     addLineItemToCart(
-      localStorage.getItem('cart-id'),
+      getFromLocalStorage('cart-id'),
       productCard.id,
       1,
       1,
@@ -33,13 +35,12 @@ function ProductCard({ productCard }: IProductCardProps) {
       setCartUpdated((prev) => !prev);
     });
   };
-
   useEffect(() => {
-    getAllProductFromCart(localStorage.getItem('cart-id')).then((response) => {
-      const includeProduct = response.lineItems.some(
+    getAllProductFromCart(getFromLocalStorage('cart-id')).then((response) => {
+      const includeProduct = response.cartDraft?.lineItems.some(
         (item) => item.productId === productCard.id,
       );
-      setIsCartActive(includeProduct);
+      setIsCartActive(includeProduct!);
     });
     // const includeProduct = cartArray.some((item) => item.id === productCard.id);
     // setIsCartActive(includeProduct);

@@ -59,7 +59,7 @@
 .cartOrderPriceBlock{
     display: flex;
     justify-content: space-between;
-    align-items:start;
+    align-items: center;
     text-align: end;
 }
 
@@ -96,3 +96,9 @@
     color: var(--c-red);
     font-size: 1.25rem;
   }
+
+  .toastBody{
+    font-family: "salina trial";
+     font-size: 0.8rem;
+     color: var(--c-black);
+}

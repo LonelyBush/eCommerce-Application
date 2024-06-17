@@ -9,7 +9,8 @@ import {
   authMiddlewareOptions,
   httpMiddlewareOptions,
 } from './constForApi';
-import { ApiResponse } from './intefaceApi';
+import { ApiResponse, CartUpdateActionBody } from './intefaceApi';
+import { saveToLocalStorage } from '../utils/local-storage/ls-handler';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
@@ -21,23 +22,27 @@ const apiRoot = createApiBuilderFromCtpClient(middleware).withProjectKey({
   projectKey,
 });
 
-export default function getAllProductFromCart(
+export default function cartUpdateAction(
   cartId: string,
+  updateBody: CartUpdateActionBody,
 ): Promise<ApiResponse> {
   return new Promise((resolve, reject) => {
     apiRoot
       .carts()
       .withId({ ID: cartId })
-      .get()
+      .post({
+        body: updateBody,
+      })
       .execute()
       .then((response) => {
         if (response.body) {
           const cartDraft: Cart = {
             ...response.body,
           };
+          saveToLocalStorage('version-cart', `${cartDraft.version}`);
           resolve({ cartDraft });
         } else {
-          reject(new Error('No response body'));
+          reject(new Error('Update was failed !'));
         }
       })
       .catch((error) => {

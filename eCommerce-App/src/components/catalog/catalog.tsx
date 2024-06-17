@@ -85,7 +85,7 @@ function Catalog({ query = {} }: CatalogProps) {
     (page - 1) * itemsPerPage,
     page * itemsPerPage,
   );
-
+  console.log(displayedProducts);
   return (
     <div className={styles.catalogBlock}>
       <div className={styles.catalogInner}>
