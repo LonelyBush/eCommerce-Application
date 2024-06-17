@@ -45,8 +45,8 @@ function ProductCard({ productCard }: IProductCardProps) {
         }
       }
     }
-  };
 
+  };
   useEffect(() => {
     if (cartId) {
       getAllProductFromCart(cartId).then((response) => {

@@ -10,6 +10,7 @@ import {
   httpMiddlewareOptions,
 } from './constForApi';
 import { ApiResponse, UpdateActionBody } from './intefaceApi';
+import { saveToLocalStorage } from '../utils/local-storage/ls-handler';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
@@ -38,7 +39,7 @@ export default function updateAction(
           const customer: Customer = {
             ...response.body,
           };
-          localStorage.setItem('version', `${customer.version}`);
+          saveToLocalStorage('version', `${customer.version}`);
           resolve({ customer });
         } else {
           reject(new Error('Update was failed !'));
