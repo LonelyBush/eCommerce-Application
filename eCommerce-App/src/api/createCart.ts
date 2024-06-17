@@ -6,6 +6,7 @@ import {
   authMiddlewareOptions,
   httpMiddlewareOptions,
 } from './constForApi';
+import { ApiResponse } from './intefaceApi';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
@@ -21,7 +22,7 @@ const cartDraft = {
   currency: 'USD',
 };
 
-export default function createCart() {
+export default function createCart(): Promise<ApiResponse> {
   return new Promise((resolve, reject) => {
     apiRoot
       .carts()
@@ -29,9 +30,7 @@ export default function createCart() {
       .execute()
       .then((response) => {
         if (response.body) {
-          console.log('Cart1 created:', response.body);
-
-          resolve(response.body);
+          resolve({ cart: response.body });
         } else {
           reject(new Error('No response body'));
         }
