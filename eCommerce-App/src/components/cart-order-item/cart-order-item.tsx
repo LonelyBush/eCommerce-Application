@@ -139,7 +139,7 @@ function CartOrderItem({
             </p>
           </div>
         </div>
-        <div className={styles.cartOrderTotalPrice}>
+        <div className={styles.cartOrderPriceBlock}>
           Total:
           <div className={styles.pricesBlock}>
             <p className={`${styles.cardPrice}`}>{totalUnitPrice}&#36;</p>

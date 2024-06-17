@@ -1,6 +1,7 @@
 .cartContentSection{
     display: flex;
     flex-direction: column;
+    min-height: 80vh;
 
 }
 
@@ -9,7 +10,7 @@
     align-items: center;
     gap: 1rem;
     margin-top: 1rem;
-    margin-left: 20rem;
+    margin-left: 10rem;
     margin-bottom: 1rem;
 }
 .cartTitle > p {
@@ -18,10 +19,19 @@
     opacity: 0.8;
 }
 
+.cartOrderListSection{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 45rem;
+    overflow-y: scroll;
+}
+
 .mainCartView{
     display: flex;
-    justify-content: space-between;
-    margin: 0 20rem;
+    justify-content: space-around;
+    margin: 0 10rem;
+    gap: 2rem;
 }
 
 .deleteAllIcon {
@@ -60,4 +70,29 @@
     display: block;
     color: var(--c-green-400);
     transition: all 0.4s ease-out;
+}
+
+@media (max-width: 1200px) {
+    .mainCartView{
+        display: flex;
+        flex-direction: column-reverse;
+        margin: 0 3rem;
+    }
+
+    .cartTitle{
+
+        margin-left: 3em;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .mainCartView{
+        margin: 0 1.5rem;
+    }
+
+    .cartTitle{
+
+        margin-left: 1.5em;
+    }
 }
