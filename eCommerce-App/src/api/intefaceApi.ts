@@ -11,7 +11,6 @@ import {
   CartUpdateAction,
 } from '@commercetools/platform-sdk';
 
-
 export interface ApiResponse {
   customerSignInResult?: CustomerSignInResult;
   customer?: Customer;

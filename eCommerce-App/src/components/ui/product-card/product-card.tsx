@@ -45,21 +45,20 @@ function ProductCard({ productCard }: IProductCardProps) {
         }
       }
     }
-
   };
   useEffect(() => {
     if (cartId) {
       getAllProductFromCart(cartId).then((response) => {
-        const includeProduct = response.lineItems.some(
+        const includeProduct = response.cartDraft?.lineItems.some(
           (item, index: number) => {
             if (item.productId === productCard.id) {
-              setLineItemsId(response.lineItems[index].id);
+              setLineItemsId(response.cartDraft!.lineItems[index].id);
               return true;
             }
             return false;
           },
         );
-        setIsCartActive(includeProduct);
+        setIsCartActive(includeProduct!);
       });
     }
   }, [cartUpdated]);
