@@ -8,43 +8,60 @@ import { saveToLocalStorage } from '../../../utils/local-storage/ls-handler';
 import styles from './product-card.module.css';
 import getAllProductFromCart from '../../../api/getAllProductFromCart';
 import addLineItemToCart from '../../../api/addLineItemToCart';
+import removeLineItemFromCart from '../../../api/removeLineItem';
 
 function ProductCard({ productCard }: IProductCardProps) {
   const navigate = useNavigate();
   const { scrollToTop } = useScrollToTop(0);
   const [isCartActive, setIsCartActive] = useState<boolean>(true);
+  const [lineItemsId, setLineItemsId] = useState<string>('');
   const [cartUpdated, setCartUpdated] = useState(false);
+  const cartId = localStorage.getItem('cart-id');
+
   const handleClick = () => {
     scrollToTop();
     saveToLocalStorage('product-id', productCard.id);
     navigate(`/catalog/product/:key=${productCard.key}`);
   };
 
-  const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleProductInCart = async (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     event.stopPropagation();
-    addLineItemToCart(
-      localStorage.getItem('cart-id'),
-      productCard.id,
-      1,
-      1,
-    ).then((response) => {
-      console.log(response);
-      setCartUpdated((prev) => !prev);
-    });
+    if (cartId) {
+      if (isCartActive) {
+        try {
+          await removeLineItemFromCart(cartId, lineItemsId);
+          setCartUpdated((prev) => !prev);
+        } catch (error) {
+          console.error('Failed to remove item from cart:', error);
+        }
+      } else {
+        try {
+          await addLineItemToCart(cartId, productCard.id, 1, 1);
+          setCartUpdated((prev) => !prev);
+        } catch (error) {
+          console.error('Failed to add item to cart:', error);
+        }
+      }
+    }
   };
 
   useEffect(() => {
-    getAllProductFromCart(localStorage.getItem('cart-id')).then((response) => {
-      const includeProduct = response.lineItems.some(
-        (item) => item.productId === productCard.id,
-      );
-      setIsCartActive(includeProduct);
-    });
-    // const includeProduct = cartArray.some((item) => item.id === productCard.id);
-    // setIsCartActive(includeProduct);
-    // setIsCartActive(isCartActive);
-    // getOrCreateCart(productCard.id);
-    // console.log(productCard.id);
+    if (cartId) {
+      getAllProductFromCart(cartId).then((response) => {
+        const includeProduct = response.lineItems.some(
+          (item, index: number) => {
+            if (item.productId === productCard.id) {
+              setLineItemsId(response.lineItems[index].id);
+              return true;
+            }
+            return false;
+          },
+        );
+        setIsCartActive(includeProduct);
+      });
+    }
   }, [cartUpdated]);
 
   return (
@@ -73,10 +90,9 @@ function ProductCard({ productCard }: IProductCardProps) {
             </div>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
-              className={styles.cardCart}
+              className={`${styles.cardCart} ${isCartActive ? styles.checked : ''}`}
               type="button"
-              disabled={isCartActive}
-              onClick={addToCart}
+              onClick={toggleProductInCart}
             />
           </div>
         </div>
