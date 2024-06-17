@@ -25,7 +25,7 @@ function AboutUsCard({ us }: AboutUsCardProps) {
           </summary>
           <ul>
             {us.contribution.map((item) => (
-              <li className={styles.contributionItem} key={us.name}>
+              <li className={styles.contributionItem} key={`${us.img}-${item}`}>
                 {item}
               </li>
             ))}

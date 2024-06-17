@@ -14,7 +14,7 @@ function AboutUsPage() {
         <Tags.H2>Undefineds Team</Tags.H2>
         <div className={styles.aboutUsBlock}>
           {aboutUs.map((us) => (
-            <AboutUsCard key={us.name} us={us} />
+            <AboutUsCard key={us.img} us={us} />
           ))}
         </div>
         <div className={styles.schoolBlock}>
