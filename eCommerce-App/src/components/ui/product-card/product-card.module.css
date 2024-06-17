@@ -122,3 +122,7 @@
     width: 17rem;
   }
 }
+
+.checked {
+  mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
+}

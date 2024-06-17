@@ -3,6 +3,7 @@ import {
   Customer,
   CustomerUpdateAction,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/customer';
+
 import {
   ProductProjection,
   Category,
@@ -10,16 +11,15 @@ import {
   CartUpdateAction,
 } from '@commercetools/platform-sdk';
 
+
 export interface ApiResponse {
   customerSignInResult?: CustomerSignInResult;
   customer?: Customer;
   productProjection?: ProductProjection;
   productProjectionArr?: ProductProjection[];
-
   cartDraft?: Cart;
-
   category?: Category[];
-
+  cart?: Cart;
   error?: Error;
 }
 

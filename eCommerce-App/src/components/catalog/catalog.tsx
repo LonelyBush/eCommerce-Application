@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Pagination from '@mui/material/Pagination';
 import ProductCard from '../ui/product-card/product-card';
-import {
-  IProductCard,
-  IPrice,
-} from '../ui/product-card/product-card-interface';
+import { IProductCard } from '../ui/product-card/product-card-interface';
 import getAllProducts from '../../api/getAllProduct';
 import Loading from '../ui/loading/loading';
 import styles from './catalog.module.css';
@@ -40,15 +37,11 @@ function Catalog({ query = {} }: CatalogProps) {
           let price = 0;
           let discount = 0;
           if (product.masterVariant.prices) {
-            const usPrice = product.masterVariant.prices.find(
-              (priceArr: IPrice) => priceArr.country === 'US',
-            );
-            if (usPrice) {
-              price = usPrice.value.centAmount / 100;
-              discount = usPrice.discounted?.value.centAmount ?? 0;
-              if (typeof discount === 'number') {
-                discount /= 100;
-              }
+            price = product.masterVariant.prices[0].value.centAmount / 100;
+            discount =
+              product.masterVariant.prices[0].discounted?.value.centAmount ?? 0;
+            if (typeof discount === 'number') {
+              discount /= 100;
             }
           }
 

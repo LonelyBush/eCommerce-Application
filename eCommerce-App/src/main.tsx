@@ -8,18 +8,27 @@ const appContainer = document.createElement('div');
 appContainer.id = 'root';
 document.body.append(appContainer);
 
-if (!localStorage.getItem('cart-id')) {
-  createCart().then((response) => {
-    console.log('create!!', response, response.id);
-    localStorage.setItem('cart-id', response.id);
-    localStorage.setItem('version-cart', '1');
-  });
-}
+const initializeApp = async () => {
+  if (!localStorage.getItem('cart-id')) {
+    try {
+      const response = (await createCart()).cart;
+      if (response) {
+        localStorage.setItem('cart-id', response.id);
+        localStorage.setItem('version-cart', '1');
+      }
+    } catch (error) {
+      console.error('Failed to create cart:', error);
+      // Handle the error accordingly, e.g., show an error message to the user
+    }
+  }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-);
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>,
+  );
+};
+
+initializeApp();

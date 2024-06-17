@@ -5,7 +5,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
 }
+
+.aboutUsBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
 .schoolBlock {
     max-width: 70rem;
     display: flex;
