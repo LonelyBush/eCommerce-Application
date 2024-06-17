@@ -23,13 +23,13 @@
   gap: 1rem;
 }
 
+.text {
+  font-size: 1rem;
+}
+
 .footerNav {
   display: flex;
   flex-direction: column;
-}
-
-.text {
-  font-size: 1rem;
 }
 
 .footerNav > * {
@@ -52,4 +52,23 @@
   background-image: url('../../assets/logo/logo-rss.svg');
   background-repeat: no-repeat;
   background-size: 6rem;
+}
+
+@media (max-width: 420px) {
+  .logoRS {
+    min-width: 4rem;
+    height: 1.5rem;
+    background-size: 4rem;
+  }
+  .year {
+    font-size: 1rem;
+  }
+
+  .iconGitHub {
+    min-width: 1.5rem;
+    height: 1.5rem;
+  }
+  .text {
+    font-size: 0.7rem;
+  }
 }
