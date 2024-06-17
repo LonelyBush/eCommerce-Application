@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import getProductById from '../../api/getProductById';
 import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
-import {
-  IProductCard,
-} from '../ui/product-card/product-card-interface';
+import { IProductCard } from '../ui/product-card/product-card-interface';
 import Loading from '../ui/loading/loading';
 import Tags from '../ui/tags/tags';
 import ImgSlider from '../ui/each-img-slider/img-slider';
