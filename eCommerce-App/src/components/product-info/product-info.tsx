@@ -3,7 +3,6 @@ import getProductById from '../../api/getProductById';
 import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
 import {
   IProductCard,
-  IPrice,
 } from '../ui/product-card/product-card-interface';
 import Loading from '../ui/loading/loading';
 import Tags from '../ui/tags/tags';
@@ -50,15 +49,11 @@ function ProductInfo() {
           let price = 0;
           let discount = 0;
           if (product.masterVariant.prices) {
-            const usPrice = product.masterVariant.prices.find(
-              (priceArr: IPrice) => priceArr.country === 'US',
-            );
-            if (usPrice) {
-              price = usPrice.value.centAmount / 100;
-              discount = usPrice.discounted?.value.centAmount ?? 0;
-              if (typeof discount === 'number') {
-                discount /= 100;
-              }
+            price = product.masterVariant.prices[0].value.centAmount / 100;
+            discount =
+              product.masterVariant.prices[0].discounted?.value.centAmount ?? 0;
+            if (typeof discount === 'number') {
+              discount /= 100;
             }
           }
 

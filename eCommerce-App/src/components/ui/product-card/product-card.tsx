@@ -5,7 +5,6 @@ import useScrollToTop from '../../../utils/hooks/scroll-to-top';
 import { IProductCardProps } from './product-card-interface';
 import { saveToLocalStorage } from '../../../utils/local-storage/ls-handler';
 
-
 import styles from './product-card.module.css';
 import getAllProductFromCart from '../../../api/getAllProductFromCart';
 import addLineItemToCart from '../../../api/addLineItemToCart';
