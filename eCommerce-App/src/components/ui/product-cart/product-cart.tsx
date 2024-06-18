@@ -40,16 +40,20 @@ function ProductCart({ productCardId }: ProductCartProps) {
   useEffect(() => {
     if (cartId) {
       getAllProductFromCart(cartId).then((response) => {
-        const includeProduct = response.lineItems.some(
+        const includeProduct = response.cartDraft?.lineItems.some(
           (item, index: number) => {
             if (item.productId === productCardId) {
-              setLineItemsId(response.lineItems[index].id);
+              const lineItemsIdIncluded =
+                response.cartDraft?.lineItems[index].id;
+              setLineItemsId(
+                lineItemsIdIncluded !== undefined ? lineItemsIdIncluded : '0',
+              );
               return true;
             }
             return false;
           },
         );
-        setIsCartActive(includeProduct);
+        setIsCartActive(includeProduct!);
       });
     }
   }, [cartUpdated]);
