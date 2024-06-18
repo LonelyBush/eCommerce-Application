@@ -104,17 +104,8 @@
   mask-image: url('../../../assets/svg-icons/shopping-cart-not-check.svg');
 }
 
-.cardBlock:hover .cardCart {
+.cardBlock:hover button {
   background-color: var(--c-green-400);
-}
-
-.cardCart:hover {
-  transform: scale(1.1);
-}
-
-.cardCart:disabled {
-  mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
-  cursor: default;
 }
 
 @media (max-width: 768px) {
@@ -123,6 +114,4 @@
   }
 }
 
-.checked {
-  mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
-}
+

@@ -5,8 +5,10 @@ import { IProductCard } from '../ui/product-card/product-card-interface';
 import Loading from '../ui/loading/loading';
 import Tags from '../ui/tags/tags';
 import ImgSlider from '../ui/each-img-slider/img-slider';
-import styles from './product-info.module.css';
 import getAllProducts from '../../api/getAllProduct';
+import ProductCart from '../ui/product-cart/product-cart';
+
+import styles from './product-info.module.css';
 
 function ProductInfo() {
   const id: string | null = getFromLocalStorage('product-id');
@@ -22,14 +24,11 @@ function ProductInfo() {
   });
 
   useEffect(() => {
-    getAllProducts().then((res) => {
-      console.log('allProducts', res);
-    });
+    getAllProducts().then(() => {});
     if (!id) return;
     getProductById(id)
       .then((response) => {
         const product = response.productProjection;
-        console.log('product', product);
         if (product) {
           const { images } = product.masterVariant;
           let imageUrl = '';
@@ -92,9 +91,14 @@ function ProductInfo() {
       </div>
       <div className={styles.productPageInfo}>
         <Tags.H1>{productCard.name}</Tags.H1>
-        <div className={styles.productPagePrices}>
-          Price:&nbsp;
-          <span className={styles.productPagePrice}>{productCard.price}$</span>
+        <div className={styles.productInner}>
+          <div className={styles.productPagePrices}>
+            Price:&nbsp;
+            <span className={styles.productPagePrice}>
+              {productCard.price}$
+            </span>
+          </div>
+          <ProductCart productCardId={productCard.id} />
         </div>
         {productCard.discount > 0 && (
           <div className={styles.productPagePrices}>
