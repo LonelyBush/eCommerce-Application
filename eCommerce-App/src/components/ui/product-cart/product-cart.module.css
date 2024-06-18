@@ -1,0 +1,20 @@
+.cardCart {
+    min-width: 2rem;
+    height: 2rem;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: center;
+    background-color: var(--c-blue-600);
+    transition: all 0.4s ease-out;
+    mask-image: url('../../../assets/svg-icons/shopping-cart-not-check.svg');
+  }
+   
+  .cardCart:hover {
+    transform: scale(1.1);
+    background-color: var(--c-green-400);
+  }
+  
+  .checked {
+    mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
+  }
+  

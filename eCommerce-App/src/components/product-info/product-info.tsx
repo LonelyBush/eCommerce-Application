@@ -5,8 +5,10 @@ import { IProductCard } from '../ui/product-card/product-card-interface';
 import Loading from '../ui/loading/loading';
 import Tags from '../ui/tags/tags';
 import ImgSlider from '../ui/each-img-slider/img-slider';
-import styles from './product-info.module.css';
 import getAllProducts from '../../api/getAllProduct';
+import ProductCart from '../ui/product-cart/product-cart';
+
+import styles from './product-info.module.css';
 
 function ProductInfo() {
   const id: string | null = getFromLocalStorage('product-id');
@@ -105,6 +107,7 @@ function ProductInfo() {
             <div className={styles.discountPercent}>{getDiscount()}%</div>
           </div>
         )}
+        <ProductCart productCardId={productCard.id} />
         <p className={styles.productPageDescription}>
           {productCard.description}
         </p>
