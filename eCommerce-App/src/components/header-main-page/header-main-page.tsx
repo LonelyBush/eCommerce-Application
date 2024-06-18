@@ -21,12 +21,16 @@ function HeaderMainPage() {
 
   useEffect(() => {
     if (cartId) {
-      getAllProductFromCart(cartId).then((response) => {
-        const cartProducts = response.cartDraft?.lineItems ? response.cartDraft.lineItems.length : 0;
-        setCountCart(cartProducts);
-      }).catch(error => {
-        console.error('Failed to fetch cart products:', error);
-      });
+      getAllProductFromCart(cartId)
+        .then((response) => {
+          const cartProducts = response.cartDraft?.lineItems
+            ? response.cartDraft.lineItems.length
+            : 0;
+          setCountCart(cartProducts);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch cart products:', error);
+        });
     }
   }, [cartId]);
 
