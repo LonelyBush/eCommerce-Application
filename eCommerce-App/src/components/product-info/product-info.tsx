@@ -24,14 +24,11 @@ function ProductInfo() {
   });
 
   useEffect(() => {
-    getAllProducts().then((res) => {
-      console.log('allProducts', res);
-    });
+    getAllProducts().then(() => {});
     if (!id) return;
     getProductById(id)
       .then((response) => {
         const product = response.productProjection;
-        console.log('product', product);
         if (product) {
           const { images } = product.masterVariant;
           let imageUrl = '';
@@ -94,9 +91,14 @@ function ProductInfo() {
       </div>
       <div className={styles.productPageInfo}>
         <Tags.H1>{productCard.name}</Tags.H1>
-        <div className={styles.productPagePrices}>
-          Price:&nbsp;
-          <span className={styles.productPagePrice}>{productCard.price}$</span>
+        <div className={styles.productInner}>
+          <div className={styles.productPagePrices}>
+            Price:&nbsp;
+            <span className={styles.productPagePrice}>
+              {productCard.price}$
+            </span>
+          </div>
+          <ProductCart productCardId={productCard.id} />
         </div>
         {productCard.discount > 0 && (
           <div className={styles.productPagePrices}>
@@ -107,7 +109,6 @@ function ProductInfo() {
             <div className={styles.discountPercent}>{getDiscount()}%</div>
           </div>
         )}
-        <ProductCart productCardId={productCard.id} />
         <p className={styles.productPageDescription}>
           {productCard.description}
         </p>
