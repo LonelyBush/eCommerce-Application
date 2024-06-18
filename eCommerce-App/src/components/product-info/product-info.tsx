@@ -9,8 +9,13 @@ import getAllProducts from '../../api/getAllProduct';
 import ProductCart from '../ui/product-cart/product-cart';
 
 import styles from './product-info.module.css';
+import { CountCart } from '../../types/types';
 
-function ProductInfo() {
+function ProductInfo({
+  setCountCart,
+}: {
+  setCountCart: React.Dispatch<React.SetStateAction<CountCart>>;
+}) {
   const id: string | null = getFromLocalStorage('product-id');
   const [productCard, setProductCard] = useState<IProductCard>({
     id: '',
@@ -98,7 +103,10 @@ function ProductInfo() {
               {productCard.price}$
             </span>
           </div>
-          <ProductCart productCardId={productCard.id} />
+          <ProductCart
+            setCountCart={setCountCart}
+            productCartId={productCard.id}
+          />
         </div>
         {productCard.discount > 0 && (
           <div className={styles.productPagePrices}>

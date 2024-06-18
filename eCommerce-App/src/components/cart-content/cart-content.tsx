@@ -10,10 +10,14 @@ import Tags from '../ui/tags/tags';
 import styles from './cart-content.module.css';
 import UseCartContent from './useCartContent-hook';
 import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
+import { CountCart } from '../../types/types';
 
-export function CartContent() {
+export function CartContent({
+  setCountCart,
+}: {
+  setCountCart: React.Dispatch<React.SetStateAction<CountCart>>;
+}) {
   const { cartContent, setCartContent } = UseCartContent();
-  const getTotalQuantity = cartContent.totalLineItemQuantity;
   const getLineItems = cartContent.lineItems;
   const getTotalPrice = cartContent.totalPrice;
 
@@ -37,6 +41,10 @@ export function CartContent() {
         apiResponse.cartDraft!.totalPrice.centAmount / 100 || 0;
       const responsedLineItems = apiResponse.cartDraft?.lineItems || [];
       const responsedVersion = apiResponse.cartDraft?.version || 0;
+      const cartProducts = apiResponse.cartDraft?.lineItems
+        ? apiResponse.cartDraft.lineItems.length
+        : 0;
+      setCountCart((prevState) => ({ ...prevState, count: cartProducts }));
       setCartContent((prevState) => ({
         ...prevState,
         totalLineItemQuantity: responsedTotalQuantity,
@@ -52,7 +60,7 @@ export function CartContent() {
       <div className={styles.cartContentSection}>
         <div className={styles.cartTitle}>
           <Tags.H2>Cart</Tags.H2>
-          <p>{`${getTotalQuantity} Items`}</p>
+          <p>{`${getLineItems.length} Items`}</p>
           <div className={styles.deleteAllBlock} onClick={handleDeleteAll}>
             <div className={styles.deleteAllIcon} />
             <div className={styles.hide}>Clear All</div>
@@ -67,6 +75,7 @@ export function CartContent() {
                   key={lineItem.id}
                   lineItem={lineItem}
                   setCartContent={setCartContent}
+                  setCountCart={setCountCart}
                 />
               );
             })}

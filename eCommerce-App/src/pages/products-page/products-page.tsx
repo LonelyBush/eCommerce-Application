@@ -4,12 +4,12 @@ import Footer from '../../components/footer/footer';
 import useCountCart from '../../components/header-main-page/useCountCart-hook';
 
 function ProductsPage() {
-  const { countCart } = useCountCart();
+  const { countCart, setCountCart } = useCountCart();
   return (
     <>
       {' '}
       <HeaderMainPage countCart={countCart.count} />
-      <ProductInfo />
+      <ProductInfo setCountCart={setCountCart} />
       <Footer />
     </>
   );
