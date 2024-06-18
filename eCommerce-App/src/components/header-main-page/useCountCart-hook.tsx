@@ -26,7 +26,6 @@ function useCountCart() {
     }
     getResponse();
   }, []);
-  console.log(countCart);
   return { countCart, setCountCart };
 }
 

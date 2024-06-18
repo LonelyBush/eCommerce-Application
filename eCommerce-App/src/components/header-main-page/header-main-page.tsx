@@ -20,7 +20,6 @@ function HeaderMainPage({ countCart }: { countCart: number }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  console.log(countCart);
   const authToken = localStorage.getItem('authToken');
 
   return (

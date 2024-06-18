@@ -43,7 +43,6 @@ function ProductCart({
           const cartProducts = response.cartDraft?.lineItems
             ? response.cartDraft.lineItems.length
             : 0;
-          console.log(cartProducts);
           setCountCart((prevState) => ({
             ...prevState,
             count: cartProducts,
