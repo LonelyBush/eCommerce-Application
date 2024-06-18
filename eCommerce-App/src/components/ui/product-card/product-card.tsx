@@ -1,12 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import useScrollToTop from '../../../utils/hooks/scroll-to-top';
-import { IProductCardProps } from './product-card-interface';
+import { IProductCard } from './product-card-interface';
 import { saveToLocalStorage } from '../../../utils/local-storage/ls-handler';
 import ProductCart from '../product-cart/product-cart';
 
 import styles from './product-card.module.css';
+import { CountCart } from '../../../types/types';
 
-function ProductCard({ productCard }: IProductCardProps) {
+function ProductCard({
+  productCard,
+  setCountCart,
+}: {
+  productCard: IProductCard;
+  setCountCart: React.Dispatch<React.SetStateAction<CountCart>>;
+}) {
   const navigate = useNavigate();
   const { scrollToTop } = useScrollToTop(0);
 
@@ -40,7 +47,10 @@ function ProductCard({ productCard }: IProductCardProps) {
                 {productCard.price} &#36;
               </p>
             </div>
-            <ProductCart productCardId={productCard.id} />
+            <ProductCart
+              productCartId={productCard.id}
+              setCountCart={setCountCart}
+            />
           </div>
         </div>
       </div>

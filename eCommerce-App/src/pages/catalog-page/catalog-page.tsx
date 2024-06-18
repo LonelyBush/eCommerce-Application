@@ -7,8 +7,10 @@ import Catalog from '../../components/catalog/catalog';
 import SortSelect from '../../components/sort-select/sort-select';
 import { AccordionCatalog } from '../../components/catalog-accordion/catalog-accordion';
 import Footer from '../../components/footer/footer';
+import useCountCart from '../../components/header-main-page/useCountCart-hook';
 
 function CatalogPage() {
+  const { countCart, setCountCart } = useCountCart();
   const [query, setQuery] = useState<object>({});
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
@@ -118,7 +120,7 @@ function CatalogPage() {
 
   return (
     <>
-      <HeaderMainPage />
+      <HeaderMainPage countCart={countCart.count} />
       <div className={styles.catalogCategorySection}>
         <AccordionCatalog onCategoryChange={handleCategoryChange} />
         <div className={styles.catalogWrapper}>
@@ -127,7 +129,7 @@ function CatalogPage() {
             <PriceInput onPriceChange={handlePriceInputChange} />
             <SearchInput onSearchChange={handleSearchChange} />
           </div>
-          <Catalog query={query} />
+          <Catalog query={query} setCountCart={setCountCart} />
         </div>
       </div>
       <Footer />

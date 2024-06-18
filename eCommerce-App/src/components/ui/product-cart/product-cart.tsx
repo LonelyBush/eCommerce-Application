@@ -3,12 +3,15 @@ import getAllProductFromCart from '../../../api/getAllProductFromCart';
 import addLineItemToCart from '../../../api/addLineItemToCart';
 import removeLineItemFromCart from '../../../api/removeLineItem';
 import styles from './product-cart.module.css';
+import { CountCart } from '../../../types/types';
 
-interface ProductCartProps {
-  productCardId: string;
-}
-
-function ProductCart({ productCardId }: ProductCartProps) {
+function ProductCart({
+  productCartId,
+  setCountCart,
+}: {
+  productCartId: string;
+  setCountCart: React.Dispatch<React.SetStateAction<CountCart>>;
+}) {
   const [isCartActive, setIsCartActive] = useState<boolean>(true);
   const [lineItemsId, setLineItemsId] = useState<string>('');
   const [cartUpdated, setCartUpdated] = useState(false);
@@ -21,15 +24,30 @@ function ProductCart({ productCardId }: ProductCartProps) {
     if (cartId) {
       if (isCartActive) {
         try {
-          await removeLineItemFromCart(cartId, lineItemsId);
+          const response = await removeLineItemFromCart(cartId, lineItemsId);
           setCartUpdated((prev) => !prev);
+          const cartProducts = response.cartDraft?.lineItems
+            ? response.cartDraft.lineItems.length
+            : 0;
+          setCountCart((prevState) => ({
+            ...prevState,
+            count: cartProducts,
+          }));
         } catch (error) {
           console.error('Failed to remove item from cart:', error);
         }
       } else {
         try {
-          await addLineItemToCart(cartId, productCardId, 1, 1);
+          const response = await addLineItemToCart(cartId, productCartId, 1, 1);
           setCartUpdated((prev) => !prev);
+          const cartProducts = response.cartDraft?.lineItems
+            ? response.cartDraft.lineItems.length
+            : 0;
+          console.log(cartProducts);
+          setCountCart((prevState) => ({
+            ...prevState,
+            count: cartProducts,
+          }));
         } catch (error) {
           console.error('Failed to add item to cart:', error);
         }
@@ -42,7 +60,7 @@ function ProductCart({ productCardId }: ProductCartProps) {
       getAllProductFromCart(cartId).then((response) => {
         const includeProduct = response.cartDraft?.lineItems.some(
           (item, index: number) => {
-            if (item.productId === productCardId) {
+            if (item.productId === productCartId) {
               const lineItemsIdIncluded =
                 response.cartDraft?.lineItems[index].id;
               setLineItemsId(
