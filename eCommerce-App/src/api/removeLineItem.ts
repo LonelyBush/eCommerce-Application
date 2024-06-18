@@ -1,4 +1,7 @@
-import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
+import {
+  Cart,
+  createApiBuilderFromCtpClient,
+} from '@commercetools/platform-sdk';
 import { ClientBuilder } from '@commercetools/sdk-client-v2';
 
 import {
@@ -6,6 +9,8 @@ import {
   authMiddlewareOptions,
   httpMiddlewareOptions,
 } from './constForApi';
+import { saveToLocalStorage } from '../utils/local-storage/ls-handler';
+import { ApiResponse } from './intefaceApi';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
@@ -20,7 +25,7 @@ const apiRoot = createApiBuilderFromCtpClient(middleware).withProjectKey({
 export default function removeLineItemFromCart(
   cartId: string,
   lineItemId: string,
-) {
+): Promise<ApiResponse> {
   const versionCart = Number(localStorage.getItem('version-cart'));
 
   return new Promise((resolve, reject) => {
@@ -43,8 +48,11 @@ export default function removeLineItemFromCart(
         if (response.body) {
           console.log('Removed Item from Cart:', response.body);
           const newVersionCart = response.body.version.toString();
-          localStorage.setItem('version-cart', newVersionCart);
-          resolve(response.body);
+          saveToLocalStorage('version-cart', newVersionCart);
+          const cartDraft: Cart = {
+            ...response.body,
+          };
+          resolve({ cartDraft });
         } else {
           reject(new Error('No response body'));
         }

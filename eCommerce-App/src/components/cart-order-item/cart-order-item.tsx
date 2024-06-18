@@ -6,13 +6,16 @@ import styles from './cart-order-item.module.css';
 import cartUpdateAction from '../../api/cartUpdateActipn';
 import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
 import { CartContent } from '../../types/interface';
+import { CountCart } from '../../types/types';
 
 function CartOrderItem({
   lineItem,
   setCartContent,
+  setCountCart,
 }: {
   lineItem: LineItem;
   setCartContent: React.Dispatch<React.SetStateAction<CartContent>>;
+  setCountCart: React.Dispatch<React.SetStateAction<CountCart>>;
 }) {
   const getImage = lineItem.variant.images?.filter((elem) => elem.url)[0].url;
   const name = lineItem.name['en-US'];
@@ -46,6 +49,10 @@ function CartOrderItem({
         apiResponse.cartDraft!.totalPrice.centAmount / 100 || 0;
       const responsedLineItems = apiResponse.cartDraft?.lineItems || [];
       const responsedVersion = apiResponse.cartDraft?.version || 0;
+      const cartProducts = apiResponse.cartDraft?.lineItems
+        ? apiResponse.cartDraft.lineItems.length
+        : 0;
+      setCountCart((prevState) => ({ ...prevState, count: cartProducts }));
       setCartContent((prevState) => ({
         ...prevState,
         totalLineItemQuantity: responsedTotalQuantity,
@@ -74,6 +81,10 @@ function CartOrderItem({
         apiResponse.cartDraft!.totalPrice.centAmount / 100 || 0;
       const responsedLineItems = apiResponse.cartDraft?.lineItems || [];
       const responsedVersion = apiResponse.cartDraft?.version || 0;
+      const cartProducts = apiResponse.cartDraft?.lineItems
+        ? apiResponse.cartDraft.lineItems.length
+        : 0;
+      setCountCart((prevState) => ({ ...prevState, count: cartProducts }));
       setCartContent((prevState) => ({
         ...prevState,
         totalLineItemQuantity: responsedTotalQuantity,
@@ -101,6 +112,10 @@ function CartOrderItem({
         apiResponse.cartDraft!.totalPrice.centAmount / 100 || 0;
       const responsedLineItems = apiResponse.cartDraft?.lineItems || [];
       const responsedVersion = apiResponse.cartDraft?.version || 0;
+      const cartProducts = apiResponse.cartDraft?.lineItems
+        ? apiResponse.cartDraft.lineItems.length
+        : 0;
+      setCountCart((prevState) => ({ ...prevState, count: cartProducts }));
       setCartContent((prevState) => ({
         ...prevState,
         totalLineItemQuantity: responsedTotalQuantity,

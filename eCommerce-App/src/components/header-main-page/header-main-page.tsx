@@ -1,14 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import logOutClient from '../../utils/local-storage/logOutClient';
 import LinkTemplateIcon from '../ui/link/link-icon';
 import Logo from '../ui/logo/logo';
 import CartHeader from '../ui/cart-header/cart-header';
-import getAllProductFromCart from '../../api/getAllProductFromCart';
 
 import styles from './header-main-page.module.css';
 
-function HeaderMainPage() {
+function HeaderMainPage({ countCart }: { countCart: number }) {
   const navigate = useNavigate();
   const handleLogOut = () => {
     logOutClient();
@@ -16,23 +15,6 @@ function HeaderMainPage() {
   };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [countCart, setCountCart] = useState<number>(0);
-  const cartId = localStorage.getItem('cart-id');
-
-  useEffect(() => {
-    if (cartId) {
-      getAllProductFromCart(cartId)
-        .then((response) => {
-          const cartProducts = response.cartDraft?.lineItems
-            ? response.cartDraft.lineItems.length
-            : 0;
-          setCountCart(cartProducts);
-        })
-        .catch((error) => {
-          console.error('Failed to fetch cart products:', error);
-        });
-    }
-  }, [cartId]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

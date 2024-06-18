@@ -1,4 +1,7 @@
-import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
+import {
+  Cart,
+  createApiBuilderFromCtpClient,
+} from '@commercetools/platform-sdk';
 import { ClientBuilder } from '@commercetools/sdk-client-v2';
 
 import {
@@ -6,6 +9,7 @@ import {
   authMiddlewareOptions,
   httpMiddlewareOptions,
 } from './constForApi';
+import { ApiResponse } from './intefaceApi';
 
 const middleware = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
@@ -22,7 +26,7 @@ export default function addLineItemToCart(
   productId: string,
   variantId: number,
   quantity: number,
-) {
+): Promise<ApiResponse> {
   const versionCart = Number(localStorage.getItem('version-cart'));
 
   return new Promise((resolve, reject) => {
@@ -48,7 +52,10 @@ export default function addLineItemToCart(
           console.log('Add new Item to Cart:', response.body);
           const newVersionCart = response.body.version.toString();
           localStorage.setItem('version-cart', newVersionCart);
-          resolve(response.body);
+          const cartDraft: Cart = {
+            ...response.body,
+          };
+          resolve({ cartDraft });
         } else {
           reject(new Error('No response body'));
         }

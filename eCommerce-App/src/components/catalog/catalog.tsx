@@ -5,12 +5,14 @@ import { IProductCard } from '../ui/product-card/product-card-interface';
 import getAllProducts from '../../api/getAllProduct';
 import Loading from '../ui/loading/loading';
 import styles from './catalog.module.css';
+import { CountCart } from '../../types/types';
 
 interface CatalogProps {
   query?: object;
+  setCountCart: React.Dispatch<React.SetStateAction<CountCart>>;
 }
 
-function Catalog({ query = {} }: CatalogProps) {
+function Catalog({ query = {}, setCountCart }: CatalogProps) {
   const [productCards, setProductCards] = useState<IProductCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -84,7 +86,11 @@ function Catalog({ query = {} }: CatalogProps) {
       <div className={styles.catalogInner}>
         {displayedProducts.length > 0 ? (
           displayedProducts.map((productCard) => (
-            <ProductCard key={productCard.id} productCard={productCard} />
+            <ProductCard
+              key={productCard.id}
+              productCard={productCard}
+              setCountCart={setCountCart}
+            />
           ))
         ) : (
           <p>No products found based on the selected criteria</p>
