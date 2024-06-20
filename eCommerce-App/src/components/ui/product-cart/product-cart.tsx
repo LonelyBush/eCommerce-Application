@@ -26,7 +26,7 @@ function ProductCart({
           (apiResponse) => {
             toast.promise(response, {
               pending: 'Loading...',
-              success: 'Item has been removed!',
+              success: 'Item has been removed from cart!',
               error: {
                 render({ data }) {
                   return `Error: ${data}`;

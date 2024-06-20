@@ -46,7 +46,7 @@ function CartOrderItem({
     response.then((apiResponse) => {
       toast.promise(response, {
         pending: 'Loading...',
-        success: 'Item has been removed',
+        success: 'Item has been removed from cart!',
         error: {
           render({ data }) {
             return `Error: ${data}`;
@@ -87,7 +87,7 @@ function CartOrderItem({
     response.then((apiResponse) => {
       toast.promise(response, {
         pending: 'Loading...',
-        success: 'Item has been added!',
+        success: 'Item has been added to cart!',
         error: {
           render({ data }) {
             return `Error: ${data}`;
