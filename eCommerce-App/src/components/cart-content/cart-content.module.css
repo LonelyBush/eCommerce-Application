@@ -1,3 +1,9 @@
+.toastBody{
+    font-family: "salina trial";
+     font-size: 0.8rem;
+     color: var(--c-black);
+}
+
 .cartContentSection{
     display: flex;
     flex-direction: column;

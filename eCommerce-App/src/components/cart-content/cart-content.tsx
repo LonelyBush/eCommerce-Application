@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { CartRemoveLineItemAction } from '@commercetools/platform-sdk';
+import { ToastContainer } from 'react-toastify';
 import cartUpdateAction from '../../api/cartUpdateActipn';
 import CartOrderItem from '../cart-order-item/cart-order-item';
 import CartPriceView from '../cart-price-view/cart-price-view';
@@ -11,6 +12,7 @@ import styles from './cart-content.module.css';
 import UseCartContent from './useCartContent-hook';
 import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
 import { CountCart } from '../../types/types';
+import toastProps from '../cart-order-item/toast-props';
 
 export function CartContent({
   setCountCart,
@@ -83,6 +85,7 @@ export function CartContent({
           <CartPriceView orderPrice={getTotalPrice} lineItems={getLineItems} />
         </div>
       </div>
+      <ToastContainer {...toastProps} />
     </>
   );
 }

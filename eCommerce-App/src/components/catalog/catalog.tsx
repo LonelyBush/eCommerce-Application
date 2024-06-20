@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Pagination from '@mui/material/Pagination';
+import { ToastContainer } from 'react-toastify';
 import ProductCard from '../ui/product-card/product-card';
 import { IProductCard } from '../ui/product-card/product-card-interface';
 import getAllProducts from '../../api/getAllProduct';
 import Loading from '../ui/loading/loading';
 import styles from './catalog.module.css';
 import { CountCart } from '../../types/types';
+import toastProps from './toast-props';
 
 interface CatalogProps {
   query?: object;
@@ -82,28 +84,31 @@ function Catalog({ query = {}, setCountCart }: CatalogProps) {
   );
   console.log(displayedProducts);
   return (
-    <div className={styles.catalogBlock}>
-      <div className={styles.catalogInner}>
-        {displayedProducts.length > 0 ? (
-          displayedProducts.map((productCard) => (
-            <ProductCard
-              key={productCard.id}
-              productCard={productCard}
-              setCountCart={setCountCart}
-            />
-          ))
-        ) : (
-          <p>No products found based on the selected criteria</p>
-        )}
+    <>
+      <div className={styles.catalogBlock}>
+        <div className={styles.catalogInner}>
+          {displayedProducts.length > 0 ? (
+            displayedProducts.map((productCard) => (
+              <ProductCard
+                key={productCard.id}
+                productCard={productCard}
+                setCountCart={setCountCart}
+              />
+            ))
+          ) : (
+            <p>No products found based on the selected criteria</p>
+          )}
+        </div>
+        <Pagination
+          className={styles.pagination}
+          count={Math.ceil(productCards.length / itemsPerPage)}
+          page={page}
+          onChange={handleChange}
+          sx={{ button: { color: 'inherit' } }}
+        />
       </div>
-      <Pagination
-        className={styles.pagination}
-        count={Math.ceil(productCards.length / itemsPerPage)}
-        page={page}
-        onChange={handleChange}
-        sx={{ button: { color: 'inherit' } }}
-      />
-    </div>
+      <ToastContainer {...toastProps} />
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { LineItem } from '@commercetools/platform-sdk';
+import { toast } from 'react-toastify';
 import QuantityCounter from '../ui/quantity-counter/quantity-counter';
 import styles from './cart-order-item.module.css';
 import cartUpdateAction from '../../api/cartUpdateActipn';
@@ -43,6 +44,15 @@ function CartOrderItem({
       ],
     });
     response.then((apiResponse) => {
+      toast.promise(response, {
+        pending: 'Loading...',
+        success: 'Item has been removed from cart!',
+        error: {
+          render({ data }) {
+            return `Error: ${data}`;
+          },
+        },
+      });
       const responsedTotalQuantity =
         apiResponse.cartDraft?.totalLineItemQuantity || 0;
       const responsedTotalPrice =
@@ -75,6 +85,15 @@ function CartOrderItem({
       ],
     });
     response.then((apiResponse) => {
+      toast.promise(response, {
+        pending: 'Loading...',
+        success: 'Item has been added to cart!',
+        error: {
+          render({ data }) {
+            return `Error: ${data}`;
+          },
+        },
+      });
       const responsedTotalQuantity =
         apiResponse.cartDraft?.totalLineItemQuantity || 0;
       const responsedTotalPrice =
@@ -104,8 +123,16 @@ function CartOrderItem({
           quantity: 1,
         },
       ],
-    });
-    response.then((apiResponse) => {
+    }).then((apiResponse) => {
+      toast.promise(response, {
+        pending: 'Loading...',
+        success: 'Item has been removed',
+        error: {
+          render({ data }) {
+            return `Error: ${data}`;
+          },
+        },
+      });
       const responsedTotalQuantity =
         apiResponse.cartDraft?.totalLineItemQuantity || 0;
       const responsedTotalPrice =
@@ -125,7 +152,6 @@ function CartOrderItem({
       }));
     });
   };
-
   return (
     <div className={styles.cartOrderItem}>
       <div className={styles.deleteIcon} onClick={handleDelete} />

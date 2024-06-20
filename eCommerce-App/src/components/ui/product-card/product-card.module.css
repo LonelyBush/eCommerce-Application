@@ -18,9 +18,7 @@
 
 .cardBlock:hover {
   border-radius: 0.2rem;
-  filter: drop-shadow(0rem 0.2rem 0.3rem var(--c-green-200));
   background-color: var(--c-blue-600);
-  transform: scale(1.01);
   color: var(--c-green-400);
 }
 
