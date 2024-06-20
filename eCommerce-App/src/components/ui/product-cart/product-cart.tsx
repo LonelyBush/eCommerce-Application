@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import getAllProductFromCart from '../../../api/getAllProductFromCart';
 import addLineItemToCart from '../../../api/addLineItemToCart';
 import removeLineItemFromCart from '../../../api/removeLineItem';
@@ -17,39 +18,53 @@ function ProductCart({
   const [cartUpdated, setCartUpdated] = useState(false);
   const cartId = localStorage.getItem('cart-id');
 
-  const toggleProductInCart = async (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const toggleProductInCart = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     if (cartId) {
       if (isCartActive) {
-        try {
-          const response = await removeLineItemFromCart(cartId, lineItemsId);
-          setCartUpdated((prev) => !prev);
-          const cartProducts = response.cartDraft?.lineItems
-            ? response.cartDraft.lineItems.length
-            : 0;
-          setCountCart((prevState) => ({
-            ...prevState,
-            count: cartProducts,
-          }));
-        } catch (error) {
-          console.error('Failed to remove item from cart:', error);
-        }
+        const response = removeLineItemFromCart(cartId, lineItemsId).then(
+          (apiResponse) => {
+            toast.promise(response, {
+              pending: 'Loading...',
+              success: 'Item has been removed!',
+              error: {
+                render({ data }) {
+                  return `Error: ${data}`;
+                },
+              },
+            });
+            setCartUpdated((prev) => !prev);
+            const cartProducts = apiResponse.cartDraft?.lineItems
+              ? apiResponse.cartDraft.lineItems.length
+              : 0;
+            setCountCart((prevState) => ({
+              ...prevState,
+              count: cartProducts,
+            }));
+          },
+        );
       } else {
-        try {
-          const response = await addLineItemToCart(cartId, productCartId, 1, 1);
-          setCartUpdated((prev) => !prev);
-          const cartProducts = response.cartDraft?.lineItems
-            ? response.cartDraft.lineItems.length
-            : 0;
-          setCountCart((prevState) => ({
-            ...prevState,
-            count: cartProducts,
-          }));
-        } catch (error) {
-          console.error('Failed to add item to cart:', error);
-        }
+        const response = addLineItemToCart(cartId, productCartId, 1, 1).then(
+          (apiResponse) => {
+            toast.promise(response, {
+              pending: 'Loading...',
+              success: 'Item has been added to cart!',
+              error: {
+                render({ data }) {
+                  return `Error: ${data}`;
+                },
+              },
+            });
+            setCartUpdated((prev) => !prev);
+            const cartProducts = apiResponse.cartDraft?.lineItems
+              ? apiResponse.cartDraft.lineItems.length
+              : 0;
+            setCountCart((prevState) => ({
+              ...prevState,
+              count: cartProducts,
+            }));
+          },
+        );
       }
     }
   };

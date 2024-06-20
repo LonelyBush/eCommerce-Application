@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import getProductById from '../../api/getProductById';
 import { getFromLocalStorage } from '../../utils/local-storage/ls-handler';
 import { IProductCard } from '../ui/product-card/product-card-interface';
@@ -10,6 +11,7 @@ import ProductCart from '../ui/product-cart/product-cart';
 
 import styles from './product-info.module.css';
 import { CountCart } from '../../types/types';
+import toastProps from './toast-props';
 
 function ProductInfo({
   setCountCart,
@@ -90,38 +92,41 @@ function ProductInfo({
   }
 
   return (
-    <div className={styles.productPageBlock}>
-      <div className={styles.productPageImgSlider}>
-        <ImgSlider productCard={productCard} />
-      </div>
-      <div className={styles.productPageInfo}>
-        <Tags.H1>{productCard.name}</Tags.H1>
-        <div className={styles.productInner}>
-          <div className={styles.productPagePrices}>
-            Price:&nbsp;
-            <span className={styles.productPagePrice}>
-              {productCard.price}$
-            </span>
-          </div>
-          <ProductCart
-            setCountCart={setCountCart}
-            productCartId={productCard.id}
-          />
+    <>
+      <div className={styles.productPageBlock}>
+        <div className={styles.productPageImgSlider}>
+          <ImgSlider productCard={productCard} />
         </div>
-        {productCard.discount > 0 && (
-          <div className={styles.productPagePrices}>
-            Discount:&nbsp;{' '}
-            <span className={styles.productPageDiscount}>
-              {productCard.discount}$
-            </span>{' '}
-            <div className={styles.discountPercent}>{getDiscount()}%</div>
+        <div className={styles.productPageInfo}>
+          <Tags.H1>{productCard.name}</Tags.H1>
+          <div className={styles.productInner}>
+            <div className={styles.productPagePrices}>
+              Price:&nbsp;
+              <span className={styles.productPagePrice}>
+                {productCard.price}$
+              </span>
+            </div>
+            <ProductCart
+              setCountCart={setCountCart}
+              productCartId={productCard.id}
+            />
           </div>
-        )}
-        <p className={styles.productPageDescription}>
-          {productCard.description}
-        </p>
+          {productCard.discount > 0 && (
+            <div className={styles.productPagePrices}>
+              Discount:&nbsp;{' '}
+              <span className={styles.productPageDiscount}>
+                {productCard.discount}$
+              </span>{' '}
+              <div className={styles.discountPercent}>{getDiscount()}%</div>
+            </div>
+          )}
+          <p className={styles.productPageDescription}>
+            {productCard.description}
+          </p>
+        </div>
       </div>
-    </div>
+      <ToastContainer {...toastProps} />
+    </>
   );
 }
 

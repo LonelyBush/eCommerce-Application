@@ -17,4 +17,10 @@
   .checked {
     mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
   }
+
+  .toastBody{
+    font-family: "salina trial";
+     font-size: 0.8rem;
+     color: var(--c-black);
+}
   
