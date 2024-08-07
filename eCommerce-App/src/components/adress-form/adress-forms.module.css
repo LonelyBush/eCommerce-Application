@@ -1,0 +1,11 @@
+
+.fieldsetBlock{
+    display: flex;
+    flex-direction: column;
+    border: 0.1rem solid var(--c-mint-100);
+    padding: 1rem;
+    gap: 0.5rem;
+}
+.fieldsetBlock > legend {
+    color: var(--c-mint-100);
+}

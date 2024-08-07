@@ -1,0 +1,36 @@
+.title {
+    text-align: center;
+    color: var(--c-blue-800);
+    font-weight: 500;
+    font-size: 3rem;
+}
+
+.smallTitle {
+    text-align: center;
+    color: var(--c-blue-800);
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0  2rem;
+}
+
+@media (max-width: 768px) {
+    .title,
+    .smallTitle {
+        font-size: 2rem;
+      }
+}
+
+@media (max-width: 420px) {
+    .title,
+    .smallTitle {
+        font-size: 1.5rem;
+      }
+}

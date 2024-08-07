@@ -1,0 +1,25 @@
+.toastBody{
+  font-family: "salina trial";
+   font-size: 0.8rem;
+   color: var(--c-black);
+}
+
+.catalogBlock {
+  display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.catalogInner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  flex-grow: 2;
+  padding: 1.7rem 1rem;
+  justify-content: center;
+}
+
+.pagination {
+  color: inherit
+}

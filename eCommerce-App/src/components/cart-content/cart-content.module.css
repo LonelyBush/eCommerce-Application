@@ -1,0 +1,104 @@
+.toastBody{
+    font-family: "salina trial";
+     font-size: 0.8rem;
+     color: var(--c-black);
+}
+
+.cartContentSection{
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+
+}
+
+.cartTitle{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-left: 10rem;
+    margin-bottom: 1rem;
+}
+.cartTitle > p {
+    margin-top: 0.4rem;
+    font-size: 1.4rem;
+    opacity: 0.8;
+}
+
+.cartOrderListSection{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 45rem;
+    overflow-y: scroll;
+}
+
+.mainCartView{
+    display: flex;
+    justify-content: space-around;
+    margin: 0 10rem;
+    gap: 2rem;
+}
+
+.deleteAllIcon {
+    display: block;
+  width: 2rem;
+  height: 2rem;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  background-color: var(--c-blue-600);
+  transition: all 0.4s ease-out;
+  mask-image: url('../../assets/svg-icons/trash-bin.svg');
+  cursor: pointer;
+}
+
+.deleteAllBlock{
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: all 0.4s ease-out;
+    margin-top: 0.4rem;
+    margin-left: 1.5rem;
+}
+
+.hide{
+    display: none;
+    transition: all 0.4s ease-out;
+}
+
+.deleteAllIcon:hover{
+    background-color: var(--c-green-400);
+}
+
+.deleteAllIcon:hover + .hide {
+    display: block;
+    color: var(--c-green-400);
+    transition: all 0.4s ease-out;
+}
+
+@media (max-width: 1200px) {
+    .mainCartView{
+        display: flex;
+        flex-direction: column-reverse;
+        margin: 0 3rem;
+    }
+
+    .cartTitle{
+
+        margin-left: 3em;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .mainCartView{
+        margin: 0 1.5rem;
+    }
+
+    .cartTitle{
+
+        margin-left: 1.5em;
+    }
+}
