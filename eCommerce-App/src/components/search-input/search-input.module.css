@@ -1,13 +1,12 @@
 .searchInputBlock {
   display: flex;
   padding: 0.1rem 0.5rem;
-  margin: 1rem 0;
-  width: 10rem;
+  width: 26rem;
   box-sizing: border-box;
   font-size: 1.2rem;
   color: var(--c-blue-600);
-  border: 0.2rem solid var(--c-mint-100);
-  border-radius: 1rem;
+  border: 0.17rem solid var(--c-blue-600);
+  border-radius: 0.2rem;
 }
 
 .searchInputBlock:focus {
@@ -26,7 +25,13 @@
   mask-repeat: no-repeat;
   mask-size: cover;
   mask-position: center;
-  background-color: var(--c-mint-100);
+  background-color: var(--c-blue-600);
   mask-image: url('../../assets/svg-icons/search.svg');
   cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .searchInputBlock{
+    width: 15rem
+  }
 }

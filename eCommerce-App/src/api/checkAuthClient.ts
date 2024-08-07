@@ -6,6 +6,7 @@ import {
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/customer';
 
 import { ApiResponse } from './intefaceApi';
+import { saveToLocalStorage } from '../utils/local-storage/ls-handler';
 
 import {
   projectKey,
@@ -45,8 +46,8 @@ export function checkAuthClient(
           );
           const personalId = response.body.customer.id;
           const personalVer = response.body.customer.version;
-          localStorage.setItem('personal-id', `${personalId}`);
-          localStorage.setItem('version', `${personalVer}`);
+          saveToLocalStorage('personal-id', personalId);
+          saveToLocalStorage('version', `${personalVer}`);
           const customerSignInResult: CustomerSignInResult = {
             customer: response.body.customer,
           };

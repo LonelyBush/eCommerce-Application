@@ -1,6 +1,7 @@
 @import '../../styles/colors.css';
 
 .headerMain {
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -33,6 +34,14 @@
 
 .iconSignUp {
   mask-image: url('../../assets/svg-icons/signup.svg');
+}
+
+.iconCart {
+  mask-image: url('../../assets/svg-icons/cart.svg');
+}
+
+.iconAboutUs {
+  mask-image: url('../../assets/svg-icons/about-us.svg');
 }
 
 .iconLogOut {
@@ -130,11 +139,17 @@
     right: 0;
   }
 
-  .textLink {
-    font-size: 2rem;
+  .linkBlock {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
   .iconLogOut {
-    display: none;
+    order: 1;
+  }
+
+  .textLink {
+    font-size: 2rem;
   }
 }

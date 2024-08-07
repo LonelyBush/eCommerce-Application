@@ -10,7 +10,7 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: 100%;
+  width: 0;
   height: 0.1rem;
   background-color: var(--c-green-400);
   transition: all 0.4s ease-in;
@@ -18,7 +18,7 @@
 }
 
 .link:hover::before {
-  width: 0;
+  width: 100%;
   color: var(--c-mint-100);
 }
 
@@ -65,11 +65,13 @@
   }
 
   .iconHeader {
-    display: none;
+    order: 1;
   }
 
-  .iconLogOut {
-    display: none;
+  .linkBlock {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 }
 

@@ -1,4 +1,17 @@
+.toastBody{
+  font-family: "salina trial";
+   font-size: 0.8rem;
+   color: var(--c-black);
+}
+
+.productInner {
+display: flex;
+justify-content: space-between;
+padding-right: 4rem;
+}
+
 .productPageBlock {
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +46,7 @@
 }
 
 .productPageDiscount {
-  color: red;
+  color: var(--c-red);
   padding-right: 1rem;
 }
 
@@ -45,6 +58,7 @@
   background-color: var(--c-green-400);
   border-radius: 2rem;
 }
+
 
 @media (max-width: 900px) {
   .productPageBlock {
@@ -70,4 +84,7 @@
   .productPageDescription {
     font-size: 1rem;
   }
+  .productInner {
+    padding: 0  1rem 1rem 0;
+    }
 }

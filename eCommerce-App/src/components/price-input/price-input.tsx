@@ -51,7 +51,7 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
           type="number"
           min="1"
           value={minPrice}
-          placeholder="min price"
+          placeholder="Min price"
           onChange={handleMinPriceChange}
           onBlur={handleBlur}
         />
@@ -62,7 +62,7 @@ function PriceInput({ onPriceChange }: PriceInputProps) {
           type="number"
           min="1"
           value={maxPrice}
-          placeholder="max price"
+          placeholder="Max price"
           onChange={handleMaxPriceChange}
           onBlur={handleBlur}
         />

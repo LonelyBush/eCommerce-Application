@@ -1,38 +1,46 @@
 .cardBlock {
-  width: 15rem;
-  height: 30rem;
+  width: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0.8rem;
   font-size: 1.1rem;
-  color: var(--c-mint-100);
-  border-radius: 1rem;
-  background-color: var(--c-blue-600);
+  color: var(--c-blue-600);
+  border-radius: 0.2rem;
   transition: all 0.4s ease-out;
+  box-shadow: 0rem 0.3rem 0.6rem var(--c-blue-800);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
 }
 
 .cardBlock:hover {
-  border-radius: 1rem;
-  filter: drop-shadow(0.3rem 0.3rem 1rem var(--c-green-400));
-  background-color: var(--c-blue-800);
-  transform: scale(1.01);
+  border-radius: 0.2rem;
+  background-color: var(--c-blue-600);
+  color: var(--c-green-400);
 }
 
 .imgBlock {
-  padding: 0.2rem;
-  width: 15rem;
-  height: 18rem;
-  border-radius: 1rem 1rem 0 0;
-  overflow: hidden;
+  display: block;
+  border-radius: 0.2rem;
+  margin: 0 auto 10px;
 }
 
 .cardImg {
+  object-fit: cover;
+  object-position: center;
   width: 100%;
   height: 100%;
-  object-fit: fill;
-  border-radius: 1rem 1rem 0 0;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  box-sizing: border-box;
   transition: all 0.4s ease-out;
-  transform: scale(1);
+}
+
+.cardImg:hover {
+  transform: scale(1.05);
 }
 
 .cardInfoBlock {
@@ -49,18 +57,19 @@
 }
 
 .cardName {
-  height: 3rem;
   text-align: center;
-  color: var(--c-white);
+  height: 2rem;
+  font-weight: 600;
 }
 
 .underscore {
   text-decoration: line-through;
+  font-weight: 600;
 }
 
 .cardDiscount {
   font-weight: 600;
-  color: #dc6f6f;
+  color: var(--c-red);
   font-size: 1.25rem;
 }
 
@@ -79,7 +88,7 @@
   display: flex;
   align-items: last baseline;
   justify-content: space-between;
-  padding: 0.2rem 1rem 0;
+  padding: 0.5rem 0.6rem 0;
 }
 
 .cardCart {
@@ -88,17 +97,19 @@
   mask-repeat: no-repeat;
   mask-size: contain;
   mask-position: center;
-  background-color: var(--c-green-400);
+  background-color: var(--c-blue-600);
+  transition: all 0.4s ease-out;
   mask-image: url('../../../assets/svg-icons/shopping-cart-not-check.svg');
 }
 
-.checked {
-  mask-image: url('../../../assets/svg-icons/shopping-cart-check.svg');
+.cardBlock:hover button {
+  background-color: var(--c-green-400);
 }
 
-@media (hover: hover) and (pointer: fine) and (pointer: fine) {
-  .cardImg:hover,
-  .cardCart:hover {
-    transform: scale(1.1);
+@media (max-width: 768px) {
+  .cardBlock {
+    width: 17rem;
   }
 }
+
+

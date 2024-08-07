@@ -1,15 +1,15 @@
 import HeaderMainPage from '../../components/header-main-page/header-main-page';
-
-const containerStyle: object = {
-  textAlign: 'center',
-  marginTop: 60,
-};
+import MainContent from '../../components/main-content/main-content';
+import Footer from '../../components/footer/footer';
+import useCountCart from '../../components/header-main-page/useCountCart-hook';
 
 function MainPage() {
+  const { countCart } = useCountCart();
   return (
     <>
-      <HeaderMainPage />
-      <p style={containerStyle}> The main page</p>
+      <HeaderMainPage countCart={countCart.count} />
+      <MainContent />
+      <Footer />
     </>
   );
 }

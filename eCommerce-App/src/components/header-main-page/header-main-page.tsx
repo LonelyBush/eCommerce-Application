@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-
 import { useState } from 'react';
 import logOutClient from '../../utils/local-storage/logOutClient';
 import LinkTemplateIcon from '../ui/link/link-icon';
 import Logo from '../ui/logo/logo';
+import CartHeader from '../ui/cart-header/cart-header';
 
 import styles from './header-main-page.module.css';
 
-function HeaderMainPage() {
+function HeaderMainPage({ countCart }: { countCart: number }) {
   const navigate = useNavigate();
   const handleLogOut = () => {
     logOutClient();
@@ -49,6 +49,10 @@ function HeaderMainPage() {
         <LinkTemplateIcon to="/main" className={styles.iconMain}>
           Main
         </LinkTemplateIcon>
+        <LinkTemplateIcon to="/about-us" className={styles.iconAboutUs}>
+          About us
+        </LinkTemplateIcon>
+        <CartHeader countCart={countCart} />
         {authToken ? (
           <>
             <LinkTemplateIcon to="/profile" className={styles.iconProfile}>
